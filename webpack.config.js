@@ -13,8 +13,12 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
     entry: path.join(__dirname, '/client/src/index.jsx'),
+
     output: {
         path: path.resolve(__dirname, 'client/dist'),
+    },
+    watchOptions: {
+        ignored: path.join(__dirname, 'client/dist')
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -32,9 +36,27 @@ const config = {
                 test: /\.(js|jsx)$/i,
                 loader: 'babel-loader',
             },
+            // {
+            //     test: /\.css$/i,
+            //     use: [stylesHandler,'css-loader'],
+            // },
             {
-                test: /\.css$/i,
-                use: [stylesHandler,'css-loader'],
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            esModule: true,
+                            modules: {
+                                namedExport: true,
+                                localIdentName: "foo__[name]__[local]",
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.s[ac]ss$/i,
