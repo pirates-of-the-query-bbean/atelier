@@ -1,8 +1,16 @@
 import React from 'react';
+import FiveStars from './sharedComponents/FiveStars.jsx';
 
 const App = () => {
+  const props = 2.5;
+
   return (
-    <h1>Hello World!!!!!</h1>
+    <div>
+      <h1>Hello World!!!!!</h1>
+
+      <FiveStars props={props}/>
+
+    </div>
   )
 }
 
