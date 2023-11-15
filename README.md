@@ -13,3 +13,11 @@ yarn build
 ```
 
 to bundle your application
+
+then...
+
+```
+npm run start
+```
+
+to render the React app.
