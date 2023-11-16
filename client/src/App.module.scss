@@ -3,6 +3,11 @@
   background-color: aqua;
 }
 
+.ugly {
+  background-color: var(--brand-color);
+  color: var(--offwhite);
+}
+
 /* ===== SHARED ROOT ====== */
 :root {
   --offwhite: rgb(218, 218, 218);
@@ -28,6 +33,7 @@
 html,
 body {
   height: 100%;
+  background-color: var(--offwhite);
 
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './App.module.css'
+import styles from './App.module.scss'
 
 
 const App = () => {
@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div>
 
-      <h2 className={styles.test}>Pirates of the query-bbean</h2>
+      <h2 className={styles.ugly}>Pirates of the query-bbean</h2>
     </div>
   )
 }
