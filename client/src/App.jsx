@@ -4,7 +4,7 @@ import styles from './App.module.scss';
 function App() {
   return (
     <div>
-      <h2 className={styles.ugly}>Pirates of the query-bbean</h2>
+      <h1 data-testid="app-hw" className={styles.ugly}>Pirates of the query-bbean</h1>
     </div>
   );
 }
