@@ -37,29 +37,11 @@ const config = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
             },
-            // {
-            //     test: /\.css$/i,
-            //     use: [stylesHandler,'css-loader'],
-            // },
             {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                    },
-                    {
-                        loader: "css-loader",
-                        options: {
-                            esModule: true,
-                            modules: {
-                                namedExport: true,
-                                localIdentName: "foo__[name]__[local]",
-                            },
-                        },
-                    },
-
-                ],
+                test: /\.css$/i,
+                use: [stylesHandler, 'css-loader'],
             },
+
             {
                 test: /\.s[ac]ss$/i,
                 use: [stylesHandler, 'css-loader', 'sass-loader'],
