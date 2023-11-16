@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div>
-      <h1 data-testid="app-hw" className={styles.ugly}>Pirates of the query-bbean</h1>
+      <h1 data-testid="app-hw" className={styles.ugly}>Pirates of the query-bbean 2</h1>
     </div>
   );
 }
