@@ -1,8 +1,3 @@
-.test {
-  /* DELET THIS JUST A TEST */
-  background-color: aqua;
-}
-
 .ugly {
   background-color: var(--brand-color);
   color: var(--offwhite);
@@ -28,6 +23,7 @@
 
 * {
   margin: 0;
+  padding: 0;
 }
 
 html,

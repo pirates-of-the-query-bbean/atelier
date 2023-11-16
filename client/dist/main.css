@@ -1,11 +1,6 @@
 /*!*********************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./client/src/App.module.scss ***!
   \*********************************************************************************************************************/
-.HaqI6AorxYsdtJJtqTLE {
-  /* DELET THIS JUST A TEST */
-  background-color: aqua;
-}
-
 .YbfbdwzhDWoo2mfVNX4S {
   background-color: var(--brand-color);
   color: var(--offwhite);
@@ -30,6 +25,7 @@
 
 * {
   margin: 0;
+  padding: 0;
 }
 
 html,
