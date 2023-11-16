@@ -18,9 +18,9 @@ const config = {
     ignored: path.join(__dirname, 'client/dist'),
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '/client/dist/index.html'),
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: path.resolve(__dirname, '/client/dist/index.html'),
+    // }),
 
     new MiniCssExtractPlugin(),
 
