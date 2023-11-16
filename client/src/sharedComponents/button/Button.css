@@ -6,6 +6,7 @@
     font-weight: 400; 
     cursor: pointer;
     border: 1px solid black;
+    background-color: white;
 }
 
 .sharedButton__container {
