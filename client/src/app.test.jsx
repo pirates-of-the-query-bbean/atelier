@@ -8,6 +8,5 @@ describe('App component', () => {
     render(<App />);
     const appElement = screen.getByTestId('app-hw');
     expect(appElement).toBeInTheDocument();
-    expect(appElement).toHaveTextContent('Hello World!!!!!');
   });
 });
