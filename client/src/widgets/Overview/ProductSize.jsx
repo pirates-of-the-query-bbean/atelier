@@ -1,13 +1,16 @@
-import React from 'react';
-import styles from './ProductSize.module.scss';
-import FiveStars from '../../sharedComponents/FiveStars.jsx';
+import React from "react";
+import styles from "./ProductSize.module.scss";
+import FiveStars from "../../sharedComponents/FiveStars.jsx";
 
-function ProductSize({product}) {
-
+function ProductSize({ product }) {
   return (
     <div>
-     SIZE SMALL
-      </div>
+      <input></input>
+      <input></input>
+
+      <button></button>
+      <button></button>
+    </div>
   );
 }
 

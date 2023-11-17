@@ -1,6 +1,9 @@
+.container {
+  width: 100%;
+}
+
 .container h3 {
   font-size: .85rem;
-
 }
 
 .container span {
@@ -11,7 +14,7 @@
 .styleList {
   margin-top: .5rem;
   gap: 1rem;
-  width: 15rem;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
 }

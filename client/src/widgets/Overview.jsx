@@ -403,10 +403,21 @@ function Overview({ product }) {
     ],
   };
 
-  const [currPrice, setCurrPrice] = useState(product.default_price);
+  const [currPrice, setCurrPrice] = useState({
+    sale_price: null,
+    original_price: product.default_price,
+  });
   const [currSize, setCurrSize] = useState(product.default_price);
   const [currQty, setCurrQty] = useState(product.default_price);
   const [currStyle, setCurrStyle] = useState(null);
+
+  const updateStyle = (style) => {
+    setCurrStyle(style);
+    setCurrPrice({
+      sale_price: style.sale_price,
+      original_price: style.original_price,
+    });
+  };
 
   useEffect(() => {
     productStyles.results.forEach((product) => {
@@ -418,7 +429,7 @@ function Overview({ product }) {
   }, []);
 
   return (
-    <section>
+    <section className={styles.container}>
       <h1 data-testid="app-hw" className={styles.ugly}>
         Overview
       </h1>
@@ -430,7 +441,7 @@ function Overview({ product }) {
             product={product}
             productStyles={productStyles.results}
             currStyle={currStyle}
-            setCurrStyle={setCurrStyle}
+            setCurrStyle={updateStyle}
           />
           <ProductSize product={product} />
         </aside>

@@ -1,17 +1,29 @@
-import React from 'react';
-import styles from './ProductTitle.module.scss';
-import FiveStars from '../../sharedComponents/FiveStars.jsx';
+import React from "react";
+import styles from "./ProductTitle.module.scss";
+import FiveStars from "../../sharedComponents/FiveStars.jsx";
 
-function ProductTitle({product, price}) {
-
+function ProductTitle({ product, price }) {
   return (
-    <div>
+    <div className={styles.container}>
       {/* TODO get review rating and render conditionally if no reviews */}
-      <div><FiveStars rating="3" /> <a href="#" >Reviews</a> </div>
-      <h3>{product.category}</h3>
-      <h1>{product ? product.name : 'A great product'}</h1>
-      <h3>${price}</h3>
+      <div className={styles.ratingsReviews}>
+        <FiveStars rating="3" /> <a href="#">Reviews</a>{" "}
       </div>
+      <h3>{product.category}</h3>
+      <h1>{product ? product.name : "A great product"}</h1>
+      <h3>
+        <span
+          className={`${price.sale_price === null ? styles.hidden : null} ${
+            styles.salePrice
+          }`}
+        >
+          ${price.sale_price} SALE!
+        </span>
+        <span className={`${price.sale_price !== null ? styles.strike : null}`}>
+          ${price.original_price}
+        </span>
+      </h3>
+    </div>
   );
 }
 

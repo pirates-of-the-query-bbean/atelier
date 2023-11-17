@@ -5,3 +5,11 @@
 .galleryAndAside {
   display: flex;
 }
+
+.container aside {
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}

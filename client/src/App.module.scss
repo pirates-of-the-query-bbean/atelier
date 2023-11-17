@@ -72,3 +72,9 @@ main {
   padding: 16px;
   margin: auto;
 }
+
+a,
+a:visited,
+a:active {
+  color: var(--text-color);
+}
