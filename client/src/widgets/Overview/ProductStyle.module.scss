@@ -1,0 +1,17 @@
+.container h3 {
+  font-size: .85rem;
+
+}
+
+.container span {
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.styleList {
+  margin-top: .5rem;
+  gap: 1rem;
+  width: 15rem;
+  display: flex;
+  flex-wrap: wrap;
+}
