@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import styles from "./App.module.scss";
 import FiveStars from "./sharedComponents/FiveStars.jsx";
@@ -33,6 +34,17 @@ function App() {
         Pirates of the query-bbean 2
       </h1>
       <Overview product={sampleProduct} />
+=======
+import React from 'react';
+import styles from './App.module.scss';
+
+function App() {
+  return (
+    <div>
+      <h1 data-testid="app-hw" className={styles.ugly}>
+        Pirates of the query-bbean
+      </h1>
+>>>>>>> main
     </div>
   );
 }
