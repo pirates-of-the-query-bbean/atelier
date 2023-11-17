@@ -1,7 +1,6 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -18,10 +17,6 @@ const config = {
     ignored: path.join(__dirname, 'client/dist'),
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: path.resolve(__dirname, '/client/dist/index.html'),
-    // }),
-
     new MiniCssExtractPlugin(),
 
     // Add your plugins here
