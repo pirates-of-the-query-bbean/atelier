@@ -3,7 +3,6 @@ import AnswerList from './AnswerList.jsx';
 
 const Question = ({ product }) => {
   const [questionArr, setQuestionArr] = useState([]);
-  const [answerArr, setAnswerArr] = useState([]);
 
   const getAnswers = (answerObj) => {
     const answerArr = [];
@@ -42,7 +41,7 @@ const Question = ({ product }) => {
 
 
   useEffect(() => {
-    setAnswerArr(getAnswers(testAnswer));
+    getAnswers(testAnswer);
   }, [])
 
   return (
