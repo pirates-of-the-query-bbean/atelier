@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import styles from './App.module.scss';
 import RatingsReviews from './widgets/RatingsReviews/RatingsReviews.jsx';
+import FiveStars from './sharedComponents/FiveStars';
 
 function App() {
 
