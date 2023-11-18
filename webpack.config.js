@@ -22,7 +22,12 @@ const config = {
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
+
+
     rules: [
       {
         test: /\.(js|jsx)$/i,

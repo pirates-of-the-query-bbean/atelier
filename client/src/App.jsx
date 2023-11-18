@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './App.module.scss';
+import FiveStars from './sharedComponents/FiveStars';
 
 function App() {
   return (
