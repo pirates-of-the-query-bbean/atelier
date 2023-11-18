@@ -27,7 +27,6 @@ const config = {
   },
   module: {
 
-
     rules: [
       {
         test: /\.(js|jsx)$/i,
