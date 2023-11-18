@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import styles from './App.module.scss';
-import FiveStars from './sharedComponents/FiveStars.jsx';
 import RatingsReviews from './widgets/RatingsReviews/RatingsReviews.jsx';
 
 function App() {
@@ -60,10 +59,11 @@ function App() {
       Loading...
     </div>
   }
-
   return (
     <div>
-      <h1 data-testid="app-hw" className={styles.ugly}>Pirates of the query-bbean</h1>
+      <h1 data-testid="app-hw" className={styles.ugly}>
+        Pirates of the query-bbean
+      </h1>
       <RatingsReviews productReviews={productReviews} />
     </div>
   );
