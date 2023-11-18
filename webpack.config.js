@@ -19,14 +19,11 @@ const config = {
   plugins: [
     new MiniCssExtractPlugin(),
 
+
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
   module: {
-    resolve: {
-      extensions: ['.js', '.jsx'],
-    },
-
     rules: [
       {
         test: /\.(js|jsx)$/i,

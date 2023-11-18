@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./Style.module.scss";
-import CheckIcon from "@mui/icons-material/Check";
+import React from 'react';
+import CheckIcon from '@mui/icons-material/Check';
+import styles from './Style.module.scss';
 
 function Style({ style, setCurrStyle, selected = false }) {
   return (
@@ -10,7 +10,7 @@ function Style({ style, setCurrStyle, selected = false }) {
       }}
       className={styles.container}
     >
-      <img src={style.photos[0].thumbnail_url}></img>
+      <img src={style.photos[0].thumbnail_url} />
       {selected ? (
         <div className={styles.check}>
           <CheckIcon />

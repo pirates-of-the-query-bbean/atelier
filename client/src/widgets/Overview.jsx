@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Overview.module.scss';
-import ProductTitle from './Overview/ProductTitle.jsx';
-import ProductStyle from './Overview/ProductStyle.jsx';
-import ProductSize from './Overview/ProductSize.jsx';
-import Description from './Overview/Description.jsx';
-import Gallery from './Overview/Gallery.jsx';
+import ProductTitle from './Overview/ProductTitle';
+import ProductStyle from './Overview/ProductStyle';
+import ProductSize from './Overview/ProductSize';
+import Description from './Overview/Description';
+import Gallery from './Overview/Gallery';
 
 function Overview({ product }) {
   const productStyles = {
@@ -422,7 +422,6 @@ function Overview({ product }) {
   useEffect(() => {
     productStyles.results.forEach((product) => {
       if (product['default?'] === true) {
-        console.log(product, 'PRODUCT');
         setCurrStyle(product);
       }
     });
@@ -451,5 +450,4 @@ function Overview({ product }) {
     </section>
   );
 }
-
 export default Overview;
