@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import Answer from './Answer.jsx';
 import axios from 'axios';
 
-const AnswerList = ({ question, helpful, report }) => {
+function AnswerList({ question, helpful, report }) {
   const [answerArr, setAnswerArr] = useState([]);
 
-  const getAnswers = (question_id) => {
+  function getAnswers(question_id) {
     // axios.get(`/qa/questions/${product_id}/answers`)
     //   .then((data) => {
     //     const questions = [];
@@ -20,7 +20,7 @@ const AnswerList = ({ question, helpful, report }) => {
     //   });
   }
 
-  const getAnswers2 = (answerObj) => {
+  function getAnswers2(answerObj) {
     const answers = [];
 
     for (let key in answerObj) {
@@ -71,9 +71,7 @@ const AnswerList = ({ question, helpful, report }) => {
 
   return (
     <section className='question__answer--container'>
-      <h2>AnswerList</h2>
         {answerArr.map((answer, index) => {
-          console.log('answer is ', answer)
           return (
             <Answer key={index} answer={answer} helpful={helpful} report={report}/>
             )}

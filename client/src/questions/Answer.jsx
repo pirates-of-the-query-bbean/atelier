@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
-const Answer = ({ answer, helfpul, report }) => {
+function Answer({ answer, upvote, report }) {
   const {body, date, answerer_name, helpfulness, photos} = answer;
 
-  const formattedDate = (date) => {
+  function formattedDate(date) {
     date = new Date(date);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -11,6 +11,8 @@ const Answer = ({ answer, helfpul, report }) => {
       day: 'numeric',
     });
   }
+
+
 
   return (
     <section>
@@ -26,7 +28,7 @@ const Answer = ({ answer, helfpul, report }) => {
           <p>
             <a href='#' onClick={(e)=> {
               e.preventDefault();
-              upvote();
+              upvote(e);
             }}>Helpful?</a>  ({helpfulness})
           </p>
           <p>
