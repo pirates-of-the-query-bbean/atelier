@@ -1,0 +1,32 @@
+.review__item {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--grey-color);
+  border-radius: 4px;
+  position: relative;
+
+  .star__container {
+    // Define your star rating container styles or ensure it is defined in your FiveStars component
+  }
+
+  .review__date {
+    display: flex;
+    align-items: center;
+    gap: 8px; // Adds space between items
+    position: absolute;
+    right: 16px; // Adjust as needed
+    top: 16px; // Adjust as needed
+  }
+
+  .upvoteLink {
+    border-left: none;
+  }
+
+  .review__body {
+    color: #333;
+    margin-bottom: 16px;
+  }
+}
