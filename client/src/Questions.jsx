@@ -83,7 +83,9 @@ function Questions() {
       <QuestionList
       questionArr={questionArr}
       setQuestionArr={setQuestionArr}
-      questionsStartIndex={questionsStartIndex} sort={sort}/>
+      questionsStartIndex={questionsStartIndex}
+      showTwoMoreItems={showTwoMoreItems}
+      sort={sort}/>
 
       <div className={styles.questions__buttons}>
         <CustomButton style={styles.custom__button}

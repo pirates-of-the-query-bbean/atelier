@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Question from './Question.jsx';
 
-function QuestionList ({ product, questionArr, setQuestionArr, questionsStartIndex, sortQuestions }) {
+function QuestionList ({ product, questionArr, setQuestionArr, questionsStartIndex, answersStartIndex, setAnswersStartIndex, sort, showTwoMoreItems }) {
 
   const getQuestions = () => {
     // axios.get(`/questions/${product_id}/`)
@@ -18,11 +18,6 @@ function QuestionList ({ product, questionArr, setQuestionArr, questionsStartInd
     //   });
   }
 
-  function sort(arr, setState, property) {
-    const sortedArr = [...arr].sort((a, b) => b[property] - a[property]);
-    setState(sortedArr);
-  }
-
   useEffect(() => {
     sort(questionArr, setQuestionArr, 'question_helpfulness');
   }, []);
@@ -31,7 +26,14 @@ function QuestionList ({ product, questionArr, setQuestionArr, questionsStartInd
     <section>
       {questionArr.slice(0, questionsStartIndex + 1).map((question) => {
         return(
-          <Question key={question.question_id} question={question} />
+          <Question
+            key={question.question_id}
+            question={question}
+            sort={sort}
+            answersStartIndex={answersStartIndex}
+            setAnswersStartIndex={setAnswersStartIndex}
+            showTwoMoreItems={showTwoMoreItems}
+            />
         )
       })}
     </section>

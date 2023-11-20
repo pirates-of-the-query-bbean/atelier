@@ -3,7 +3,7 @@ import Answer from './Answer.jsx';
 import styles from './Answer.module.scss';
 import axios from 'axios';
 
-function AnswerList({ question, helpful, report }) {
+function AnswerList({ question, helpful, report, sort, answersStartIndex, setAnswersStartIndex, showTwoMoreItems }) {
   const [answerArr, setAnswerArr] = useState([]);
 
   function getAnswers(question_id) {
@@ -26,22 +26,27 @@ function AnswerList({ question, helpful, report }) {
 
     for (let key in answerObj) {
       answers.push(answerObj[key]);
+
     }
-    setAnswerArr(answers);
+    sort(answers, setAnswerArr, 'helpfulness');
+    // setAnswerArr(answers);
+
+    console.log(answerArr);
+
   }
 
   const testAnswer = {
     73: {
       "id": 73,
-      "body": "Some of the seams started splitting the first time I wore it!",
+      "body": "Last of the seams started splitting the first time I wore it!",
       "date": "2019-11-28T00:00:00.000Z",
       "answerer_name": "sillyguy",
-      "helpfulness": 6,
+      "helpfulness": -6,
       "photos": [],
     },
     78: {
       "id": 78,
-      "body": "9 lives",
+      "body": "First 9 lives",
       "date": "2019-11-12T00:00:00.000Z",
       "answerer_name": "iluvdogz",
       "helpfulness": 31,
@@ -49,7 +54,7 @@ function AnswerList({ question, helpful, report }) {
     },
     70: {
       "id": 70,
-      "body": "Some of the seams started splitting the first time I wore it!",
+      "body": "Six of the seams started splitting the first time I wore it!",
       "date": "2019-11-28T00:00:00.000Z",
       "answerer_name": "sillyguy",
       "helpfulness": 6,
@@ -57,7 +62,7 @@ function AnswerList({ question, helpful, report }) {
     },
     82: {
       "id": 82,
-      "body": "Some of the seams started splitting the first time I wore it!",
+      "body": "Second of the seams started splitting the first time I wore it!",
       "date": "2019-11-28T00:00:00.000Z",
       "answerer_name": "Seller",
       "helpfulness": 8,
@@ -70,16 +75,20 @@ function AnswerList({ question, helpful, report }) {
     getAnswers2(testAnswer);
   }, []);
 
+
   return (
     <section>
-      {answerArr.map((answer, index) => {
+      {answerArr.slice(0, 2).map((answer, index) => {
         return (
           <Answer key={index} answer={answer} helpful={helpful} report={report}/>
           )}
         )}
       <a href='#'
         className={styles.loadMoreAnswers}
-        onClick={(e) => console.log('clicked')}>Load More Answers</a>
+        onClick={(e) => {
+          e.preventDefault()
+          showTwoMoreItems(setAnswersStartIndex, answersStartIndex)
+        }}>Load More Answers</a>
     </section>
   )
 }
