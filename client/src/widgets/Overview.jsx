@@ -407,9 +407,10 @@ function Overview({ product }) {
     sale_price: null,
     original_price: product.default_price,
   });
-  const [currSize, setCurrSize] = useState(product.default_price);
-  const [currQty, setCurrQty] = useState(product.default_price);
+  const [currSize, setCurrSize] = useState(null);
+  const [currQty, setCurrQty] = useState(1);
   const [currStyle, setCurrStyle] = useState(null);
+  const [isSku, setSku] = useState(null);
 
   const updateStyle = (style) => {
     setCurrStyle(style);
@@ -417,6 +418,22 @@ function Overview({ product }) {
       sale_price: style.sale_price,
       original_price: style.original_price,
     });
+  };
+
+  const addToBag = () => {
+    console.log('ADDING TO BAG');
+    console.log({
+      product_id: product.id,
+      size: currSize,
+      qty: currQty,
+      style: currStyle.style_id,
+      price: currPrice,
+      sku: isSku,
+    });
+  };
+
+  const favorite = () => {
+    console.log('Favorite', product.id);
   };
 
   useEffect(() => {
@@ -442,7 +459,14 @@ function Overview({ product }) {
             currStyle={currStyle}
             setCurrStyle={updateStyle}
           />
-          <ProductSize product={product} />
+          <ProductSize
+            productStyles={productStyles.results[0].skus}
+            addToBag={addToBag}
+            favorite={favorite}
+            setCurrSize={setCurrSize}
+            setCurrQty={setCurrQty}
+            setSku={setSku}
+          />
         </aside>
       </div>
 
