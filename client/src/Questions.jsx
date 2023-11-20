@@ -3,6 +3,7 @@ import CustomButton from './sharedComponents/customButton/CustomButton.jsx';
 import Search from './questions/Search.jsx';
 import QuestionList from './questions/QuestionList.jsx';
 import styles from './Questions.module.scss';
+import Modal from './questions/Modal.jsx';
 
 function Questions() {
   const questionsObj = [{
@@ -54,17 +55,17 @@ function Questions() {
   const [questionArr, setQuestionArr] = useState(questionsObj);
   const [questionsStartIndex, setQuestionStartIndex] = useState(0);
   const [answersStartIndex, setAnswersStartIndex] = useState(0);
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  function showTwoMoreItems(arrToFilter) {
-    setStartIndex(startIndex + 2);
+  function showTwoMoreItems(indexToAdjust, stateToAdjust) {
+    indexToAdjust(stateToAdjust + 2);
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
     console.log('handle submit invoked');
   }
 
-  function showMoreQuestions() {
+  function showMoreQuestions(e) {
     console.log('button clicked');
   }
 
@@ -72,25 +73,28 @@ function Questions() {
     <section className={styles.questions__container}>
       <h5>Questions & Answers</h5>
       <Search
-        handleSubmit={handleSubmit}
-        questionAr={questionArr}/>
+      handleSubmit={handleSubmit}
+      questionAr={questionArr}/>
       <QuestionList
-        questionArr={questionArr}
-        setQuestionArr={setQuestionArr}
-        questionsStartIndex={questionsStartIndex}
-        setQuestionStartIndex={setQuestionStartIndex}/>
+      questionArr={questionArr}
+      setQuestionArr={setQuestionArr}
+      questionsStartIndex={questionsStartIndex} />
 
-      <div className={styles.questions__loadMore_buttons}>
-        <CustomButton style={styles.moreQuestions}
+      <div className={styles.questions__buttons}>
+        <CustomButton style={styles.custom__button}
           text={'More Answered Questions'}
           buttonWidth={245}
-          onClickFunction={() => { showMoreQuestions(); }} />
-        <CustomButton
+          onClickFunction={() => { showTwoMoreItems(setQuestionStartIndex, questionsStartIndex); }} />
+        <CustomButton style={styles.custom__button}
           text={'Add A Question'}
-          icon={'AddIcon'}
+          Icon={'AddIcon'}
           buttonWidth={200}
-          onClickFunction={() => { handleSubmit(); }} />
+          onClickFunction={(e) => { setModalOpen(true); }} />
       </div>
+      <Modal
+        isModalOpen={isModalOpen}
+        setModalOpen={setModalOpen}
+        onSubmit={()=> handleSubmit()}/>
     </section>
   )
 }

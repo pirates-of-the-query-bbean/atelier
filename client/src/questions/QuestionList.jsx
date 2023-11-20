@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Question from './Question.jsx';
 
-function QuestionList ({ product, questionArr, setQuestionArr }) {
-  const [startQuestionsIndex, setStartQuestionsIndex] = useState(0);
-  const [startAnswersIndex, setStartAnswersIndex] = useState(0);
-
-  function showTwoMoreItems(arrToFilter) {
-    setStartIndex(startIndex, 2);
-  }
+function QuestionList ({ product, questionArr, setQuestionArr, questionsStartIndex }) {
 
   const getQuestions = () => {
     // axios.get(`/questions/${product_id}/`)
@@ -27,7 +21,7 @@ function QuestionList ({ product, questionArr, setQuestionArr }) {
 
   return (
     <section>
-      {questionArr.map((question) => {
+      {questionArr.slice(0, questionsStartIndex + 1).map((question) => {
         return(
           <Question key={question.question_id} question={question} />
         )

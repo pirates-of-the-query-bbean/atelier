@@ -11,7 +11,6 @@ function Button({text, Icon, buttonWidth, onClickFunction, args }) {
     }
   }
 
-  console.log(text, Icon, buttonWidth)
   return (
       <button type='button' onClick={() => handleOnClick()} className='sharedButton' style={{width: buttonWidth}}>
         <div className='sharedButton__container' style={{justifyContent: Icon ? 'space-between': 'center' }}>
