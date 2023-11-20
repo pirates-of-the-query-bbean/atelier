@@ -11,7 +11,7 @@ function Questions() {
     "question_body": "Why is this product cheaper here than other sites?",
     "question_date": "2018-10-18T00:00:00.000Z",
     "asker_name": "williamsmith",
-    "question_helpfulness": 4,
+    "question_helpfulness": 1,
     "reported": false,
     "answers": {
       68: {
@@ -29,7 +29,7 @@ function Questions() {
     "question_body": "How long does it last?",
     "question_date": "2019-06-28T00:00:00.000Z",
     "asker_name": "funnygirl",
-    "question_helpfulness": 2,
+    "question_helpfulness": 5,
     "reported": false,
     "answers": {
       70: {
@@ -57,6 +57,11 @@ function Questions() {
   const [answersStartIndex, setAnswersStartIndex] = useState(0);
   const [isModalOpen, setModalOpen] = useState(false);
 
+  function sort(arr, setState, property) {
+    const sortedArr = [...arr].sort((a, b) => b[property] - a[property]);
+    setState(sortedArr);
+  }
+
   function showTwoMoreItems(indexToAdjust, stateToAdjust) {
     indexToAdjust(stateToAdjust + 2);
   }
@@ -78,7 +83,7 @@ function Questions() {
       <QuestionList
       questionArr={questionArr}
       setQuestionArr={setQuestionArr}
-      questionsStartIndex={questionsStartIndex} />
+      questionsStartIndex={questionsStartIndex} sort={sort}/>
 
       <div className={styles.questions__buttons}>
         <CustomButton style={styles.custom__button}
