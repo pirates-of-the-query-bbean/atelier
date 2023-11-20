@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Answer from './Answer.jsx';
+import styles from './Answer.module.scss';
 import axios from 'axios';
 
 function AnswerList({ question, helpful, report }) {
@@ -70,12 +71,15 @@ function AnswerList({ question, helpful, report }) {
   }, []);
 
   return (
-    <section className='question__answer--container'>
-        {answerArr.map((answer, index) => {
-          return (
-            <Answer key={index} answer={answer} helpful={helpful} report={report}/>
-            )}
+    <section>
+      {answerArr.map((answer, index) => {
+        return (
+          <Answer key={index} answer={answer} helpful={helpful} report={report}/>
           )}
+        )}
+      <a href='#'
+        className={styles.loadMoreAnswers}
+        onClick={(e) => console.log('clicked')}>Load More Answers</a>
     </section>
   )
 }

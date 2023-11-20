@@ -5,13 +5,13 @@ import './customButton.scss'
 //the desired width of the button. Accepts 'text', 'Icon', 'onClickFunction', 'buttonWidth' and 'args' properties.
 //Example: Minimum needede to render <Button text='open' Icon={StarBorderIcon}buttonWidth="460px" />
 function Button({text, Icon, buttonWidth, onClickFunction, args }) {
-
   const handleOnClick = () => {
     if (onClickFunction) {
       onClickFunction(args)
     }
   }
 
+  console.log(text, Icon, buttonWidth)
   return (
       <button type='button' onClick={() => handleOnClick()} className='sharedButton' style={{width: buttonWidth}}>
         <div className='sharedButton__container' style={{justifyContent: Icon ? 'space-between': 'center' }}>

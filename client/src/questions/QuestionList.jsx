@@ -24,10 +24,14 @@ function QuestionList ({ product, questionArr, setQuestionArr }) {
     //   });
   }
 
+
   return (
     <section>
-      <h2>Question List</h2>
-      <Question />
+      {questionArr.map((question) => {
+        return(
+          <Question key={question.question_id} question={question} />
+        )
+      })}
     </section>
   )
 }

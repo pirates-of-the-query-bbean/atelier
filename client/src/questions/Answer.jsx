@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import styles from './Answer.module.scss';
 
 function Answer({ answer, upvote, report }) {
   const {body, date, answerer_name, helpfulness, photos} = answer;
@@ -15,10 +16,11 @@ function Answer({ answer, upvote, report }) {
 
 
   return (
-    <section>
-      <h2>A:</h2>
-        <p>{body}</p>
-        <div className='answer__meta'>
+    <section className={styles.answer__container}>
+      <h5 className={styles.answer__heading}>A:
+        <span className={styles.answer__body}>{body}</span>
+      </h5>
+        <div className={styles.answer__meta}>
           <p>
             by {answerer_name}
             {answerer_name === 'Seller' ? (
@@ -26,10 +28,12 @@ function Answer({ answer, upvote, report }) {
             ) : (<span>, {formattedDate(answer.date)}</span>)}
           </p>
           <p>
+            <span className={styles.upvote}>Helpful?</span>
             <a href='#' onClick={(e)=> {
               e.preventDefault();
               upvote(e);
-            }}>Helpful?</a>  ({helpfulness})
+            }}>Yes</a>
+            <span>({helpfulness})</span>
           </p>
           <p>
             <a href='#' onClick={(e)=> {

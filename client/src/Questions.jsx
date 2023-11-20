@@ -4,9 +4,7 @@ import Search from './questions/Search.jsx';
 import QuestionList from './questions/QuestionList.jsx';
 import styles from './Questions.module.scss';
 
-function Questions({ props }) {
-  const [questionArr, setQuestionArr] = useState(questionsObj);
-
+function Questions() {
   const questionsObj = [{
     "question_id": 37,
     "question_body": "Why is this product cheaper here than other sites?",
@@ -53,6 +51,14 @@ function Questions({ props }) {
   },
 ]
 
+  const [questionArr, setQuestionArr] = useState(questionsObj);
+  const [questionsStartIndex, setQuestionStartIndex] = useState(0);
+  const [answersStartIndex, setAnswersStartIndex] = useState(0);
+
+  function showTwoMoreItems(arrToFilter) {
+    setStartIndex(startIndex + 2);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log('handle submit invoked');
@@ -62,31 +68,28 @@ function Questions({ props }) {
     console.log('button clicked');
   }
 
-  // Button objects
-  const moreQuestionsBtn = {
-    text: 'More Answered Questions',
-    buttonWidth: 200,
-    onClickFunction: (() => { showMoreQuestions() }),
-  }
-
-  // Add A Question btn
-  const addQuestionBtn = {
-    text: 'Add A Question',
-    icon: 'AddIcon',
-    buttonWidth: 200,
-    onClickFunction: (() => { handleSubmit() })
-  }
-
-
   return (
     <section className={styles.questions__container}>
       <h5>Questions & Answers</h5>
-        <Search handleSubmit={handleSubmit} questionAr={questionArr}/>
-        <QuestionList questionArr={questionArr} setQuestionArr={setQuestionArr}/>
+      <Search
+        handleSubmit={handleSubmit}
+        questionAr={questionArr}/>
+      <QuestionList
+        questionArr={questionArr}
+        setQuestionArr={setQuestionArr}
+        questionsStartIndex={questionsStartIndex}
+        setQuestionStartIndex={setQuestionStartIndex}/>
 
-      <div className='questions__interactive--buttons'>
-        {/* <CustomButton moreQuestionsBtn />
-        <CustomButton addQuestionBtn /> */}
+      <div className={styles.questions__loadMore_buttons}>
+        <CustomButton style={styles.moreQuestions}
+          text={'More Answered Questions'}
+          buttonWidth={245}
+          onClickFunction={() => { showMoreQuestions(); }} />
+        <CustomButton
+          text={'Add A Question'}
+          icon={'AddIcon'}
+          buttonWidth={200}
+          onClickFunction={() => { handleSubmit(); }} />
       </div>
     </section>
   )

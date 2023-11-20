@@ -3,5 +3,11 @@
   h5 {
     text-transform: uppercase;
     font-weight: 400;
+    margin-bottom: 7px;
+  }
+  .questions__loadMore_buttons button{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
   }
 }
