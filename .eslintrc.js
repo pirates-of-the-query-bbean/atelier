@@ -10,11 +10,7 @@ module.exports = {
         node: true,
       },
       files: [
-<<<<<<< HEAD
-        '.eslintrc.{js,cjs}',
-=======
         '.eslintrc.{js,cjs,jsx}',
->>>>>>> main
       ],
       parserOptions: {
         sourceType: 'script',
@@ -25,10 +21,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-<<<<<<< HEAD
-=======
   ignorePatterns: ['main.js', 'main.css', '**/apiSampleData/**'],
->>>>>>> main
   rules: {
   },
 };

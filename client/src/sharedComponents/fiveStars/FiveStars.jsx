@@ -3,34 +3,32 @@ import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 
-const FiveStars = ({rating}) => {
-
-  const renderStars = (rating) => {
-    let fullStars = Math.floor(rating);
-    let halfStars = rating !== fullStars
-    let emptyStars = 5 - rating;
+function FiveStars({ rating }) {
+  const renderStars = (starRating) => {
+    const fullStars = Math.floor(starRating);
+    const halfStars = starRating !== fullStars;
+    let emptyStars = 5 - starRating;
     const stars = [];
 
-    for (var i = 0; i < fullStars; i++) {
+    for (let i = 0; i < fullStars; i += 1) {
       stars.push(<StarIcon />);
-    };
+    }
 
     if (halfStars) {
       stars.push(<StarHalfIcon />);
-      emptyStars--;
-  };
+      emptyStars -= 1;
+    }
 
-    for (var j = 0; j < emptyStars; j++) {
+    for (let j = 0; j < emptyStars; j += 1) {
       stars.push(<StarOutlineIcon />);
-    };
+    }
 
     return stars;
-  }
+  };
 
   return (
     <div className="starRating">{rating ? renderStars(rating) : 'No reviews yet.'}</div>
-  )
-
+  );
 }
 
 export default FiveStars;
