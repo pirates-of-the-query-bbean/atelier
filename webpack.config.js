@@ -1,7 +1,7 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
-
+const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+require('dotenv').config();
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -18,16 +18,21 @@ const config = {
     ignored: path.join(__dirname, 'client/dist'),
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: path.resolve(__dirname, '/client/dist/index.html'),
-    // }),
+    new webpack.DefinePlugin({
+      'process.env.REACT_APP_API_KEY': JSON.stringify(process.env.REACT_APP_API_KEY),
+      // You can define other environment variables here
+    }),
 
     new MiniCssExtractPlugin(),
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
+
     rules: [
       {
         test: /\.(js|jsx)$/i,
