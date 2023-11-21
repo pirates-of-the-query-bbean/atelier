@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import styles from './App.module.scss';
+import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
 // import RatingsReviews from './widgets/RatingsReviews/RatingsReviews.jsx';
 import FiveStars from './sharedComponents/FiveStars';
 import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
