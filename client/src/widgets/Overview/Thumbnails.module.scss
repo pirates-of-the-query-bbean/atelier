@@ -1,0 +1,33 @@
+.container {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+li.selected {
+  position: relative;
+
+}
+
+li.selected div {
+
+  // position: absolute;
+  // top: -3px;
+  // left: 0;
+  // height: 10px;
+  // background-color: orange;
+
+
+  border-bottom: 3px solid var(--text-color);
+
+}
+
+
+
+.thumbnail {
+  width: 3rem;
+  height: 3rem;
+  background-color: rgb(161, 161, 161);
+  border: 1px solid var(--text-color);
+}

@@ -7,9 +7,11 @@
 }
 
 .container aside {
-  width: 20rem;
+
+  width: 24rem;
+  padding-left: 1rem;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 1rem;
   margin-bottom: .75rem;
 }

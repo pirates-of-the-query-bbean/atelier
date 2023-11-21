@@ -446,9 +446,6 @@ function Overview({ product }) {
 
   return (
     <section data-testid="overview" className={styles.container}>
-      <h1 className={styles.ugly}>
-        Overview
-      </h1>
       <div className={styles.galleryAndAside}>
         <Gallery />
         <aside>
