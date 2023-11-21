@@ -29,9 +29,6 @@ function AnswerList({ question, helpful, report, sort, answersStartIndex, setAns
 
     }
     sort(answers, setAnswerArr, 'helpfulness');
-    // setAnswerArr(answers);
-
-    console.log(answerArr);
 
   }
 
@@ -78,7 +75,7 @@ function AnswerList({ question, helpful, report, sort, answersStartIndex, setAns
 
   return (
     <section>
-      {answerArr.slice(0, 2).map((answer, index) => {
+      {answerArr.slice(0, answersStartIndex + 2).map((answer, index) => {
         return (
           <Answer key={index} answer={answer} helpful={helpful} report={report}/>
           )}
@@ -86,8 +83,7 @@ function AnswerList({ question, helpful, report, sort, answersStartIndex, setAns
       <a href='#'
         className={styles.loadMoreAnswers}
         onClick={(e) => {
-          e.preventDefault()
-          showTwoMoreItems(setAnswersStartIndex, answersStartIndex)
+          showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
         }}>Load More Answers</a>
     </section>
   )

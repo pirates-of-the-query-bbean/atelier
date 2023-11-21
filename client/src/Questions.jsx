@@ -49,7 +49,7 @@ function Questions() {
         "photos": [],
       }
     }
-  },
+  }
 ]
 
   const [questionArr, setQuestionArr] = useState(questionsObj);
@@ -70,28 +70,25 @@ function Questions() {
     console.log('handle submit invoked');
   }
 
-  function showMoreQuestions(e) {
-    console.log('button clicked');
-  }
-
   return (
     <section className={styles.questions__container}>
       <h5>Questions & Answers</h5>
       <Search
       handleSubmit={handleSubmit}
-      questionAr={questionArr}/>
+      questionAr={questionArr} />
       <QuestionList
       questionArr={questionArr}
       setQuestionArr={setQuestionArr}
       questionsStartIndex={questionsStartIndex}
+      answersStartIndex={answersStartIndex}
       showTwoMoreItems={showTwoMoreItems}
-      sort={sort}/>
+      sort={sort} />
 
       <div className={styles.questions__buttons}>
         <CustomButton style={styles.custom__button}
           text={'More Answered Questions'}
           buttonWidth={245}
-          onClickFunction={() => { showTwoMoreItems(setQuestionStartIndex, questionsStartIndex); }} />
+          onClickFunction={() => { showTwoMoreItems(setQuestionStartIndex, questionsStartIndex) }} />
         <CustomButton style={styles.custom__button}
           text={'Add A Question'}
           Icon={'AddIcon'}
@@ -103,7 +100,7 @@ function Questions() {
         setModalOpen={setModalOpen}
         onSubmit={()=> handleSubmit()}/>
     </section>
-  )
+  );
 }
 
 export default Questions;

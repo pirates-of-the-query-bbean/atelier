@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import AnswerList from './AnswerList.jsx';
 import styles from './Question.module.scss';
 
-function Question({ question, upvote, sort }) {
+function Question({ question, upvote, sort, answersStartIndex, setAnswersStartIndex, showTwoMoreItems }) {
   const { question_body, question_date, asker_name, question_helpfulness, answers, reported} = question;
 
   useEffect(() => {
@@ -22,7 +22,12 @@ function Question({ question, upvote, sort }) {
         </span>
         </div>
       </h5>
-      <AnswerList upvote={upvote} sort={sort}/>
+      <AnswerList
+        upvote={upvote}
+        sort={sort}
+        answersStartIndex={answersStartIndex}
+        setAnswersStartIndex={setAnswersStartIndex}
+        showTwoMoreItems={showTwoMoreItems}/>
     </section>
   )
 }
