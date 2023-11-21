@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import AddOutfitCard from './AddOutfitCard/AddOutfitCard.jsx';
 import ItemContainer from './ItemContainer/ItemContainers';
 import styles from './RelatedProducts.module.scss';
-
+import axios from 'axios'; 
 function RelatedProducts({items, currentItem, relatedItemsStyle}) {
   //  currentList state is the list given to us combined with its default styling and price
   const [currentList, setCurrentList] = useState([]);
@@ -25,16 +25,47 @@ function RelatedProducts({items, currentItem, relatedItemsStyle}) {
   const [userOutfitlist, setUserOutfitList] = useState([]);
 
   //  combines the list of 'related items' with their default styles and prices
+
+
+
+
   useEffect(() => {
-    if (items && relatedItemsStyle) {
-      const combineBothList = items.map((item) => {
-        const styleObj = relatedItemsStyle.find(style => style.product_id === String(item.id));
-        const defaultStyle = styleObj ? styleObj.results.find(r => r['default?'] === true) : null;
-        return { ...item, style: defaultStyle };
-      });
-      setCurrentList(combineBothList);
+    if (currentItem && currentItem.id) {
+      const fetchRelatedItems = async () => {
+        try {
+          const response = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${currentItem.id}/related`, {
+            headers: {
+              'Authorization': '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'
+            }
+          });
+          const relatedItemsID = response.data;
+          const relatedItemsInfo = await Promise.all(relatedItemsID.map(id => 
+            axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, {
+              headers: {
+                'Authorization': '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'
+              }
+            }).then(res => res.data)
+          ));
+          const relatedItemsStyles = await Promise.all(relatedItemsID.map(id => 
+            axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, {
+              headers: {
+                'Authorization': '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'
+              }
+            }).then(res => res.data)
+          ));
+          const combinedList = relatedItemsInfo.map((item, index) => {
+            const defaultStyle = relatedItemsStyles[index].results.find(r => r['default?']) || relatedItemsStyles[index].results[0];
+            return { ...item, style: defaultStyle };
+          });
+          setCurrentList(combinedList);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchRelatedItems();
     }
-  }, [items, relatedItemsStyle]);
+  }, [currentItem]);
+
 
   const handleTableClick = (item) => {
     setClickedItem(item);
