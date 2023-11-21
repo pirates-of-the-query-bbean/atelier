@@ -445,8 +445,8 @@ function Overview({ product }) {
   }, []);
 
   return (
-    <section className={styles.container}>
-      <h1 data-testid="app-hw" className={styles.ugly}>
+    <section data-testid="overview" className={styles.container}>
+      <h1 className={styles.ugly}>
         Overview
       </h1>
       <div className={styles.galleryAndAside}>

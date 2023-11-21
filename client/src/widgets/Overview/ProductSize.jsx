@@ -13,7 +13,7 @@ function ProductSize({
 
   const sizeHandler = (e) => {
     const [sku, size] = e.target.value.split(',');
-    const qty = 0;// productStyles[sku].quantity;
+    const qty = productStyles[sku].quantity;
     setSizeQty(qty);
     if (qty > 0) {
       setDisabled(false);
