@@ -447,7 +447,9 @@ function Overview({ product }) {
   return (
     <section data-testid="overview" className={styles.container}>
       <div className={styles.galleryAndAside}>
-        <Gallery />
+        <div className={styles.gallery}>
+          <Gallery currStyle={currStyle} />
+        </div>
         <aside>
           <ProductTitle product={product} price={currPrice} />
           <ProductStyle

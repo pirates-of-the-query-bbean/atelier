@@ -1,23 +1,25 @@
 .container {
   width: 100%;
-  padding-right: 5rem;
+  padding-right: 50px;
+  padding-top: 20px;
 }
 
 .ratingsReviews {
   display: flex;
-  font-size: .75rem;
+  font-size: 10px;
   align-items: center;
 }
 
 .container h3 {
   font-weight: 300;
-  font-size: .75rem;
+  font-size: 15px;
   text-transform: uppercase;
-  letter-spacing: .05spx;
+  letter-spacing: .05px;
 }
 
 .container h1 {
-  font-size: 1.5rem;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 .strike {
@@ -31,5 +33,5 @@
 .salePrice {
   color: red;
   font-weight: 400;
-  margin-right: .5rem;
+  margin-right: 10px;
 }
