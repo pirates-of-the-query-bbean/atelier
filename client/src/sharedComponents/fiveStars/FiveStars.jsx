@@ -27,7 +27,7 @@ function FiveStars({ rating }) {
   };
 
   return (
-    <div className="starRating">{rating ? renderStars(rating) : 'No reviews yet.'}</div>
+    <div data-testid="starRating" className="starRating">{rating ? renderStars(rating) : 'No reviews yet.'}</div>
   );
 }
 

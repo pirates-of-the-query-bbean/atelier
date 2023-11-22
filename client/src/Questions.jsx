@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import CustomButton from './sharedComponents/customButton/CustomButton';
-import Search from './questions/Search';
-import QuestionList from './questions/QuestionList';
+import CustomButton from './sharedComponents/customButton/CustomButton.jsx';
+import Search from './questions/Search.jsx';
+import QuestionList from './questions/QuestionList.jsx';
 import styles from './Questions.module.scss';
-import Modal from './questions/Modal';
+import Modal from './questions/Modal.jsx';
 
 function Questions() {
   const questionsObj = [{
@@ -88,7 +88,7 @@ function Questions() {
 
       <div className={styles.questions__buttons}>
         <CustomButton
-          style={styles.custom__button}
+          style={styles.questions__customButton}
           text="More Answered Questions"
           buttonWidth={245}
           onClickFunction={() => {
@@ -96,7 +96,7 @@ function Questions() {
           }}
         />
         <CustomButton
-          style={styles.custom__button}
+          style={styles.questions__customButton}
           text="Add A Question"
           Icon="AddIcon"
           buttonWidth={200}
