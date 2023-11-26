@@ -84,7 +84,7 @@ function AnswerList({ question, helpful, report, sort, answersStartIndex, setAns
         className={styles.loadMoreAnswers}
         onClick={(e) => {
           showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
-        }}>Load More Answers</a>
+        }}>See More Answers</a>
     </section>
   )
 }
