@@ -11,7 +11,7 @@ function QuestionList({
   sort,
   showTwoMoreItems
 }) {
-  const getQuestions = (id) => {
+  const getQuestions = () => {
     // axios.get(`/questions/${product_id}/`)
     //   .then((data) => {
     //     const questions = [];
@@ -27,7 +27,7 @@ function QuestionList({
   };
 
   useEffect(() => {
-    getQuestions(product._id);
+    // getQuestions(product._id);
     sort(questionArr, setQuestionArr, 'question_helpfulness');
   }, []);
 

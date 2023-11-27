@@ -20,13 +20,14 @@ function App() {
   const getProducts = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
       headers: {
-        'Authorization': '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'
+        'Authorization': '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'
       }
     })
     .then((response) => {
       setProducts(response.data);
       //set current product to first product in array
       setCurrentProduct(response.data[0]);
+      console.log(currentProduct);
     })
     .catch((err) => {
       console.log('error fetching products', err);
@@ -37,7 +38,7 @@ function App() {
     setIsLoading(true);
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${currentProduct.id}`, {
       headers: {
-        'Authorization': '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'
+        'Authorization': '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'
       }
     })
     .then((response) => {
@@ -68,7 +69,7 @@ function App() {
         Pirates of the query-bbean
       </h1>
       {/* <RatingsReviews productReviews={productReviews} /> */}
-      <Questions />
+      <Questions currentProduct={currentProduct}/>
     </div>
   );
 }
