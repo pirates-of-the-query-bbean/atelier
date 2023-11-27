@@ -21,6 +21,4 @@ function AddOutfitCard({handleClick}) {
   );
 }
 
-
-
 export default AddOutfitCard;
