@@ -3,7 +3,9 @@ import axios from 'axios';
 import styles from './App.module.scss';
 import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
 import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
-import FiveStars from './sharedComponents/FiveStars';
+import FiveStars from './sharedComponents/fiveStars/FiveStars.jsx';
+import Questions from './widgets/Questions.jsx';
+import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
 import Overview from './widgets/Overview';
 
 function App() {
@@ -15,7 +17,6 @@ function App() {
 
   useEffect(() => {
     getProducts();
-    // getQuestions();
   }, []);
 
   const getProducts = () => {
@@ -65,12 +66,14 @@ function App() {
       </div>
     );
   }
+
   return (
-    <div>
+    <div className={styles.container}>
       <h1 data-testid="app-hw" className={styles.ugly}>
         Pirates of the query-bbean 2
       </h1>
-
+      <RelatedProducts currentItem={currentProduct} />
+      <Questions currentProduct={currentProduct} />
       {Object.keys(currentProduct).length > 0 && <Overview product={currentProduct} />}
       <RatingsReviews
         productReviews={productReviews}
