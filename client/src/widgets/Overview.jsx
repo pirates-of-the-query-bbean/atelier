@@ -9,22 +9,6 @@ import Gallery from './Overview/Gallery';
 
 function Overview({ product }) {
   console.log('product', product);
-
-  const getStyles = () => {
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
-      headers: {
-        Authorization: process.env.REACT_APP_API_KEY,
-      },
-    })
-      .then((response) => {
-        console.log('RESPONSE', response);
-        setProductStyles(response.data);
-      })
-      .catch((err) => {
-        console.log('error fetching styles', err);
-      });
-  };
-
   const [currPrice, setCurrPrice] = useState({
     sale_price: null,
     original_price: product.default_price,
@@ -34,6 +18,32 @@ function Overview({ product }) {
   const [currStyle, setCurrStyle] = useState(null);
   const [productStyles, setProductStyles] = useState([]);
   const [isSku, setSku] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+
+  const getStyles = () => {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product.id}/styles`, {
+      headers: {
+        Authorization: process.env.REACT_APP_API_KEY,
+      },
+    })
+      .then((response) => {
+        console.log('RESPONSE', response);
+        setProductStyles(response.data);
+        response.data.results.forEach((productStyle) => {
+          if (productStyle['default?'] === true) {
+            console.log('style is', productStyle);
+            setCurrStyle(productStyle);
+          }
+        });
+        console.log('Curr', currStyle);
+      }).then(() => {
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log('error fetching styles', err);
+        setLoading('error');
+      });
+  };
 
   const updateStyle = (style) => {
     setCurrStyle(style);
@@ -60,14 +70,16 @@ function Overview({ product }) {
   };
 
   useEffect(() => {
-    getStyles().then((data) => {
-      data.results.forEach((productStyle) => {
-        if (productStyle['default?'] === true) {
-          setCurrStyle(productStyle);
-        }
-      });
-    });
+    getStyles();
   }, []);
+
+  if (isLoading === true) {
+    return <h3>Loading...</h3>;
+  }
+
+  if (isLoading === 'error') {
+    return <h3>ERROR fetching content!</h3>;
+  }
 
   return (
     <section data-testid="overview" className={styles.container}>
@@ -84,7 +96,7 @@ function Overview({ product }) {
             setCurrStyle={updateStyle}
           />
           <ProductSize
-            productStyles={productStyles.results[0].skus}
+            productStyles={currStyle.skus}
             addToBag={addToBag}
             favorite={favorite}
             setCurrSize={setCurrSize}
