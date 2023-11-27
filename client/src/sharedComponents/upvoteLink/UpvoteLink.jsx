@@ -11,6 +11,7 @@ const UpvoteLink = function ({ item, property }) {
     setUpvoteCount(item[property] += 1);
   };
 
+
   return (
     <div className={styles.upvote__container}>
       <span>Helpful? </span>
