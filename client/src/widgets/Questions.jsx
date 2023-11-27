@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import CustomButton from './sharedComponents/customButton/CustomButton.jsx';
-import Search from './questions/Search.jsx';
-import QuestionList from './questions/QuestionList.jsx';
+import CustomButton from '../sharedComponents/customButton/CustomButton';
+import Search from './Questions/Search.jsx';
+import QuestionList from './Questions/QuestionList.jsx';
 import styles from './Questions.module.scss';
-import Modal from './questions/Modal.jsx';
+import Modal from './Questions/Modals/Modal.jsx';
 
 function Questions({ currentProduct }) {
   const [questionArr, setQuestionArr] = useState([]);

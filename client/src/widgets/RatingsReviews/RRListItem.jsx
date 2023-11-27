@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './RRListItem.module.scss';
-import FiveStars from '../../sharedComponents/FiveStars';
+import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 import ParsedDate from '../../sharedComponents/ParsedDate';
 import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
 
@@ -16,7 +16,9 @@ const RRListItem = function ({ review }) {
         <ParsedDate date={review.date} />
       </div>
       <div className={styles.review__body}>
-        Review: {review.body}
+        Review:
+        {' '}
+        {review.body}
       </div>
       <div>
         <UpvoteLink item={review} property="helpfulness" />
