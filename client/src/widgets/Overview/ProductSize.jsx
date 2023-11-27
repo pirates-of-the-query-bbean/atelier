@@ -43,10 +43,10 @@ function ProductSize({
       </div>
       <div className={styles.buttonRow}>
         <div onClick={addToBag} className={styles.addToBag}>
-          <CustomButton text="ADD TO BAG" Icon={AddIcon} />
+          <CustomButton text="ADD TO CART" Icon={AddIcon} />
         </div>
-        <div onClick={favorite} className={styles.addToBag}>
-          <CustomButton className={styles.favorite} Icon={StarBorderIcon} />
+        <div onClick={favorite} className={styles.favorite}>
+          <CustomButton Icon={StarBorderIcon} />
         </div>
       </div>
     </div>

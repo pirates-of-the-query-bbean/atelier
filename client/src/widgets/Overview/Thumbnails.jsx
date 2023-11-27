@@ -1,24 +1,28 @@
 import React from 'react';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styles from './Thumbnails.module.scss';
 
-function Thumbnails({ product }) {
+function Thumbnails({ imgs, selectionHandler, currImg }) {
   return (
     <ul className={styles.container}>
-      <li className={styles.selected}>
-        <img className={styles.thumbnail} src="#" alt="test" />
-        <div />
-      </li>
+      {imgs.map((img, index) => {
+        if (index < 5) {
+          return (
+            <li
+              onClick={() => {
+                selectionHandler(index);
+              }}
+              key={index}
+              className={currImg === index ? styles.selected : null}
+            >
+              <img className={styles.thumbnail} src={img.thumbnail_url} alt="test" />
+              <div />
+            </li>
+          );
+        }
+      })}
       <li>
-        <img className={styles.thumbnail} src="#" alt="test" />
-      </li>
-      <li>
-        <img className={styles.thumbnail} src="#" alt="test" />
-      </li>
-      <li>
-        <img className={styles.thumbnail} src="#" alt="test" />
-      </li>
-      <li>
-        <img className={styles.thumbnail} src="#" alt="test" />
+        <ExpandMoreIcon />
       </li>
 
     </ul>

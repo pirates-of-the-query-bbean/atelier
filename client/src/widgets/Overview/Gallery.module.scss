@@ -34,7 +34,7 @@
   align-self: flex-end;
 }
 
-.container nav div {
+.arrows {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -49,7 +49,6 @@
 
 .imgs {
   z-index: 1;
-  background-color: black;
   display: flex;
   width: fit-content;
   position: absolute;
