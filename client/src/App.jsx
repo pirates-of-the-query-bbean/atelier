@@ -5,7 +5,6 @@ import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
 import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
 import FiveStars from './sharedComponents/fiveStars/FiveStars.jsx';
 import Questions from './widgets/Questions.jsx';
-require('dotenv').config();
 
 function App() {
   const [products, setProducts] = useState([]);
