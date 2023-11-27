@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './RRListItem.module.scss';
-import FiveStars from '../../sharedComponents/FiveStars';
+import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 import ParsedDate from '../../sharedComponents/ParsedDate';
 import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
 

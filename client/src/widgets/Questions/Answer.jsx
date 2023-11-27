@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
 import styles from './Answer.module.scss';
 
 function Answer({ answer, upvote, report }) {
@@ -28,18 +29,18 @@ function Answer({ answer, upvote, report }) {
             ) : (<span>, {formattedDate(answer.date)}</span>)}
           </p>
           <p>
-            <span className={styles.upvote}>Helpful?</span>
-            <a href='#' onClick={(e)=> {
-              e.preventDefault();
-              upvote(e);
-            }}>Yes</a>
-            <span>({helpfulness})</span>
+            <UpvoteLink item={answer} itemType="answer" property="helpfulness" />
           </p>
           <p>
-            <a href='#' onClick={(e)=> {
-              e.preventDefault();
-              report(movie);
-            }}>Report</a>
+            <button
+              type="submit"
+              onClick={(e)=> {
+                e.preventDefault();
+                report();
+              }}
+            >
+              Report
+            </button>
           </p>
         </div>
     </section>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import CustomButton from '../sharedComponents/customButton/CustomButton.jsx';
-import Search from './questions/Search.jsx';
-import QuestionList from './questions/QuestionList.jsx';
+import PropTypes from 'prop-types';
+import CustomButton from '../sharedComponents/customButton/CustomButton';
+import Search from './questions/Search';
+import QuestionList from './questions/QuestionList';
 import styles from './Questions.module.scss';
-import Modal from './questions/Modals/Modal.jsx';
+import Modal from './questions/Modals/Modal';
 
-function Questions({ currentProduct }) {
+function Questions({ currentProduct, questions }) {
   const questionsObj = [{
     "question_id": 37,
     "question_body": "Why is this product cheaper here than other sites?",
@@ -115,5 +116,20 @@ function Questions({ currentProduct }) {
     </section>
   );
 }
+
+Questions.propTypes = {
+  currentProduct: PropTypes.shape({
+
+  }).isRequired,
+  questions: PropTypes.arrayOf({
+    question_id: PropTypes.number,
+    question_body: PropTypes.string,
+    question_helpfulness: PropTypes.number,
+    reported: PropTypes.boolean,
+    answers: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }).isRequired,
+};
 
 export default Questions;

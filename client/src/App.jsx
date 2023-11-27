@@ -14,10 +14,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
 
-  useEffect(() => {
-    getProducts();
-  }, []);
-
   const getProducts = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
       headers: {
@@ -52,6 +48,25 @@ function App() {
       });
   };
 
+  const getQuestions = () => {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/?product_id=${currentProduct.id}`, {
+      headers: {
+        Authorization: process.env.REACT_APP_API_KEY,
+      },
+    })
+      .then((response) => {
+        setQuestions(response.data);
+      })
+      .catch((err) => {
+        console.log('error fetching questions', err);
+      });
+  };
+
+  useEffect(() => {
+    getProducts();
+    getQuestions();
+  }, []);
+
   useEffect(() => {
     if (currentProduct && currentProduct.id) {
       getReviews();
@@ -72,8 +87,8 @@ function App() {
       </h1>
       {/* <RatingsReviews productReviews={productReviews} /> */}
 
-      <Overview product={currentProduct} />
-      <Questions currentProduct={currentProduct} />
+      {/* <Overview product={currentProduct} /> */}
+      <Questions currentProduct={currentProduct} questions={questions}/>
       {/* <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}

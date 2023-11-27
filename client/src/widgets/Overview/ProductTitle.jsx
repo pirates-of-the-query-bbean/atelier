@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ProductTitle.module.scss";
-import FiveStars from "../../sharedComponents/FiveStars.jsx";
+import FiveStars from "../../sharedComponents/fiveStars/FiveStars";
 
 function ProductTitle({ product, price }) {
   return (

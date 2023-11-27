@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './Upvote.module.scss';
 
 // Because various components have different keys, pass in key
 // along with object to upvote a particular property.
-// EXAMPLE USAGE: <UpvoteLink item={questionObj/answerObj/reviewObj} property={helpfulnessKey}/>
+// EXAMPLE USAGE: <UpvoteLink item={questionObj/answerObj/reviewObj} itemType={'review', 'answer', 'question'} property={helpfulnessKey}/>
 
 function UpvoteLink({ item, itemType, property }) {
   const [upvoteCount, setUpvoteCount] = useState(item[property]);
@@ -36,7 +37,7 @@ function UpvoteLink({ item, itemType, property }) {
       <span>Helpful? </span>
       <button
         type="submit"
-        onSubmit={(e) => {
+        onClick={(e) => {
           e.preventDefault();
           upvote(item, property);
         }}
@@ -51,5 +52,13 @@ function UpvoteLink({ item, itemType, property }) {
     </div>
   );
 }
+
+UpvoteLink.propTypes = {
+  item: PropTypes.shape({
+
+  }).isRequired,
+  itemType: PropTypes.string.isRequired,
+  property: PropTypes.string.isRequired,
+};
 
 export default UpvoteLink;
