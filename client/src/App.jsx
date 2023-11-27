@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './App.module.scss';
 import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
-import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
-import FiveStars from './sharedComponents/fiveStars/FiveStars.jsx';
-import Questions from './widgets/Questions.jsx';
+import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink';
+import FiveStars from './sharedComponents/fiveStars/FiveStars';
+import Questions from './widgets/Questions';
+import Overview from './widgets/Overview';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -70,13 +71,13 @@ function App() {
         Pirates of the query-bbean 2
       </h1>
       {/* <RatingsReviews productReviews={productReviews} /> */}
-      <Questions currentProduct={currentProduct}/>
 
       <Overview product={currentProduct} />
-      <RatingsReviews
+      <Questions currentProduct={currentProduct} />
+      {/* <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}
-      />
+      /> */}
     </div>
   );
 }
