@@ -3,8 +3,8 @@ import axios from 'axios';
 import styles from './App.module.scss';
 import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
 import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
-import RatingsReviews from './widgets/RatingsReviews/RatingsReviews.jsx';
-import FiveStars from './sharedComponents/FiveStars'
+import FiveStars from './sharedComponents/FiveStars';
+import Overview from './widgets/Overview';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -15,18 +15,18 @@ function App() {
 
   useEffect(() => {
     getProducts();
-    getQuestions();
+    // getQuestions();
   }, []);
 
   const getProducts = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
       headers: {
-        'Authorization': process.env.REACT_APP_API_KEY
+        Authorization: process.env.REACT_APP_API_KEY,
       },
     })
       .then((response) => {
         setProducts(response.data);
-        //set current product to first product in array
+        // set current product to first product in array
         setCurrentProduct(response.data[0]);
       })
       .catch((err) => {
@@ -38,7 +38,7 @@ function App() {
     setIsLoading(true);
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${currentProduct.id}`, {
       headers: {
-        'Authorization': process.env.REACT_APP_API_KEY
+        Authorization: process.env.REACT_APP_API_KEY,
       },
     })
       .then((response) => {
@@ -71,7 +71,7 @@ function App() {
         Pirates of the query-bbean 2
       </h1>
 
-      <Overview product={currentProduct} />
+      {Object.keys(currentProduct).length > 0 && <Overview product={currentProduct} />}
       <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}
