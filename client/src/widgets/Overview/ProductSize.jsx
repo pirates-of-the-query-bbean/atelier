@@ -37,8 +37,8 @@ function ProductSize({
         <select onChange={qtyHandler} disabled={isDisabled}>
           {isSizeQty === null ? <option value="-">-</option> : null}
           {isSizeQty === 0 ? <option value="null">Out of Stock</option> : null}
-          { [...Array(isSizeQty)].map((_, i) => (
-            <option value={i + 1}>{i + 1}</option>))}
+          { [...Array(isSizeQty)].map((_, i) => (i < 15
+            ? <option value={i + 1}>{i + 1}</option> : null))}
         </select>
       </div>
       <div className={styles.buttonRow}>
