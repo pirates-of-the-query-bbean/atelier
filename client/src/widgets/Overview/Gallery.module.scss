@@ -1,0 +1,73 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  overflow: hidden;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+
+}
+
+.container nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+
+}
+
+.fullscreen {
+  padding: 0;
+  align-self: flex-end;
+}
+
+.arrows {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+
+
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.imgs {
+  z-index: 1;
+  display: flex;
+  width: fit-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 250ms ease-in-out;
+}
+
+.imgs div {
+  width: 630px;
+  cursor: pointer;
+  background-color: black;
+  object-fit: contain;
+}
+
+.imgs img {
+  width: 630px;
+  height: 100%;
+  object-fit: contain;
+}

@@ -68,8 +68,10 @@ function App() {
   return (
     <div>
       <h1 data-testid="app-hw" className={styles.ugly}>
-        Pirates of the query-bbean
+        Pirates of the query-bbean 2
       </h1>
+
+      <Overview product={currentProduct} />
       <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}

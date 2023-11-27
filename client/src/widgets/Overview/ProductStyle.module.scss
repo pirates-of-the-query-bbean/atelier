@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  padding-right: 60px;
+}
+
+.container h3 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.container span {
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.styleList {
+  margin-top: .5rem;
+  gap: 1rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}

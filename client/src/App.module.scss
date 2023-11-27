@@ -28,6 +28,7 @@
 
 html,
 body {
+  color: var(--text-color);
   height: 100%;
   background-color: var(--offwhite);
 
@@ -70,4 +71,10 @@ main {
   max-width: 840px;
   padding: 16px;
   margin: auto;
+}
+
+a,
+a:visited,
+a:active {
+  color: var(--text-color);
 }
