@@ -11,9 +11,11 @@ function App() {
   const [currentProduct, setCurrentProduct] = useState({});
   const [productReviews, setProductReviews] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     getProducts();
+    getQuestions();
   }, []);
 
   const getProducts = () => {
