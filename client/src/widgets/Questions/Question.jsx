@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AnswerList from './AnswerList';
 import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
+import AddAnswerModal from './Modals/AddAnswerModal';
 import styles from './Question.module.scss';
 
 function Question({
@@ -22,10 +23,15 @@ function Question({
   } = question;
 
   const [isAddAnswerModalOpen, setAddAnswerModalOpen] = useState(false);
+  const [answerFormData, setAnswerFormData] = useState(null);
 
-  const handleOpenAddAnswerModal = () => {
+  function handleOpenAddAnswerModal() {
     setAddAnswerModalOpen(true);
-  };
+  }
+
+  function handleCloseAddAnswerModal() {
+    setAddAnswerModalOpen(false);
+  }
 
   useEffect(() => {
 
@@ -45,7 +51,7 @@ function Question({
           <span className={styles.addAnswer}>
             <button
               type="submit"
-              onSubmit={(e) => {
+              onClick={(e) => {
                 e.preventDefault();
                 console.log('clicked');
                 handleOpenAddAnswerModal();

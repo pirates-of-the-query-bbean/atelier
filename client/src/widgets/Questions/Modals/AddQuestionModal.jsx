@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from './Modal.jsx';
 
-function AddAnswerModal({
+function AddQuestionModal({
   product, question, isOpen, onSubmit
 }) {
   const initialModalData = {
     title: `${product.name}: ${question.body}`,
-    answerBody: '',
+    questionBody: '',
     nickname: '',
     email: '',
   };
@@ -31,24 +31,34 @@ function AddAnswerModal({
   return (
     <div>
       <Modal isOpen={isOpen} />
-        <form onSubmit={handleSubmit}>
-          <h1>{Product.name}: {Question.body}</h1>
-          <input
-            type="text"
-            id="answerBody"
-            name="answerBody"
-            value={formState.answerBody}
+      <form onSubmit={handleSubmit}>
+        <h4>Ask Your Question</h4>
+        <h5>About the {product.name}</h5>
+        <label htmlFor="questionBody">
+          Your Question*
+          <textarea
+            id="questionBody"
+            name="questionBody"
+            value={formState.questionBody}
             onChange={handleInputChange}
             required
           />
+        </label>
+        <label htmlFor="nickname">
+          What is your nickname?*
           <input
             type="text"
             id="nickname"
             name="nickname"
             value={formState.nickname}
             onChange={handleInputChange}
+            placeholder="Example: jackson11!"
             required
           />
+        </label>
+        <p>For privacy reasons, do not use your full name or email address.</p>
+        <label htmlFor="email">
+          Email
           <input
             type="email"
             id="email"
@@ -57,13 +67,14 @@ function AddAnswerModal({
             onChange={handleInputChange}
             required
           />
-          <button type="submit">Submit</button>
-        </form>
+        </label>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
 
-// AddAnswerModal.propTypes = {
+// AddQuestionModal.propTypes = {
 //   product: PropTypes.shape({
 
 //   }).isRequired,
@@ -74,4 +85,4 @@ function AddAnswerModal({
 //   onSubmit: PropTypes.function.isRequired,
 // };
 
-export default AddAnswerModal;
+export default AddQuestionModal;

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CustomButton from '../sharedComponents/customButton/CustomButton';
 import Search from './questions/Search';
 import QuestionList from './questions/QuestionList';
 import styles from './Questions.module.scss';
-import Modal from './questions/Modals/Modal';
+import AddQuestionModal from './questions/Modals/AddQuestionModal';
 
 function Questions({ currentProduct, questions }) {
   const questionsObj = [{
@@ -74,6 +74,24 @@ function Questions({ currentProduct, questions }) {
     console.log('handle submit invoked');
   }
 
+  function getQuestions() {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/?product_id=${currentProduct.id}`, {
+      headers: {
+        Authorization: process.env.REACT_APP_API_KEY,
+      },
+    })
+      .then((response) => {
+        setQuestionArr(response.data);
+      })
+      .catch((err) => {
+        console.log('error fetching questions', err);
+      });
+  }
+
+  useEffect(() => {
+    getQuestions();
+  }, []);
+
   return (
     <section className={styles.questions__container}>
       <h5>Questions & Answers</h5>
@@ -108,7 +126,7 @@ function Questions({ currentProduct, questions }) {
           onClickFunction={() => { setModalOpen(true); }}
         />
       </div>
-      <Modal
+      <AddQuestionModal
         isModalOpen={isModalOpen}
         setModalOpen={setModalOpen}
         onSubmit={() => handleSubmit()}
