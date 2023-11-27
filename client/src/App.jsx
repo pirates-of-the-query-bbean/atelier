@@ -73,11 +73,8 @@ function App() {
         Pirates of the query-bbean 2
       </h1>
       <RelatedProducts currentItem={currentProduct} />
-
-      {/* <RatingsReviews productReviews={productReviews} /> */}
       <Questions currentProduct={currentProduct} />
-
-      {/* <Overview product={currentProduct} /> */}
+      {Object.keys(currentProduct).length > 0 && <Overview product={currentProduct} />}
       <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}

@@ -16,14 +16,14 @@ function Description({ product }) {
       <aside>
         <ul>
 
-          {product.features.map((feature) => (
+          {product.features ? product.features.map((feature) => (
             <li>
               <CheckIcon />
               {feature.value}
               {' '}
               {feature.feature}
             </li>
-          ))}
+          )) : null}
         </ul>
       </aside>
     </div>
