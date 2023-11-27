@@ -3,8 +3,8 @@ import axios from 'axios';
 import styles from './App.module.scss';
 import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
 import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
-import RatingsReviews from './widgets/RatingsReviews/RatingsReviews.jsx';
-import FiveStars from './sharedComponents/FiveStars'
+import FiveStars from './sharedComponents/fiveStars/FiveStars.jsx';
+import Questions from './widgets/Questions.jsx';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -15,13 +15,12 @@ function App() {
 
   useEffect(() => {
     getProducts();
-    getQuestions();
   }, []);
 
   const getProducts = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
       headers: {
-        'Authorization': process.env.REACT_APP_API_KEY
+        Authorization: process.env.REACT_APP_API_KEY,
       },
     })
       .then((response) => {
@@ -29,10 +28,10 @@ function App() {
         //set current product to first product in array
         setCurrentProduct(response.data[0]);
       })
-      .catch((err) => {
-        console.log('error fetching products', err);
-      });
-  };
+    .catch((err) => {
+      console.log('error fetching products', err);
+    })
+  }
 
   const getReviews = () => {
     setIsLoading(true);
@@ -166,6 +165,8 @@ function App() {
       <h1 data-testid="app-hw" className={styles.ugly}>
         Pirates of the query-bbean 2
       </h1>
+      {/* <RatingsReviews productReviews={productReviews} /> */}
+      <Questions currentProduct={currentProduct}/>
 
       <Overview product={currentProduct} />
       <RatingsReviews
