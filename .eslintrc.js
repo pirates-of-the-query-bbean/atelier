@@ -23,5 +23,6 @@ module.exports = {
   },
   ignorePatterns: ['main.js', 'main.css', '**/apiSampleData/**'],
   rules: {
+    'linebreak-style': 0,
   },
 };

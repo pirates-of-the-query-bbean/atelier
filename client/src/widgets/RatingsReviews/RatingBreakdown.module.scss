@@ -1,0 +1,32 @@
+.ratingBreakdown {
+  .averageRating {
+    font-size: 48px; // Large font size for the average rating
+    .stars {
+      // Styles for the stars, perhaps color or shadows
+    }
+  }
+
+  .recommendation {
+    // Styles for the recommendation percentage
+  }
+
+  .ratingRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; // Space between rows
+
+    .starLabel {
+      // Styles for the star label
+    }
+    .ratingBarContainer {
+      flex-grow: 1;
+      background-color: #e0e0e0; // Light gray background for the bar
+      margin-left: 8px;
+
+      .ratingBar {
+        height: 10px;
+        background-color: #000; // Dark bar color
+      }
+    }
+  }
+}

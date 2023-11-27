@@ -1,0 +1,29 @@
+.container {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+}
+
+.text {
+  width: 63%;
+  border-right: 2px solid var(--text-color);
+}
+
+.text h3 {
+  margin-bottom: 20px;
+}
+
+.container aside {
+  width: 37%;
+}
+
+.container ul {
+  list-style: none;
+}
+
+.container li {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
