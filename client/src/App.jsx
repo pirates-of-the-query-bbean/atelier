@@ -1,38 +1,81 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styles from './App.module.scss';
-// import FiveStars from "./sharedComponents/FiveStars.jsx";
-import Overview from './widgets/Overview.jsx';
+import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
+import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
+import RatingsReviews from './widgets/RatingsReviews/RatingsReviews.jsx';
+import FiveStars from './sharedComponents/FiveStars'
 
 function App() {
-  const sampleProduct = {
-    id: 40344,
-    campus: 'hr-rfp',
-    name: 'Camo Onesie',
-    slogan: 'Blend in to your crowd',
-    description:
-      'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-    category: 'Jackets',
-    default_price: '140.00',
-    created_at: '2021-08-13T14:38:44.509Z',
-    updated_at: '2021-08-13T14:38:44.509Z',
-    features: [
-      {
-        feature: 'Fabric',
-        value: 'Canvas',
+  const [products, setProducts] = useState([]);
+  const [currentProduct, setCurrentProduct] = useState({});
+  const [productReviews, setProductReviews] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    getProducts();
+    getQuestions();
+  }, []);
+
+  const getProducts = () => {
+    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
+      headers: {
+        'Authorization': process.env.REACT_APP_API_KEY
       },
-      {
-        feature: 'Buttons',
-        value: 'Brass',
-      },
-    ],
+    })
+      .then((response) => {
+        setProducts(response.data);
+        //set current product to first product in array
+        setCurrentProduct(response.data[0]);
+      })
+      .catch((err) => {
+        console.log('error fetching products', err);
+      });
   };
 
+  const getReviews = () => {
+    setIsLoading(true);
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${currentProduct.id}`, {
+      headers: {
+        'Authorization': process.env.REACT_APP_API_KEY
+      },
+    })
+      .then((response) => {
+        setProductReviews(response.data);
+      })
+      .catch((err) => {
+        console.log('error fetching product reviews', err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    if (currentProduct && currentProduct.id) {
+      getReviews();
+    }
+  }, [currentProduct]);
+
+  if (isLoading) {
+    return (
+      <div>
+        Loading...
+      </div>
+    );
+  }
   return (
     <div>
       <h1 data-testid="app-hw" className={styles.ugly}>
         Pirates of the query-bbean 2
       </h1>
-      <Overview product={sampleProduct} />
+
+      <Overview product={currentProduct} />
+      <RatingsReviews
+        productReviews={productReviews}
+        currentProduct={currentProduct}
+      />
     </div>
   );
 }
