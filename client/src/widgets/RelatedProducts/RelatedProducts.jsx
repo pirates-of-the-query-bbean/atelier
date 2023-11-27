@@ -3,11 +3,12 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import CloseIcon from '@mui/icons-material/Close';
-import AddOutfitCard from './AddOutfitCard/AddOutfitCard.jsx';
+import axios from 'axios';
+import AddOutfitCard from './AddOutfitCard/AddOutfitCard';
 import ItemContainer from './ItemContainer/ItemContainers';
 import styles from './RelatedProducts.module.scss';
-import axios from 'axios'; 
-function RelatedProducts({items, currentItem, relatedItemsStyle}) {
+
+function RelatedProducts({currentItem}) {
   //  currentList state is the list given to us combined with its default styling and price
   const [currentList, setCurrentList] = useState([]);
 
@@ -25,36 +26,28 @@ function RelatedProducts({items, currentItem, relatedItemsStyle}) {
   const [userOutfitlist, setUserOutfitList] = useState([]);
 
   //  combines the list of 'related items' with their default styles and prices
-
-
-
-
   useEffect(() => {
     if (currentItem && currentItem.id) {
       const fetchRelatedItems = async () => {
         try {
           const response = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${currentItem.id}/related`, {
             headers: {
-              'Authorization': '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'
-            }
+              Authorization: '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',
+            },
           });
           const relatedItemsID = response.data;
-          const relatedItemsInfo = await Promise.all(relatedItemsID.map(id => 
-            axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, {
-              headers: {
-                'Authorization': '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'
-              }
-            }).then(res => res.data)
-          ));
-          const relatedItemsStyles = await Promise.all(relatedItemsID.map(id => 
-            axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, {
-              headers: {
-                'Authorization': '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'
-              }
-            }).then(res => res.data)
-          ));
+          const relatedItemsInfo = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, {
+            headers: {
+              Authorization: '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',
+            },
+          }).then((res) => res.data)));
+          const relatedItemsStyles = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, {
+            headers: {
+              Authorization: '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',
+            },
+          }).then((res) => res.data)));
           const combinedList = relatedItemsInfo.map((item, index) => {
-            const defaultStyle = relatedItemsStyles[index].results.find(r => r['default?']) || relatedItemsStyles[index].results[0];
+            const defaultStyle = relatedItemsStyles[index].results.find((r) => r['default?']) || relatedItemsStyles[index].results[0];
             return { ...item, style: defaultStyle };
           });
           setCurrentList(combinedList);
@@ -65,8 +58,6 @@ function RelatedProducts({items, currentItem, relatedItemsStyle}) {
       fetchRelatedItems();
     }
   }, [currentItem]);
-
-
   const handleTableClick = (item) => {
     setClickedItem(item);
     setOpenTable(!openTable);
@@ -76,14 +67,18 @@ function RelatedProducts({items, currentItem, relatedItemsStyle}) {
   };
 
   const handleAddOutfit = () => {
-    setUserOutfitList((prev) => [...prev, currentItem]);
+    if (!userOutfitlist.includes(currentItem)) {
+      setUserOutfitList((prev) => [...prev, currentItem]);
+    }
   };
 
-  const handleRemoveOutfit = (item) => {
-    //  TODO 1
-    //  TODO copy userOutfitlist
-    //  TODO remove specific 'item'
-    //  TODO then set to userOutfitlist
+  const handleRemoveOutfit = () => {
+    if (userOutfitlist.includes(currentItem)) {
+      const arrayCopy = [...userOutfitlist];
+      const indexOfRemoved = arrayCopy.indexOf(currentItem);
+      arrayCopy.splice(indexOfRemoved, 1);
+      setUserOutfitList(arrayCopy);
+    }
   };
 
   return (
@@ -130,7 +125,7 @@ function RelatedProducts({items, currentItem, relatedItemsStyle}) {
               //  TODO two
               //TODO change function that we're giving as a prop into its proper function 
               <ItemContainer
-                handleClick={handleTableClick}
+                handleClick={handleRemoveOutfit}
                 key={product.id}
                 item={product}
                 Icon={CloseIcon}
