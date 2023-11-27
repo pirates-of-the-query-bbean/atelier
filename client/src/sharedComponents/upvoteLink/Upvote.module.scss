@@ -1,9 +1,17 @@
 .upvote__container {
   display: inline-block;
   border-right: 1px solid var(--grey-color);
+  font-size: 12px;
+  padding-right: 8px;
 
-  span,
-  a {
+  span {
+    margin-right: 5px;
+  }
+
+  button {
+    border: none;
+    background: none;
+    text-decoration: underline;
     margin-right: 5px;
   }
 }
