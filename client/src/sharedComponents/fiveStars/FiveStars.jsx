@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
@@ -30,5 +31,9 @@ function FiveStars({ rating }) {
     <div data-testid="starRating" className="starRating">{rating ? renderStars(rating) : 'No reviews yet.'}</div>
   );
 }
+
+FiveStars.propTypes = {
+  rating: PropTypes.number.isRequired,
+};
 
 export default FiveStars;
