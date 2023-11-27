@@ -69,12 +69,10 @@ function App() {
 
   return (
     <div className={styles.container}>
-      <h1 data-testid="app-hw" className={styles.ugly}>
-        Pirates of the query-bbean 2
-      </h1>
+      <nav>ADD HEADER HERE</nav>
+      {Object.keys(currentProduct).length > 0 && <Overview product={currentProduct} />}
       <RelatedProducts currentItem={currentProduct} />
       <Questions currentProduct={currentProduct} />
-      {Object.keys(currentProduct).length > 0 && <Overview product={currentProduct} />}
       <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}
