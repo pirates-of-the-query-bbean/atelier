@@ -23,7 +23,7 @@ function UpvoteLink({ item, itemType, property }) {
       method: 'put',
       url: upvoteURL,
       headers: {
-        Authorization: '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',
+        Authorization: process.env.REACT_APP_API_KEY,
       },
     });
 
@@ -36,7 +36,7 @@ function UpvoteLink({ item, itemType, property }) {
       <span>Helpful? </span>
       <button
         type="submit"
-        onClick={(e) => {
+        onSubmit={(e) => {
           e.preventDefault();
           upvote(item, property);
         }}
