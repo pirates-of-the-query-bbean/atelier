@@ -1,0 +1,40 @@
+// ProductBreakdown.module.scss
+.productBreakdown {
+  .characteristic {
+    margin-bottom: 20px;
+
+    .characteristicName {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .characteristicBarContainer {
+      position: relative;
+      background-color: #e0e0e0;
+      height: 5px;
+      width: 100%;
+
+      .characteristicBar {
+        width: 100%;
+        height: 100%;
+      }
+
+      .characteristicIcon {
+        position: absolute;
+        top: 50%; // Position it halfway down the parent
+        transform: translateY(-50%); // Center the triangle vertically
+        width: 0px;
+        border-left: 10px solid transparent; // Adjust size as needed
+        border-right: 10px solid transparent; // Adjust size as needed
+        border-top: 10px solid #000; // Adjust size as needed, color of the triangle
+
+      }
+    }
+
+    .characteristicLabels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+  }
+}

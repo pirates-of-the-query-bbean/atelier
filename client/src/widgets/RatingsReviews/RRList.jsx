@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import RRListItem from './RRListItem';
 import CustomButton from '../../sharedComponents/customButton/CustomButton';
+import styles from './RRList.module.scss';
 
 const RRList = function ({ productReviews }) {
   const [reviewRenderCount, setReviewRenderCount] = useState(2);
@@ -24,9 +25,12 @@ const RRList = function ({ productReviews }) {
           />
         ))}
       </div>
-      {reviewRenderCount < productReviews.results.length && (
-        <div><CustomButton text="More Reviews" onClickFunction={handleMoreReviewsClick} /></div>
-      )}
+      <div className={styles.review__buttons}>
+        {reviewRenderCount < productReviews.results.length && (
+          <div><CustomButton text="More Reviews" onClickFunction={handleMoreReviewsClick} /></div>
+        )}
+        <div><CustomButton text="Add a Review +" /></div>
+      </div>
     </div>
   );
 };
