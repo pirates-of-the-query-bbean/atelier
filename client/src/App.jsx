@@ -12,6 +12,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
   const [productReviews, setProductReviews] = useState({});
+  const [averageRating, setAverageRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
 
@@ -44,6 +45,7 @@ function App() {
     })
       .then((response) => {
         setProductReviews(response.data);
+        getAverageRating(response.data.results);
       })
       .catch((err) => {
         console.log('error fetching product reviews', err);
@@ -67,6 +69,14 @@ function App() {
     );
   }
 
+  const getAverageRating = function (reviews) {
+    let reviewTotal = 0;
+    for (let i = 0; i < reviews.length; i += 1) {
+      reviewTotal += reviews[i].rating;
+    }
+    setAverageRating(reviewTotal / reviews.length);
+  };
+
   return (
     <div className={styles.container}>
       <nav>ADD HEADER HERE</nav>
@@ -76,6 +86,7 @@ function App() {
       <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}
+        averageRating={averageRating}
       />
     </div>
   );

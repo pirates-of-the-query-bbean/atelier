@@ -4,12 +4,17 @@ import RatingBreakdown from './RatingBreakdown';
 import ProductBreakdown from './ProductBreakdown';
 import styles from './RatingsReviews.module.scss';
 
-const RatingsReviews = function ({ productReviews, currentProduct }) {
+const RatingsReviews = function ({ productReviews, currentProduct, averageRating }) {
   return (
     <div className={styles.rating__components}>
       <div className={styles.review__breakdow}>
-        <RatingBreakdown productReviews={productReviews} />
-        <ProductBreakdown currentProduct={currentProduct} />
+        <RatingBreakdown
+          productReviews={productReviews}
+          averageRating={averageRating}
+        />
+        <ProductBreakdown
+          currentProduct={currentProduct}
+        />
       </div>
       <div className={styles.review__cards}>
         <h3>
@@ -19,7 +24,9 @@ const RatingsReviews = function ({ productReviews, currentProduct }) {
             <option>relevance</option>
           </select>
         </h3>
-        <RRList productReviews={productReviews} />
+        <RRList
+          productReviews={productReviews}
+        />
       </div>
     </div>
   );
