@@ -7,7 +7,6 @@ import CustomButton from '../../sharedComponents/customButton/CustomButton';
 function ProductSize({
   productStyles, addToBag, favorite, setCurrSize, setCurrQty, setSku,
 }) {
-  console.log('Styles', productStyles);
   const [isDisabled, setDisabled] = useState(true);
   const [isSizeQty, setSizeQty] = useState(null);
 

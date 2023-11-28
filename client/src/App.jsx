@@ -70,7 +70,12 @@ function App() {
   return (
     <div className={styles.container}>
       <nav>ADD HEADER HERE</nav>
-      {Object.keys(currentProduct).length > 0 && <Overview product={currentProduct} />}
+      {Object.keys(currentProduct).length > 0 && (
+      <Overview
+        product={currentProduct}
+        reviews={productReviews.count}
+      />
+      )}
       <RelatedProducts currentItem={currentProduct} />
       <Questions currentProduct={currentProduct} />
       <RatingsReviews

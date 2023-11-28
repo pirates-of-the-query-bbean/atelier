@@ -7,8 +7,7 @@ import ProductSize from './Overview/ProductSize';
 import Description from './Overview/Description';
 import Gallery from './Overview/Gallery';
 
-function Overview({ product }) {
-  console.log('product', product);
+function Overview({ product, reviews }) {
   const [currPrice, setCurrPrice] = useState({
     sale_price: null,
     original_price: product.default_price,
@@ -27,15 +26,12 @@ function Overview({ product }) {
       },
     })
       .then((response) => {
-        console.log('RESPONSE', response);
         setProductStyles(response.data);
         response.data.results.forEach((productStyle) => {
           if (productStyle['default?'] === true) {
-            console.log('style is', productStyle);
             setCurrStyle(productStyle);
           }
         });
-        console.log('Curr', currStyle);
       }).then(() => {
         setLoading(false);
       })
@@ -88,7 +84,7 @@ function Overview({ product }) {
           <Gallery currStyle={currStyle} />
         </div>
         <aside>
-          <ProductTitle product={product} price={currPrice} />
+          <ProductTitle reviews={reviews} product={product} price={currPrice} />
           <ProductStyle
             product={product}
             productStyles={productStyles.results}

@@ -2,12 +2,13 @@ import React from 'react';
 import styles from './ProductTitle.module.scss';
 import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 
-function ProductTitle({ product, price }) {
+function ProductTitle({ product, price, reviews }) {
+  console.log(reviews);
   return (
     <div className={styles.container}>
       {/* TODO get review rating and render conditionally if no reviews */}
       <div className={styles.ratingsReviews}>
-        <FiveStars rating="3" />
+        <FiveStars rating={reviews || 1} />
         {' '}
         <a href="#">Reviews</a>
         {' '}
