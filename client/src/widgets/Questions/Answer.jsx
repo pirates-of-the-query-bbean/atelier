@@ -20,7 +20,7 @@ function Answer({ answer, upvote, report }) {
             </span>
           ) : (
             <span>by
-              {answerer_name},
+               {answerer_name},
               <ParsedDate date={answer.date} />
             </span>
           )}
@@ -31,7 +31,7 @@ function Answer({ answer, upvote, report }) {
         <p>
           <button
             type="submit"
-            onClick={(e)=> {
+            onClick={(e) => {
               e.preventDefault();
               report();
             }}
@@ -41,8 +41,7 @@ function Answer({ answer, upvote, report }) {
         </p>
       </div>
     </section>
-  )
-
+  );
 }
 
 export default Answer;

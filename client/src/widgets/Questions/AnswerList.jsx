@@ -9,7 +9,7 @@ function AnswerList({
   const [answerArr, setAnswerArr] = useState([]);
 
   function getAnswers(question_id) {
-    // axios.get(`/qa/questions/${product_id}/answers`)
+    // axios.get(`/qa/questions/${question_id}/answers`)
     //   .then((data) => {
     //     const answers = Object.values(data.data);
     //     sort(answers, setAnswerArr, 'helpfulness');

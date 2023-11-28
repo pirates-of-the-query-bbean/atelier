@@ -62,7 +62,6 @@ function Questions({ currentProduct, questions }) {
   const [questionsStartIndex, setQuestionStartIndex] = useState(0);
   const [answersStartIndex, setAnswersStartIndex] = useState(0);
   const [isAddQuestionModalOpen, setAddQuestionModalOpen] = useState(false);
-  const [addQuestionFormData, setAddQuestionFormData] = useState(null);
 
   function sort(arr, setState, property) {
     const sortedArr = [...arr].sort((a, b) => b[property] - a[property]);
@@ -107,7 +106,6 @@ function Questions({ currentProduct, questions }) {
         console.log('Error posting question', err);
       });
 
-    setAddQuestionFormData(data);
     console.log(data);
     closeAddQuestionsModal();
   }
