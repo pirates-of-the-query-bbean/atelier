@@ -4,7 +4,7 @@ import ParsedDate from '../../sharedComponents/ParsedDate';
 import styles from './Answer.module.scss';
 
 function Answer({ answer, upvote, report }) {
-  const {body, date, answerer_name, helpfulness, photos} = answer;
+  const {id, body, date, answerer_name, helpfulness, photos} = answer;
 
   return (
     <section className={styles.answer__container}>
@@ -33,7 +33,7 @@ function Answer({ answer, upvote, report }) {
             type="submit"
             onClick={(e) => {
               e.preventDefault();
-              report();
+              report('answer', { id });
             }}
           >
             Report

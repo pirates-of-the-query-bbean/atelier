@@ -75,13 +75,13 @@ function AddQuestionModal({
           </label>
           <p>For authentication reasons, you will not be emailed.</p>
         </div>
-        <CustomButton
-          style={styles.questions__customButton}
-          text="Submit Question"
-          buttonWidth={225}
-          onClickFunction={handleSubmit}
-        />
-      </form>
+          <CustomButton
+            style={styles.questions__customButton}
+            text="Submit Question"
+            buttonWidth={225}
+            onClickFunction={handleSubmit}
+          />
+        </form>
       </Modal>
     </div>
   );
