@@ -3,7 +3,7 @@ import Question from './Question.jsx';
 import styles from './Question.module.scss';
 
 function QuestionList({
-  product,
+  currentProduct,
   questionArr,
   setQuestionArr,
   questionsStartIndex,
@@ -37,6 +37,7 @@ function QuestionList({
       {Array.isArray(questionArr) ? (
         questionArr.slice(0, questionsStartIndex + 1).map((question) => (
           <Question
+            currentProduct={currentProduct}
             key={question.question_id}
             question={question}
             sort={sort}

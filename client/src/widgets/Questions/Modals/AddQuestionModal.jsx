@@ -15,19 +15,18 @@ function AddQuestionModal({
 
   const [formState, setFormState] = useState(initialModalData);
 
-  const handleInputChange = (e) => {
+  function handleInputChange(e) {
     const { name, value } = e.target;
     setFormState((previousFormData) => ({
       ...previousFormData,
       [name]: value,
     }));
-  };
+  }
 
-  const handleSubmit = (e) => {
-    console.log(e);
+  function handleSubmit() {
     onSubmit(formState);
     setFormState(initialModalData);
-  };
+  }
 
   return (
     <div>

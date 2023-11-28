@@ -91,7 +91,7 @@ function App() {
       <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}
-      /> */}
+      />
     </div>
   );
 }

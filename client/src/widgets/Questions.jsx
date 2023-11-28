@@ -86,6 +86,28 @@ function Questions({ currentProduct, questions }) {
   }
 
   function addQuestion(data) {
+    console.log(currentProduct.id);
+    axios({
+      method: 'post',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/',
+      headers: {
+        Authorization: process.env.REACT_APP_API_KEY,
+      },
+      data: {
+        body: data.questionBody,
+        name: data.nickname,
+        email: data.email,
+        product_id: currentProduct.id
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        getQuestions();
+      })
+      .catch((err) => {
+        console.log('Error posting question', err);
+      });
+
     setAddQuestionFormData(data);
     console.log(data);
     closeAddQuestionsModal();
@@ -99,6 +121,7 @@ function Questions({ currentProduct, questions }) {
     })
       .then((response) => {
         setQuestionArr(response.data);
+        console.log(response.data);
       })
       .catch((err) => {
         console.log('error fetching questions', err);
@@ -117,6 +140,7 @@ function Questions({ currentProduct, questions }) {
         questionArr={questionArr}
       />
       <QuestionList
+        currentProduct={currentProduct}
         questionArr={questionArr}
         setQuestionArr={setQuestionArr}
         questionsStartIndex={questionsStartIndex}

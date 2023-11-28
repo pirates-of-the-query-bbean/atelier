@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CustomButton from '../../../sharedComponents/customButton/CustomButton';
 import Modal from './Modal.jsx';
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import styles from './AddQuestion.module.scss';
 
 function AddAnswerModal({
-  product, question, isOpen, onSubmit
+  currentProduct, setCurrentProduct, question, isAddAnswerModalOpen, onSubmit
 }) {
   const initialModalData = {
-    title: `${product.name}: ${question.body}`,
     answerBody: '',
     nickname: '',
     email: '',
@@ -15,51 +16,80 @@ function AddAnswerModal({
 
   const [formState, setFormState] = useState(initialModalData);
 
-  const handleInputChange = (e) => {
+  function handleInputChange(e) {
     const { name, value } = e.target;
     setFormState((previousFormData) => ({
       ...previousFormData,
       [name]: value,
     }));
-  };
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  function handleSubmit() {
     onSubmit(formState);
     setFormState(initialModalData);
-  };
+  }
 
   return (
     <div>
-      <Modal isOpen={isOpen} />
+      <Modal isOpen={isAddAnswerModalOpen}>
         <form onSubmit={handleSubmit}>
-          <h1>{Product.name}: {Question.body}</h1>
+          <h4>{currentProduct.name}:</h4>
+          <h5>{question.question_body}</h5>
+          <div className={styles.modal__formRow}>
+            <label htmlFor="answerBody">
+              Your Answer*
+              <textarea
+                type="text"
+                id="answerBody"
+                name="answerBody"
+                value={formState.answerBody}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+          </div>
+          <div className={styles.modal__formRow}>
+            <label htmlFor="nickname">
+              What is your nickname?*
+              <input
+                type="text"
+                id="nickname"
+                name="nickname"
+                value={formState.nickname}
+                placeholder="Example: jack543!"
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <p>For privacy reasons, do not use your full name or email address.</p>
+          </div>
+          <div className={styles.modal__formRow}>
+            <label htmlFor="email">
+              Your email*
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formState.email}
+                placeholder="Example: jack@email.com"
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <p>For authentication reasons, you will not be emailed.</p>
+          </div>
           <input
-            type="text"
-            id="answerBody"
-            name="answerBody"
-            value={formState.answerBody}
-            onChange={handleInputChange}
-            required
+            type="file"
+            accept="image/*"
+            multiple />
+          <CustomButton
+            style={styles.questions__customButton}
+            text="Submit Answer"
+            buttonWidth={225}
+            onClickFunction={handleSubmit}
           />
-          <input
-            type="text"
-            id="nickname"
-            name="nickname"
-            value={formState.nickname}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formState.email}
-            onChange={handleInputChange}
-            required
-          />
-          <CustomButton />
         </form>
+      </Modal>
     </div>
   );
 }

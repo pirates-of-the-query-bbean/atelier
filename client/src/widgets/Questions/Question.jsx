@@ -6,6 +6,8 @@ import AddAnswerModal from './Modals/AddAnswerModal';
 import styles from './Question.module.scss';
 
 function Question({
+  currentProduct,
+  setCurrentProduct,
   question,
   upvote,
   sort,
@@ -23,14 +25,20 @@ function Question({
   } = question;
 
   const [isAddAnswerModalOpen, setAddAnswerModalOpen] = useState(false);
-  const [answerFormData, setAnswerFormData] = useState(null);
+  const [addAnswerFormData, setAddAnswerFormData] = useState(null);
 
-  function handleOpenAddAnswerModal() {
+  function openAddAnswerModal() {
     setAddAnswerModalOpen(true);
   }
 
-  function handleCloseAddAnswerModal() {
+  function closeAddAnswerModal() {
     setAddAnswerModalOpen(false);
+  }
+
+  function addAnswer(data) {
+    console.log(data);
+    setAddAnswerFormData(data);
+    closeAddAnswerModal();
   }
 
   useEffect(() => {
@@ -54,7 +62,7 @@ function Question({
               onClick={(e) => {
                 e.preventDefault();
                 console.log('clicked');
-                handleOpenAddAnswerModal();
+                openAddAnswerModal();
               }}
             >
               Add Answer
@@ -68,6 +76,13 @@ function Question({
         answersStartIndex={answersStartIndex}
         setAnswersStartIndex={setAnswersStartIndex}
         showTwoMoreItems={showTwoMoreItems}
+      />
+      <AddAnswerModal
+        currentProduct={currentProduct}
+        setCurrentProduct={setCurrentProduct}
+        question={question}
+        isAddAnswerModalOpen={isAddAnswerModalOpen}
+        onSubmit={addAnswer}
       />
     </section>
   );
