@@ -8,7 +8,7 @@ const RRList = function ({ productReviews }) {
 
   if (!productReviews || !productReviews.results) {
     return <div>No reviews available.</div>;
-  };
+  }
 
   const handleMoreReviewsClick = () => {
     const newCount = Math.min(reviewRenderCount + 2, productReviews.results.length);
