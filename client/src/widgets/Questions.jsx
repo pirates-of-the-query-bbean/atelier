@@ -4,6 +4,7 @@ import axios from 'axios';
 import CustomButton from '../sharedComponents/customButton/CustomButton';
 import Search from './questions/Search';
 import QuestionList from './questions/QuestionList';
+import AddIcon from '@mui/icons-material/Add';
 import styles from './Questions.module.scss';
 import AddQuestionModal from './questions/Modals/AddQuestionModal';
 
@@ -127,7 +128,7 @@ function Questions({ currentProduct, questions }) {
         <CustomButton
           style={styles.questions__customButton}
           text="Add A Question"
-          Icon="AddIcon"
+          Icon={AddIcon}
           buttonWidth={200}
           onClickFunction={() => { setModalOpen(true); }}
         />
