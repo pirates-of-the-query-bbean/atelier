@@ -42,7 +42,7 @@ function UpvoteLink({ item, itemType, property }) {
         type="submit"
         onClick={(e) => {
           e.preventDefault();
-          upvote(item, property);
+          upvote(item, itemType, property);
         }}
       >
         Yes
