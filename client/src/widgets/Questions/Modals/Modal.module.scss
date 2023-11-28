@@ -1,0 +1,38 @@
+.modal::backdrop {
+  background: hsl(0 0% 0% / 50%);
+}
+
+.modal {
+  background-color: var(--grey-color);
+  max-width: 40rem;
+  padding: 2rem;
+  border: 0;
+  border-radius: 0.5rem;
+  position: relative;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal input,
+.modal textarea {
+  display: block;
+  width: 100%;
+}
+
+.modal button {
+  margin: 10px auto;
+  display: block;
+  text-decoration: none;
+}
+
+.modal label {
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.modal input {
+  font-size: 14px;
+}

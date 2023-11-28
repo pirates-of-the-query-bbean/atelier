@@ -24,7 +24,7 @@ function App() {
       .then((response) => {
         setProducts(response.data);
         // set current product to first product in array
-        setCurrentProduct(response.data[0]);
+        setCurrentProduct(response.data[3]);
       })
       .catch((err) => {
         console.log('error fetching products', err);

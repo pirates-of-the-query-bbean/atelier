@@ -61,9 +61,8 @@ function Questions({ currentProduct, questions }) {
   const [questionArr, setQuestionArr] = useState(questionsObj);
   const [questionsStartIndex, setQuestionStartIndex] = useState(0);
   const [answersStartIndex, setAnswersStartIndex] = useState(0);
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  console.log(Array.isArray(questionsObj));
+  const [isAddQuestionModalOpen, setAddQuestionModalOpen] = useState(false);
+  const [addQuestionFormData, setAddQuestionFormData] = useState(null);
 
   function sort(arr, setState, property) {
     const sortedArr = [...arr].sort((a, b) => b[property] - a[property]);
@@ -76,6 +75,20 @@ function Questions({ currentProduct, questions }) {
 
   function handleSubmit() {
     console.log('handle submit invoked');
+  }
+
+  function openAddQuestionsModal() {
+    setAddQuestionModalOpen(true);
+  }
+
+  function closeAddQuestionsModal() {
+    setAddQuestionModalOpen(false);
+  }
+
+  function addQuestion(data) {
+    setAddQuestionFormData(data);
+    console.log(data);
+    closeAddQuestionsModal();
   }
 
   function getQuestions() {
@@ -130,14 +143,14 @@ function Questions({ currentProduct, questions }) {
           text="Add A Question"
           Icon={AddIcon}
           buttonWidth={200}
-          onClickFunction={() => { setModalOpen(true); }}
+          onClickFunction={openAddQuestionsModal}
         />
       </div>
-      {/* <AddQuestionModal
-        isModalOpen={isModalOpen}
-        setModalOpen={setModalOpen}
-        onSubmit={() => handleSubmit()}
-      /> */}
+      <AddQuestionModal
+        currentProduct={currentProduct}
+        isAddQuestionModalOpen={isAddQuestionModalOpen}
+        onSubmit={addQuestion}
+      />
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import CustomButton from '../../../sharedComponents/customButton/CustomButton';
 import Modal from './Modal.jsx';
 
 function AddAnswerModal({
@@ -57,7 +58,7 @@ function AddAnswerModal({
             onChange={handleInputChange}
             required
           />
-          <button type="submit">Submit</button>
+          <CustomButton />
         </form>
     </div>
   );

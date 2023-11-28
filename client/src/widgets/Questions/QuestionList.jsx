@@ -26,7 +26,7 @@ function QuestionList({
     //     console.log('error fetching questions');
     //   });
   };
-  console.log('Question arr is: ', questionArr, Array.isArray(questionArr));
+
   useEffect(() => {
     // getQuestions(product._id);
     sort(questionArr, setQuestionArr, 'question_helpfulness');
