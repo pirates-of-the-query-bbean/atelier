@@ -86,7 +86,6 @@ function Questions({ currentProduct, questions }) {
   }
 
   function addQuestion(data) {
-    console.log(currentProduct.id);
     axios({
       method: 'post',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/',
@@ -151,7 +150,7 @@ function Questions({ currentProduct, questions }) {
       />
 
       <div className={styles.questions__buttons}>
-        {questionArr.length > 0 && (
+        {questionArr.length > questionsStartIndex && (
           <CustomButton
             style={styles.questions__customButton}
             text="More Answered Questions"

@@ -1,35 +1,28 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 import styles from './Answer.module.scss';
 import axios from 'axios';
 
-function AnswerList({ question, helpful, report, sort, answersStartIndex, setAnswersStartIndex, showTwoMoreItems }) {
+function AnswerList({
+  question, helpful, report, sort, answersStartIndex, setAnswersStartIndex, showTwoMoreItems
+}) {
   const [answerArr, setAnswerArr] = useState([]);
 
   function getAnswers(question_id) {
     // axios.get(`/qa/questions/${product_id}/answers`)
     //   .then((data) => {
-    //     const questions = [];
-
-    //     for (let key in data.data) {
-    //       questions.push(answerObj[key]);
-    //     }
-    //     setQuestionArr(questions);
+    //     const answers = Object.values(data.data);
+    //     sort(answers, setAnswerArr, 'helpfulness');
+    //     setAnswerArr(answers);
     //   })
     //   .catch((err) => {
-    //     console.log('error fetching questions');
+    //     console.log('error fetching answers');
     //   });
   }
 
   function getAnswers2(answerObj) {
-    const answers = [];
-
-    for (let key in answerObj) {
-      answers.push(answerObj[key]);
-
-    }
+    const answers = Object.values(answerObj);
     sort(answers, setAnswerArr, 'helpfulness');
-
   }
 
   const testAnswer = {
@@ -64,29 +57,32 @@ function AnswerList({ question, helpful, report, sort, answersStartIndex, setAns
       "answerer_name": "Seller",
       "helpfulness": 8,
       "photos": [],
-    }
-  }
-
+    },
+  };
 
   useEffect(() => {
     getAnswers2(testAnswer);
   }, []);
 
-
   return (
     <section>
-      {answerArr.slice(0, answersStartIndex + 2).map((answer, index) => {
-        return (
-          <Answer key={index} answer={answer} helpful={helpful} report={report}/>
-          )}
-        )}
-      <a href='#'
-        className={styles.loadMoreAnswers}
-        onClick={(e) => {
-          showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
-        }}>See More Answers</a>
+      {answerArr.slice(0, answersStartIndex + 2).map((answer, index) => (
+        <Answer key={index} answer={answer} helpful={helpful} report={report} />
+      ))}
+      {answerArr.length > (answersStartIndex - 1) && (
+        <button
+          type="submit"
+          className={styles.loadMoreAnswers}
+          onClick={(e) => {
+            e.preventDefault();
+            showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
+          }}
+        >
+          See More Answers
+        </button>
+      )}
     </section>
-  )
+  );
 }
 
 export default AnswerList;

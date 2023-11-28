@@ -15,11 +15,15 @@ function Answer({ answer, upvote, report }) {
       <div className={styles.answer__meta}>
         <p>
           {answerer_name === 'Seller' ? (
-            <span>by <b>Seller,</b> {
+            <span>by <b>Seller,</b>
               <ParsedDate date={answer.date} />
-            }</span>
+            </span>
           ) : (
-            <span> {answerer_name}, {<ParsedDate date={answer.date} />}</span>)}
+            <span>by
+              {answerer_name},
+              <ParsedDate date={answer.date} />
+            </span>
+          )}
         </p>
         <p>
           <UpvoteLink item={answer} itemType="answer" property="helpfulness" />
