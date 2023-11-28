@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import CustomButton from '../sharedComponents/customButton/CustomButton';
 import Search from './questions/Search';
 import QuestionList from './questions/QuestionList';
@@ -61,6 +62,8 @@ function Questions({ currentProduct, questions }) {
   const [answersStartIndex, setAnswersStartIndex] = useState(0);
   const [isModalOpen, setModalOpen] = useState(false);
 
+  console.log(Array.isArray(questionsObj));
+
   function sort(arr, setState, property) {
     const sortedArr = [...arr].sort((a, b) => b[property] - a[property]);
     setState(sortedArr);
@@ -110,14 +113,17 @@ function Questions({ currentProduct, questions }) {
       />
 
       <div className={styles.questions__buttons}>
-        <CustomButton
-          style={styles.questions__customButton}
-          text="More Answered Questions"
-          buttonWidth={255}
-          onClickFunction={() => {
-            showTwoMoreItems(setQuestionStartIndex, questionsStartIndex);
-          }}
-        />
+        {questionArr.length > 0 && (
+          <CustomButton
+            style={styles.questions__customButton}
+            text="More Answered Questions"
+            buttonWidth={255}
+            onClickFunction={() => {
+              showTwoMoreItems(setQuestionStartIndex, questionsStartIndex);
+            }}
+          />
+        )}
+
         <CustomButton
           style={styles.questions__customButton}
           text="Add A Question"
@@ -126,28 +132,28 @@ function Questions({ currentProduct, questions }) {
           onClickFunction={() => { setModalOpen(true); }}
         />
       </div>
-      <AddQuestionModal
+      {/* <AddQuestionModal
         isModalOpen={isModalOpen}
         setModalOpen={setModalOpen}
         onSubmit={() => handleSubmit()}
-      />
+      /> */}
     </section>
   );
 }
 
-Questions.propTypes = {
-  currentProduct: PropTypes.shape({
+// Questions.propTypes = {
+//   currentProduct: PropTypes.shape({
 
-  }).isRequired,
-  questions: PropTypes.arrayOf({
-    question_id: PropTypes.number,
-    question_body: PropTypes.string,
-    question_helpfulness: PropTypes.number,
-    reported: PropTypes.boolean,
-    answers: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-  }).isRequired,
-};
+//   }).isRequired,
+//   questions: PropTypes.arrayOf({
+//     question_id: PropTypes.number,
+//     question_body: PropTypes.string,
+//     question_helpfulness: PropTypes.number,
+//     reported: PropTypes.boolean,
+//     answers: PropTypes.shape({
+//       id: PropTypes.number,
+//     }),
+//   }).isRequired,
+// };
 
 export default Questions;

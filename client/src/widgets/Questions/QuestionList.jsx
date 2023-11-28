@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Question from './Question.jsx';
+import styles from './Question.module.scss';
 
 function QuestionList({
   product,
@@ -25,7 +26,7 @@ function QuestionList({
     //     console.log('error fetching questions');
     //   });
   };
-
+  console.log('Question arr is: ', questionArr, Array.isArray(questionArr));
   useEffect(() => {
     // getQuestions(product._id);
     sort(questionArr, setQuestionArr, 'question_helpfulness');
@@ -33,16 +34,21 @@ function QuestionList({
 
   return (
     <section>
-      {questionArr.slice(0, questionsStartIndex + 1).map((question) => (
-        <Question
-          key={question.question_id}
-          question={question}
-          sort={sort}
-          answersStartIndex={answersStartIndex}
-          setAnswersStartIndex={setAnswersStartIndex}
-          showTwoMoreItems={showTwoMoreItems}
-        />
-      ))}
+      {Array.isArray(questionArr) ? (
+        questionArr.slice(0, questionsStartIndex + 1).map((question) => (
+          <Question
+            key={question.question_id}
+            question={question}
+            sort={sort}
+            answersStartIndex={answersStartIndex}
+            setAnswersStartIndex={setAnswersStartIndex}
+            showTwoMoreItems={showTwoMoreItems}
+          />
+        ))
+      ) : (
+        <p className={styles.question__placeholder}>There are no questions for this product yet.</p>
+      )}
+
     </section>
   );
 }
