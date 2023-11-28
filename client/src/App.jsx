@@ -29,7 +29,7 @@ function App() {
       .then((response) => {
         setProducts(response.data);
         // set current product to first product in array
-        setCurrentProduct(response.data[0]);
+        setCurrentProduct(response.data[3]);
       })
       .catch((err) => {
         console.log('error fetching products', err);
@@ -83,7 +83,8 @@ function App() {
       {Object.keys(currentProduct).length > 0 && (
       <Overview
         product={currentProduct}
-        reviews={productReviews.count}
+        averageRating={averageRating}
+        reviewCount={productReviews.count}
       />
       )}
       <RelatedProducts currentItem={currentProduct} />
