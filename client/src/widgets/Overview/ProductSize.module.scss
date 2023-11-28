@@ -9,6 +9,20 @@
 .buttonRow {
   display: flex;
   gap: 1rem;
+  position: relative;
+}
+
+.buttonRow p {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  color: red;
+  font-weight: 500;
+  display: none;
+}
+
+.buttonRow.show p {
+  display: block;
 }
 
 .addToBag {
@@ -22,9 +36,12 @@
   background-color: red;
 }
 
+
+
 .container select {
   height: 60px;
-  width: fit-content;
+  width: 100%;
+  min-width: fit-content;
   border: 1px solid var(--text-color);
   font-weight: 700;
   text-transform: uppercase;
@@ -39,7 +56,7 @@
 }
 
 .container select:last-child {
-  flex-shrink: 1;
+  flex-shrink: 2;
   min-width: 6rem;
 
 

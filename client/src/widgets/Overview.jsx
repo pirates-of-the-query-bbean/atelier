@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styles from './Overview.module.scss';
 import ProductTitle from './Overview/ProductTitle';
@@ -7,8 +7,7 @@ import ProductSize from './Overview/ProductSize';
 import Description from './Overview/Description';
 import Gallery from './Overview/Gallery';
 
-function Overview({ product }) {
-  console.log('product', product);
+function Overview({ product, averageRating, reviewCount }) {
   const [currPrice, setCurrPrice] = useState({
     sale_price: null,
     original_price: product.default_price,
@@ -19,6 +18,8 @@ function Overview({ product }) {
   const [productStyles, setProductStyles] = useState([]);
   const [isSku, setSku] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const sizeFocus = useRef(null);
+  const [sizeNeeded, setSizeNeeded] = useState(false);
 
   const getStyles = () => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product.id}/styles`, {
@@ -27,15 +28,12 @@ function Overview({ product }) {
       },
     })
       .then((response) => {
-        console.log('RESPONSE', response);
         setProductStyles(response.data);
         response.data.results.forEach((productStyle) => {
           if (productStyle['default?'] === true) {
-            console.log('style is', productStyle);
             setCurrStyle(productStyle);
           }
         });
-        console.log('Curr', currStyle);
       }).then(() => {
         setLoading(false);
       })
@@ -54,15 +52,20 @@ function Overview({ product }) {
   };
 
   const addToBag = () => {
-    console.log('ADDING TO BAG');
-    console.log({
-      product_id: product.id,
-      size: currSize,
-      qty: currQty,
-      style: currStyle.style_id,
-      price: currPrice,
-      sku: isSku,
-    });
+    if (currSize === null) {
+      sizeFocus.current.focus();
+      setSizeNeeded(true);
+    } else {
+      console.log('ADDING TO BAG');
+      console.log({
+        product_id: product.id,
+        size: currSize,
+        qty: currQty,
+        style: currStyle.style_id,
+        price: currPrice,
+        sku: isSku,
+      });
+    }
   };
 
   const favorite = () => {
@@ -88,7 +91,12 @@ function Overview({ product }) {
           <Gallery currStyle={currStyle} />
         </div>
         <aside>
-          <ProductTitle product={product} price={currPrice} />
+          <ProductTitle
+            averageRating={averageRating}
+            reviewCount={reviewCount}
+            product={product}
+            price={currPrice}
+          />
           <ProductStyle
             product={product}
             productStyles={productStyles.results}
@@ -96,6 +104,8 @@ function Overview({ product }) {
             setCurrStyle={updateStyle}
           />
           <ProductSize
+            sizeNeeded={sizeNeeded}
+            sizeFocus={sizeFocus}
             productStyles={currStyle.skus}
             addToBag={addToBag}
             favorite={favorite}
