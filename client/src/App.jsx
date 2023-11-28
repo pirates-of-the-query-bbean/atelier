@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './App.module.scss';
 import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
-import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink';
-import FiveStars from './sharedComponents/fiveStars/FiveStars';
-import Questions from './widgets/Questions';
+import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
+import FiveStars from './sharedComponents/fiveStars/FiveStars.jsx';
+import Questions from './widgets/Questions.jsx';
+import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
 import Overview from './widgets/Overview';
 
 function App() {
@@ -22,19 +23,19 @@ function App() {
     })
       .then((response) => {
         setProducts(response.data);
-        //set current product to first product in array
+        // set current product to first product in array
         setCurrentProduct(response.data[0]);
       })
-    .catch((err) => {
-      console.log('error fetching products', err);
-    })
-  }
+      .catch((err) => {
+        console.log('error fetching products', err);
+      });
+  };
 
   const getReviews = () => {
     setIsLoading(true);
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${currentProduct.id}`, {
       headers: {
-        'Authorization': process.env.REACT_APP_API_KEY
+        Authorization: process.env.REACT_APP_API_KEY,
       },
     })
       .then((response) => {
@@ -80,16 +81,14 @@ function App() {
       </div>
     );
   }
-  return (
-    <div>
-      <h1 data-testid="app-hw" className={styles.ugly}>
-        Pirates of the query-bbean 2
-      </h1>
-      {/* <RatingsReviews productReviews={productReviews} /> */}
 
-      {/* <Overview product={currentProduct} /> */}
-      <Questions currentProduct={currentProduct} questions={questions}/>
-      {/* <RatingsReviews
+  return (
+    <div className={styles.container}>
+      <nav>ADD HEADER HERE</nav>
+      {Object.keys(currentProduct).length > 0 && <Overview product={currentProduct} />}
+      <RelatedProducts currentItem={currentProduct} />
+      <Questions currentProduct={currentProduct} />
+      <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}
       /> */}

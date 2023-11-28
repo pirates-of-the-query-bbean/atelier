@@ -1,0 +1,64 @@
+main {
+    padding: 0;
+    margin: 0;
+}
+
+.relatedProducts {
+    width: fit-content; 
+    margin: 0 auto;
+    margin-bottom: 5rem;
+}
+
+.products__row {
+    position: relative; 
+    display: flex;
+    gap: 1rem;
+    
+    width: 900px;
+    overflow: hidden; 
+     
+}
+
+.relatedProducts__header {
+    font-size: 16px; 
+    color: gray; 
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    display: block; 
+    margin-top: 3rem; 
+}
+
+.products__arrows {
+    width: calc(100% - 4%);
+    display: flex; 
+    justify-content: space-between;
+    top: 50%; 
+    position: absolute; 
+    z-index: 10; 
+    transform: translateY(-50%); 
+    left: 2%; 
+    right: 2%; 
+}   
+
+.products__icon {
+    width: fit-content; 
+}
+
+.products__icon svg{
+    transform: scale(1.5); 
+}
+
+.comparisonTable {
+    position: absolute; 
+}
+
+.userOutfit__row {
+    position: relative; 
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+    width: 900px;
+    overflow: hidden; 
+    margin-bottom: 5rem;
+}

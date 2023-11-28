@@ -16,7 +16,9 @@ const RRListItem = function ({ review }) {
         <ParsedDate date={review.date} />
       </div>
       <div className={styles.review__body}>
-        Review: {review.body}
+        Review:
+        {' '}
+        {review.body}
       </div>
       <div>
         <UpvoteLink item={review} property="helpfulness" />
