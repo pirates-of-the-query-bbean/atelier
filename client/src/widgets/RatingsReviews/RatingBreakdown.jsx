@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './RatingBreakdown.module.scss';
 
-const RatingBreakdown = function ({ productReviews, reviewAverage }) {
+const RatingBreakdown = function ({ productReviews, averageRating }) {
   let recommendPercentage = 0;
   const ratingCounts = {
     5: 0,
@@ -26,14 +26,16 @@ const RatingBreakdown = function ({ productReviews, reviewAverage }) {
 
   const totalReviews = productReviews.results ? productReviews.results.length : 0;
   let ratingPercentages = {};
-  for (const [key, value] of Object.entries(ratingCounts)) {
+
+  Object.keys(ratingCounts).forEach((key) => {
+    const value = ratingCounts[key];
     ratingPercentages[key] = totalReviews > 0 ? ((value / totalReviews) * 100).toFixed(0) : 0;
-  }
+  });
 
   return (
     <div className={styles.ratingBreakdown}>
       <div className={styles.averageRating}>
-        {reviewAverage}
+        {averageRating}
         <span className={styles.stars}>
           ★★★★★
         </span>
