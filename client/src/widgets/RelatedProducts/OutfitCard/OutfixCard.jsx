@@ -9,7 +9,7 @@ function OutfixCard({item, handleClick, Icon, dataTestId, currentStyle}) {
     <main data-testid={dataTestId} onClick={() => handleClick(item)} className={style1.itemContainer}>
       <div className={style1.itemContainer__image}>
       <img src={currentStyle && currentStyle.photos && currentStyle.photos[0] ? currentStyle.photos[0].thumbnail_url : mainCard} alt={item.name} />
-        <div className={style1.itemContainer__icon}><Icon/></div>
+        <div className={style1.itemContainer__icon} data-testid={`remove-${item.id}`} ><Icon/></div>
       </div>
       <div className={style1.itemContainer__text}>
         <span>{item.category}</span>

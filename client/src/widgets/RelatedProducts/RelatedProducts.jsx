@@ -67,7 +67,7 @@ function RelatedProducts({currentItem}) {
           }).then((res) => res.data)));
           const relatedItemsStyles = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, {
             headers: {
-              Authorization: process.env.REACT_APP_API_KEY,
+               Authorization: process.env.REACT_APP_API_KEY,
             },
           }).then((res) => res.data)));
           const combinedList = relatedItemsInfo.map((item, index) => {
@@ -82,6 +82,7 @@ function RelatedProducts({currentItem}) {
       fetchRelatedItems();
     }
   }, [currentItem]);
+
   const handleTableClick = (item) => {
     setClickedItem(item);
     setOpenTable(!openTable);
@@ -89,36 +90,36 @@ function RelatedProducts({currentItem}) {
   };
 
   //gets invoked when the item card is clicked, to compare with the main item
-  const compareItems = () => {
-    const currentItem = new Set(currentItem.features.map(f => f.feature));
-    const clickedItem = new Set(clickedItem.features.map(f => f.feature));
+  // const compareItems = () => {
+  //   const currentItem = new Set(currentItem.features.map(f => f.feature));
+  //   const clickedItem = new Set(clickedItem.features.map(f => f.feature));
 
-    const sharedFeatures = [];
-    const uniqueToCurrentItem = [];
-    const uniqueToClickedItem = [];
+  //   const sharedFeatures = [];
+  //   const uniqueToCurrentItem = [];
+  //   const uniqueToClickedItem = [];
 
-    product1.features.forEach(f => {
-      if (product2Features.has(f.feature)) {
-        sharedFeatures.push(f);
-      } else {
-        uniqueToCurrentItem.push(f);
-      }
-    });
+  //   product1.features.forEach(f => {
+  //     if (product2Features.has(f.feature)) {
+  //       sharedFeatures.push(f);
+  //     } else {
+  //       uniqueToCurrentItem.push(f);
+  //     }
+  //   });
 
-    product2.features.forEach(f => {
-      if (!product1Features.has(f.feature)) {
-        uniqueToClickedItem.push(f);
-      }
-    });
+  //   product2.features.forEach(f => {
+  //     if (!product1Features.has(f.feature)) {
+  //       uniqueToClickedItem.push(f);
+  //     }
+  //   });
 
-    const result = {
-      sharedFeatures,
-      uniqueToCurrentItem,
-      uniqueToClickedItem
-    };
+  //   const result = {
+  //     sharedFeatures,
+  //     uniqueToCurrentItem,
+  //     uniqueToClickedItem
+  //   };
 
-    setComparisonTableInfo(result); 
-  };
+  //   setComparisonTableInfo(result); 
+  // };
 
   const handleArrowClick = (value) => {
   };
@@ -144,11 +145,10 @@ function RelatedProducts({currentItem}) {
         <span className={styles.relatedProducts__header}>Related Products</span>
         <div className={styles.products__row}>
           <div className={styles.products__arrows}>
-            <div onClick={() => handleArrowClick("left")} className={styles.products__icon}><KeyboardArrowLeftIcon/></div>
+            {/* onClick={() => handleArrowClick("left")}  */}
+            <div className={styles.products__icon}><KeyboardArrowLeftIcon/></div>
             <div className={styles.products__icon}><KeyboardArrowRightIcon/></div>
           </div>
-          {/* //TODO 3 /}
-          {/* //TODO when card is clicked display the table */}
           {currentList.map((product) => (
             <ItemContainer
               dataTestId="itemCardContainers"
@@ -161,18 +161,20 @@ function RelatedProducts({currentItem}) {
         </div>
       </div>
      
-     {/* style={{display: 'none'}} 
-      <div className={styles.comparisonTable}>
+      {/* <div style={{ display: openTable ? "flex": "none"}} className={styles.comparisonTable}>
         <div className={styles.comparisonTable__firstRow}>
           <span>{currentItem.name}</span>
           <span>Comparing</span>
           <span>{clickedItem.name}</span>
+          <span>Fabric</span>
+          <span>Canvas</span>
+          <span>Sole</span>
+          <span>Rubber</span>
+          <span>Stitching</span>
+          <span>Double Stitch</span>
         </div>
-        {comparisonTableInfo.result.map((item) => {
-          
-        })}
-
-      </div> */}
+        
+      </div>  */}
 
       <div>
         <span className={styles.relatedProducts__header}>Your Outfit</span>
@@ -188,6 +190,7 @@ function RelatedProducts({currentItem}) {
                 item={product}
                 Icon={CloseIcon}
                 currentStyle={currentStyle}
+                
               />
             )) : ''}
         </div>
