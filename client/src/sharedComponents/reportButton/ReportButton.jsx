@@ -7,8 +7,6 @@ function ReportButton({
   itemType, id,
 }) {
   const report = () => {
-    console.log('clicked');
-
     let reportURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa';
     let param = '';
 
@@ -55,7 +53,7 @@ function ReportButton({
 
 ReportButton.propTypes = {
   itemType: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default ReportButton;
