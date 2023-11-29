@@ -35,7 +35,7 @@ function ProductSize({
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div data-testid="product-size" className={styles.container}>
       <div className={`${styles.buttonRow} ${sizeNeeded ? styles.show : null}`}>
         <p>Please Select a Size</p>
         <select ref={sizeFocus} onChange={sizeHandler}>

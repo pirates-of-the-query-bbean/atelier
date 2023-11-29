@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>14/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">58.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>7/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>5/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>14/21</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -136,45 +136,45 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,14 +197,14 @@ import AddIcon from '@mui/icons-material/Add';
 import styles from './ProductSize.module.scss';
 import CustomButton from '../../sharedComponents/customButton/CustomButton';
 &nbsp;
-function <span class="fstat-no" title="function not covered" >ProductSize(</span>{
+function ProductSize({
   productStyles, addToBag, favorite, setCurrSize, setCurrQty, setSku, sizeFocus, sizeNeeded,
 }) {
-  const [isDisabled, setDisabled] = <span class="cstat-no" title="statement not covered" >useState(true);</span>
-  const [isSizeQty, setSizeQty] = <span class="cstat-no" title="statement not covered" >useState(null);</span>
-  const [isOutOfStock, setIsOutOfStock] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
+  const [isDisabled, setDisabled] = useState(true);
+  const [isSizeQty, setSizeQty] = useState(null);
+  const [isOutOfStock, setIsOutOfStock] = useState(false);
 &nbsp;
-  const sizeHandler = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>) =&gt; {</span>
+  const sizeHandler = <span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
     const [sku, size] = <span class="cstat-no" title="statement not covered" >e.target.value.split(',');</span>
     const qty = <span class="cstat-no" title="statement not covered" >productStyles[sku].quantity;</span>
 <span class="cstat-no" title="statement not covered" >    setSizeQty(qty);</span>
@@ -213,33 +213,33 @@ function <span class="fstat-no" title="function not covered" >ProductSize(</span
 <span class="cstat-no" title="statement not covered" >    setSku(Number(sku));</span>
   };
 &nbsp;
-  const qtyHandler = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>) =&gt; {</span>
+  const qtyHandler = <span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
 <span class="cstat-no" title="statement not covered" >    setCurrQty(Number(e.target.value));</span>
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-    let qty = <span class="cstat-no" title="statement not covered" >0;</span>
-<span class="cstat-no" title="statement not covered" >    Object.keys(productStyles).forEach(<span class="fstat-no" title="function not covered" >(s</span>tyle) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      qty += productStyles[style].quantity;</span>
+  useEffect(() =&gt; {
+    let qty = 0;
+    Object.keys(productStyles).forEach((style) =&gt; {
+      qty += productStyles[style].quantity;
     });
-<span class="cstat-no" title="statement not covered" >    if (!qty &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >      setIsOutOfStock(true);</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!qty &gt; 0) {
+      setIsOutOfStock(true);
     }
   }, []);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className={styles.container}&gt;
-      &lt;div className={`${styles.buttonRow} ${sizeNeeded ? styles.show : null}`}&gt;
+  return (
+    &lt;div data-testid="product-size" className={styles.container}&gt;
+      &lt;div className={`${styles.buttonRow} ${sizeNeeded ? <span class="branch-0 cbranch-no" title="branch not covered" >styles.show </span>: null}`}&gt;
         &lt;p&gt;Please Select a Size&lt;/p&gt;
         &lt;select ref={sizeFocus} onChange={sizeHandler}&gt;
           &lt;option value="null"&gt;{isOutOfStock ? 'OUT OF STOCK' : 'SELECT A SIZE'}&lt;/option&gt;
-          {Object.keys(productStyles).map(<span class="fstat-no" title="function not covered" >(i</span>d, i) =&gt; (<span class="cstat-no" title="statement not covered" >productStyles[id].quantity === 0 ? null</span>
+          {Object.keys(productStyles).map((id, i) =&gt; (productStyles[id].quantity === 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >null</span>
             : &lt;option key={i} value={`${id},${productStyles[id].size}`}&gt;{productStyles[id].size}&lt;/option&gt;))}
         &lt;/select&gt;
         &lt;select onChange={qtyHandler} disabled={isDisabled}&gt;
-          {isDisabled ? &lt;option value="-"&gt;-&lt;/option&gt; : null}
-          { [...Array(isSizeQty)].map(<span class="fstat-no" title="function not covered" >(_</span>, i) =&gt; (<span class="cstat-no" title="statement not covered" >i &lt; 15</span>
-            ? &lt;option value={i + 1}&gt;{i + 1}&lt;/option&gt; : null))}
+          {isDisabled ? &lt;option value="-"&gt;-&lt;/option&gt; : <span class="branch-1 cbranch-no" title="branch not covered" >null}</span>
+          { [...Array(isSizeQty)].map((_, i) =&gt; (i &lt; 15
+            ? &lt;option value={i + 1}&gt;{i + 1}&lt;/option&gt; : <span class="branch-1 cbranch-no" title="branch not covered" >null)</span>)}
         &lt;/select&gt;
       &lt;/div&gt;
       &lt;div className={styles.buttonRow}&gt;
@@ -262,7 +262,7 @@ export default ProductSize;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-28T23:27:34.565Z
+                at 2023-11-29T02:50:48.509Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
