@@ -14,7 +14,7 @@ function RelatedProducts({currentItem}) {
     if (currentItem && currentItem.id) {
         axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${currentItem.id}/styles`, {
             headers: {
-                Authorization: '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', 
+              Authorization: process.env.REACT_APP_API_KEY,
             },
         })
         .then((res) => {
@@ -56,18 +56,18 @@ function RelatedProducts({currentItem}) {
         try {
           const response = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${currentItem.id}/related`, {
             headers: {
-              Authorization: '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',
+              Authorization: process.env.REACT_APP_API_KEY,
             },
           });
           const relatedItemsID = response.data;
           const relatedItemsInfo = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, {
             headers: {
-              Authorization: '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',
+              Authorization: process.env.REACT_APP_API_KEY,
             },
           }).then((res) => res.data)));
           const relatedItemsStyles = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, {
             headers: {
-              Authorization: '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',
+              Authorization: process.env.REACT_APP_API_KEY,
             },
           }).then((res) => res.data)));
           const combinedList = relatedItemsInfo.map((item, index) => {
