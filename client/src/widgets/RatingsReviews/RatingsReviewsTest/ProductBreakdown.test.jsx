@@ -2,7 +2,7 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import axios from 'axios';
-import ProductBreakdown from './ProductBreakdown';
+import ProductBreakdown from '../ProductBreakdown';
 
 //mock axios
 jest.mock('axios');

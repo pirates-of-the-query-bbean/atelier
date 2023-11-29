@@ -9,11 +9,11 @@ const RRListItem = function ({ review }) {
     <div className={styles.review__item}>
       <FiveStars rating={review.rating} className={styles.starRatingContainer} />
       <div className={styles.review__date}>
-        <span>V </span>
+        <span>*Verified*</span>
         <span>{review.reviewer_name}</span>
         <ParsedDate date={review.date} />
       </div>
-      <div>
+      <div className={styles.review__body}>
         Summary:
         {' '}
         {review.summary}

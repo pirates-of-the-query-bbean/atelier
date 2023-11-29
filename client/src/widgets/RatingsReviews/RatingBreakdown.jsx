@@ -1,5 +1,7 @@
 import React from 'react';
+import StarIcon from '@mui/icons-material/Star';
 import styles from './RatingBreakdown.module.scss';
+import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 
 const RatingBreakdown = function ({ productReviews, averageRating }) {
   let recommendPercentage = 0;
@@ -36,9 +38,7 @@ const RatingBreakdown = function ({ productReviews, averageRating }) {
     <div className={styles.ratingBreakdown} data-testid="ratingBreakdown">
       <div className={styles.averageRating}>
         {averageRating}
-        <span className={styles.stars}>
-          ★★★★★
-        </span>
+        <FiveStars rating={averageRating} />
       </div>
       <div className={styles.recommendation}>
         {recommendPercentage}
@@ -48,7 +48,7 @@ const RatingBreakdown = function ({ productReviews, averageRating }) {
         <div key={star} className={styles.ratingRow}>
           <div className={styles.starLabel}>
             {star}
-            stars
+            <StarIcon />
           </div>
           <div className={styles.ratingBarContainer}>
             <div

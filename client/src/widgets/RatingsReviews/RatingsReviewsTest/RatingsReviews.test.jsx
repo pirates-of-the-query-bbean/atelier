@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import RatingsReviews from './RatingsReviews';
-import RatingBreakdown from './RatingBreakdown';
-import ProductBreakdown from './ProductBreakdown';
-import RRList from './RRList';
+import RatingsReviews from '../RatingsReviews';
+import RatingBreakdown from '../RatingBreakdown';
+import ProductBreakdown from '../ProductBreakdown';
+import RRList from '../RRList';
 
-jest.mock('./RatingBreakdown');
-jest.mock('./ProductBreakdown');
-jest.mock('./RRList');
+jest.mock('../RatingBreakdown');
+jest.mock('../ProductBreakdown');
+jest.mock('../RRList');
 
 describe('RatingsReviews', () => {
   const mockProductReviews = { count: 5, results: [] };

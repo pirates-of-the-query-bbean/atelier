@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from './NewReviewForm.module.scss';
+import ReviewStars from './ReviewStars';
 
 const NewReviewForm = function ({ currentProduct, onClose }) {
   const [rating, setRating] = useState(0);
@@ -68,45 +70,85 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      {[1, 2, 3, 4, 5].map((num) => (
-        <label key={num}>
-          {num}
-          <input type="radio" name="rating" value={num} onChange={() => setRating(num)} />
+    <form onSubmit={handleSubmit} className={styles.newReviewForm}>
+      <div className={styles.reviewRating}>
+        <h2>
+          Rate this product
+        </h2>
+        <ReviewStars setRating={setRating} />
+      </div>
+
+      <div className={styles.formField}>
+        <input
+          type="text"
+          placeholder="Review Title"
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          className={styles.textInput}
+        />
+      </div>
+
+      <div className={styles.formField}>
+        <textarea
+          placeholder="Your Review..."
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          className={styles.textInput}
+        />
+      </div>
+
+      <div className={styles.formField}>
+        <label className={styles.checkboxLabel}>
+          {'Recommend this product? '}
+          <input
+            type="checkbox"
+            checked={recommend}
+            onChange={(e) => setRecommend(e.target.checked)}
+            className={styles.checkboxInput}
+          />
         </label>
-      ))}
+      </div>
 
-      <input type="text" placeholder="Summary" value={summary} onChange={(e) => setSummary(e.target.value)} />
+      <div className={styles.formField}>
+        <input
+          type="text"
+          placeholder="Your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className={styles.textInput}
+        />
+      </div>
 
-      <textarea placeholder="Review body" value={body} onChange={(e) => setBody(e.target.value)} />
-
-      <label>
-        Recommend this product:
-        <input type="checkbox" checked={recommend} onChange={(e) => setRecommend(e.target.checked)} />
-      </label>
-
-      <input type="text" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} />
-
-      <input type="email" placeholder="Your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <div className={styles.formField}>
+        <input
+          type="email"
+          placeholder="Your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={styles.textInput}
+        />
+      </div>
 
       {Object.entries(productCharacteristics).map(([charName, charDetails]) => (
-        <div key={charDetails.id}>
-          <p>{charName}</p>
-          {[1, 2, 3, 4, 5].map((num) => (
-            <label key={num}>
-              {num}
-              <input
-                type="radio"
-                name={`char-${charDetails.id}`}
-                value={num}
-                onChange={(e) => handleCharacteristicChange(charDetails.id, e.target.value)}
-              />
-            </label>
-          ))}
+        <div key={charDetails.id} className={styles.characteristicRating}>
+          <p className={styles.characteristicName}>{charName}</p>
+          <div className={styles.options}>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <label key={num} className={styles.optionsLabel}>
+                {num}
+                <input
+                  type="radio"
+                  name={`char-${charDetails.id}`}
+                  value={num}
+                  onChange={(e) => handleCharacteristicChange(charDetails.id, e.target.value)}
+                />
+              </label>
+            ))}
+          </div>
         </div>
       ))}
 
-      <button type="submit">Submit Review</button>
+      <button type="submit" className={styles.submitButton}>Submit Review</button>
     </form>
   );
 };

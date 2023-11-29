@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import RatingBreakdown from './RatingBreakdown';
+import RatingBreakdown from '../RatingBreakdown';
 
 describe('RatingBreakdown', () => {
   const mockProductReviews = {
@@ -61,7 +61,12 @@ describe('RatingBreakdown', () => {
   it('handles no reviews', () => {
     render(
       <RatingBreakdown
-        productReviews={{ results: [] }}
+        productReviews={{
+          results: [
+            { rating: 5, recommend: false },
+            { rating: 4, recommend: false },
+          ],
+        }}
         averageRating={0}
       />,
     );
