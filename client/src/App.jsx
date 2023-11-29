@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './App.module.scss';
 import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
-import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
-import FiveStars from './sharedComponents/fiveStars/FiveStars.jsx';
-import Questions from './widgets/Questions.jsx';
+import Questions from './widgets/Questions';
 import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
 import Overview from './widgets/Overview';
+import ReportButton from './sharedComponents/reportButton/ReportButton';
 
 function App() {
   const [products, setProducts] = useState([]);
