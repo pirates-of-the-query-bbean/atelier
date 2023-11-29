@@ -88,6 +88,7 @@ function App() {
       )}
       <RelatedProducts currentItem={currentProduct} />
       <Questions currentProduct={currentProduct} />
+      <ReportButton itemType="question" id="644740" />
       <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}

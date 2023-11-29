@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import styles from './Report.module.scss';
 
 function ReportButton({
   itemType, id,
@@ -43,7 +44,9 @@ function ReportButton({
   return (
     <button
       type="button"
+      className={styles.report__button}
       onClick={report}
+      data-testid="reportButton"
     >
       Report
     </button>
