@@ -107,6 +107,7 @@ function Questions({ currentProduct }) {
       <AddQuestionModal
         currentProduct={currentProduct}
         isAddQuestionModalOpen={isAddQuestionModalOpen}
+        onClose={closeAddQuestionsModal}
         onSubmit={addQuestion}
       />
     </section>

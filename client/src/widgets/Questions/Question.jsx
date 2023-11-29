@@ -61,7 +61,6 @@ function Question({
       },
     })
       .then((response) => {
-        console.log(response);
         getAnswers(questionID);
       })
       .catch((err) => {

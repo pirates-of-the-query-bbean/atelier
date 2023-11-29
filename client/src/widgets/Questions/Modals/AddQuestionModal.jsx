@@ -5,7 +5,7 @@ import Modal from './Modal';
 import styles from './AddQuestion.module.scss';
 
 function AddQuestionModal({
-  currentProduct, isAddQuestionModalOpen, onSubmit
+  currentProduct, isAddQuestionModalOpen, onSubmit, onClose
 }) {
   const initialModalData = {
     questionBody: '',
@@ -29,23 +29,26 @@ function AddQuestionModal({
   }
 
   return (
-    <div>
-      <Modal isOpen={isAddQuestionModalOpen}>
-        <form onSubmit={handleSubmit}>
-          <h4>Ask Your Question</h4>
-          <h5>About the {currentProduct.name}</h5>
-          <div className={styles.modal__formRow}>
-            <label htmlFor="questionBody">
-              Your Question*
-              <textarea
-                id="questionBody"
-                name="questionBody"
-                value={formState.questionBody}
-                onChange={handleInputChange}
-                required
-              />
-            </label>
-          </div>
+    <Modal
+    isOpen={isAddQuestionModalOpen}
+    hasCloseBtn={true}
+    onClose={onClose}
+    className={styles.addQuestion__modal}>
+      <form onSubmit={handleSubmit}>
+        <h4>Ask Your Question</h4>
+        <h5>About the {currentProduct.name}</h5>
+        <div className={styles.modal__formRow}>
+          <label htmlFor="questionBody">
+            Your Question*
+            <textarea
+              id="questionBody"
+              name="questionBody"
+              value={formState.questionBody}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+        </div>
         <div className={styles.modal__formRow}>
           <label htmlFor="nickname">
             What is your nickname?*
@@ -75,15 +78,14 @@ function AddQuestionModal({
           </label>
           <p>For authentication reasons, you will not be emailed.</p>
         </div>
-          <CustomButton
-            style={styles.questions__customButton}
-            text="Submit Question"
-            buttonWidth={225}
-            onClickFunction={handleSubmit}
-          />
-        </form>
-      </Modal>
-    </div>
+        <CustomButton
+          style={styles.questions__customButton}
+          text="Submit Question"
+          buttonWidth={225}
+          onClickFunction={handleSubmit}
+        />
+      </form>
+    </Modal>
   );
 }
 

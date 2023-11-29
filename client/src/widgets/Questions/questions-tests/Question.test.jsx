@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Question from './Question';
+import Question from '../Question';
 
 const currentProduct = {
   id: 40345,
