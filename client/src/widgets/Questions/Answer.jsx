@@ -3,8 +3,8 @@ import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
 import ParsedDate from '../../sharedComponents/ParsedDate';
 import styles from './Answer.module.scss';
 
-function Answer({ answer, upvote, report }) {
-  const {id, body, date, answerer_name, helpfulness, photos} = answer;
+function Answer({ answer, report }) {
+  const {answer_id, body, date, answerer_name, photos} = answer;
 
   return (
     <section className={styles.answer__container}>
@@ -16,24 +16,23 @@ function Answer({ answer, upvote, report }) {
         <p>
           {answerer_name === 'Seller' ? (
             <span>by <b>Seller,</b>
-              <ParsedDate date={answer.date} />
+              <ParsedDate date={date} />
             </span>
           ) : (
-            <span>by
-               {answerer_name},
-              <ParsedDate date={answer.date} />
+            <span>
+              by {answerer_name}, <ParsedDate date={date} />
             </span>
           )}
         </p>
         <p>
-          <UpvoteLink item={answer} itemType="answer" property="helpfulness" />
+          <UpvoteLink item={answer} itemType="answer" id={answer_id} property="helpfulness" />
         </p>
         <p>
           <button
             type="submit"
             onClick={(e) => {
               e.preventDefault();
-              report('answer', { id });
+              report('answer', answer_id);
             }}
           >
             Report

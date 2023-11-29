@@ -72,10 +72,10 @@ function App() {
       {Object.keys(currentProduct).length > 0 && <Overview product={currentProduct} />}
       <RelatedProducts currentItem={currentProduct} />
       <Questions currentProduct={currentProduct} />
-      <RatingsReviews
+      {/* <RatingsReviews
         productReviews={productReviews}
         currentProduct={currentProduct}
-      />
+      /> */}
     </div>
   );
 }

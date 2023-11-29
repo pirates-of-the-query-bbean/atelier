@@ -8,8 +8,8 @@ function AddAnswerModal({
   currentProduct, setCurrentProduct, question, isAddAnswerModalOpen, onSubmit
 }) {
   const initialModalData = {
-    answerBody: '',
-    nickname: '',
+    body: '',
+    name: '',
     email: '',
   };
 
@@ -24,7 +24,7 @@ function AddAnswerModal({
   }
 
   function handleSubmit() {
-    onSubmit(formState);
+    onSubmit(formState, question.question_id);
     setFormState(initialModalData);
   }
 
@@ -35,26 +35,26 @@ function AddAnswerModal({
           <h4>{currentProduct.name}</h4>
           <h5>{question.question_body}</h5>
           <div className={styles.modal__formRow}>
-            <label htmlFor="answerBody">
+            <label htmlFor="body">
               Your Answer*
               <textarea
                 type="text"
-                id="answerBody"
-                name="answerBody"
-                value={formState.answerBody}
+                id="body"
+                name="body"
+                value={formState.body}
                 onChange={handleInputChange}
                 required
               />
             </label>
           </div>
           <div className={styles.modal__formRow}>
-            <label htmlFor="nickname">
+            <label htmlFor="name">
               What is your nickname?*
               <input
                 type="text"
-                id="nickname"
-                name="nickname"
-                value={formState.nickname}
+                id="name"
+                name="name"
+                value={formState.name}
                 placeholder="Example: jack543!"
                 onChange={handleInputChange}
                 required

@@ -39,6 +39,7 @@ describe('AddAnswer Modal component', () => {
     const mockModalRef = {
       current: document.createElement('dialog'), // Mock the current value with a DOM node
     };
+
     render(
       <AddAnswerModal
         currentProduct={currentProduct}

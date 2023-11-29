@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.88% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/17</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.66% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/15</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -102,76 +102,79 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 &nbsp;
-function <span class="fstat-no" title="function not covered" >FiveStars(</span>{ rating }) {
-  const renderStars = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>tarRating) =&gt; {</span>
-    const fullStars = <span class="cstat-no" title="statement not covered" >Math.floor(starRating);</span>
-    const halfStars = <span class="cstat-no" title="statement not covered" >starRating !== fullStars;</span>
-    let emptyStars = <span class="cstat-no" title="statement not covered" >5 - starRating;</span>
-    const stars = <span class="cstat-no" title="statement not covered" >[];</span>
+function FiveStars({ rating }) {
+  const renderStars = (starRating) =&gt; {
+    const fullStars = Math.floor(starRating);
+    const halfStars = starRating !== fullStars;
+    let emptyStars = 5 - starRating;
+    const stars = [];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    for (let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; fullStars; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >      stars.push(&lt;StarIcon /&gt;);</span>
+    for (let i = 0; i &lt; fullStars; i += 1) {
+      stars.push(&lt;StarIcon key={uuidv4()} /&gt;);
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (halfStars) {</span>
-<span class="cstat-no" title="statement not covered" >      stars.push(&lt;StarHalfIcon /&gt;);</span>
-<span class="cstat-no" title="statement not covered" >      emptyStars -= 1;</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (halfStars) {
+      stars.push(&lt;StarHalfIcon key={uuidv4()} /&gt;);
+      emptyStars -= 1;
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    for (let j = <span class="cstat-no" title="statement not covered" >0;</span> j &lt; emptyStars; j += 1) {</span>
-<span class="cstat-no" title="statement not covered" >      stars.push(&lt;StarOutlineIcon /&gt;);</span>
+    for (let j = 0; j &lt; emptyStars; j += 1) {
+<span class="cstat-no" title="statement not covered" >      stars.push(&lt;StarOutlineIcon key={uuidv4()} /&gt;);</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return stars;</span>
+    return stars;
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div data-testid="starRating" className="starRating"&gt;{rating ? renderStars(rating) : 'No reviews yet.'}&lt;/div&gt;
+  return (
+    &lt;div data-testid="starRating" className="starRating"&gt;{rating ? renderStars(rating) : <span class="branch-1 cbranch-no" title="branch not covered" >'No reviews yet.'}</span>&lt;/div&gt;
   );
 }
 &nbsp;
@@ -187,7 +190,7 @@ export default FiveStars;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-28T16:37:32.975Z
+                at 2023-11-29T04:08:55.490Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

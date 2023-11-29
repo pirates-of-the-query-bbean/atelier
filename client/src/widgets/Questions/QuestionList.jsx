@@ -6,10 +6,7 @@ function QuestionList({
   currentProduct,
   questionArr,
   questionsStartIndex,
-  answersStartIndex,
-  setAnswersStartIndex,
-  sort,
-  showTwoMoreItems
+  showTwoMoreItems,
 }) {
   if (questionArr.length === 0) {
     return (
@@ -24,9 +21,6 @@ function QuestionList({
           currentProduct={currentProduct}
           key={question.question_id}
           question={question}
-          sort={sort}
-          answersStartIndex={answersStartIndex}
-          setAnswersStartIndex={setAnswersStartIndex}
           showTwoMoreItems={showTwoMoreItems}
         />
       ))}

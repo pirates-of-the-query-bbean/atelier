@@ -8,15 +8,11 @@ import styles from './Question.module.scss';
 
 function Question({
   currentProduct,
-  setCurrentProduct,
   question,
-  upvote,
-  sort,
-  answersStartIndex,
-  setAnswersStartIndex,
   showTwoMoreItems,
 }) {
   const {
+    question_id,
     question_body,
     question_date,
     asker_name,
@@ -26,6 +22,23 @@ function Question({
   } = question;
 
   const [isAddAnswerModalOpen, setAddAnswerModalOpen] = useState(false);
+  const [answerArr, setAnswerArr] = useState([]);
+  const [answersStartIndex, setAnswersStartIndex] = useState(2);
+
+  function getAnswers(id) {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${id}/answers`, {
+      headers: {
+        Authorization: process.env.REACT_APP_API_KEY,
+      },
+    })
+      .then((data) => {
+        setAnswerArr(data.data.results);
+      })
+      .catch((err) => {
+        console.log('error fetching answers ', err);
+      });
+  }
+
   function openAddAnswerModal() {
     setAddAnswerModalOpen(true);
   }
@@ -34,7 +47,30 @@ function Question({
     setAddAnswerModalOpen(false);
   }
 
-  function report(id, itemType) {
+  function addAnswer(data, questionID) {
+    axios({
+      method: 'post',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${questionID}/answers`,
+      headers: {
+        Authorization: process.env.REACT_APP_API_KEY,
+      },
+      data: {
+        body: data.body,
+        name: data.name,
+        email: data.email
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        getAnswers(questionID);
+      })
+      .catch((err) => {
+        console.log('Error posting answer', err);
+      });
+    closeAddAnswerModal();
+  }
+
+  function report(itemType, id) {
     let reportURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa';
     let param = '';
 
@@ -53,35 +89,15 @@ function Question({
         Authorization: process.env.REACT_APP_API_KEY,
       },
       data: {
-        param: id,
-      },
-    });
-  }
-
-  function addAnswer(data, questionID) {
-    axios({
-      method: 'post',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${questionID}/answers`,
-      headers: {
-        Authorization: process.env.REACT_APP_API_KEY,
-      },
-      data: {
-        body: data.questionBody,
-        name: data.nickname,
-        email: data.email,
-        photos: data.files,
+        [param]: id,
       },
     })
-      .then((response) => {
-        console.log(response);
-        getAnswers();
+      .then(() => {
+        getAnswers(question_id);
       })
       .catch((err) => {
-        console.log('Error posting answer', err);
+        console.log('error reporting answer', err);
       });
-
-    console.log(data);
-    closeAddAnswerModal();
   }
 
   return (
@@ -93,6 +109,7 @@ function Question({
           <UpvoteLink
             item={question}
             itemType="question"
+            id={question_id}
             property="question_helpfulness"
           />
           <span className={styles.addAnswer}>
@@ -109,17 +126,16 @@ function Question({
         </div>
       </h5>
       <AnswerList
+        answerArr={answerArr}
         question={question}
-        upvote={upvote}
-        sort={sort}
         report={report}
+        showTwoMoreItems={showTwoMoreItems}
+        getAnswers={getAnswers}
         answersStartIndex={answersStartIndex}
         setAnswersStartIndex={setAnswersStartIndex}
-        showTwoMoreItems={showTwoMoreItems}
       />
       <AddAnswerModal
         currentProduct={currentProduct}
-        setCurrentProduct={setCurrentProduct}
         question={question}
         isAddAnswerModalOpen={isAddAnswerModalOpen}
         onSubmit={addAnswer}

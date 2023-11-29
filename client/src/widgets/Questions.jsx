@@ -11,13 +11,7 @@ import AddQuestionModal from './questions/Modals/AddQuestionModal';
 function Questions({ currentProduct }) {
   const [questionArr, setQuestionArr] = useState([]);
   const [questionsStartIndex, setQuestionStartIndex] = useState(3);
-  const [answersStartIndex, setAnswersStartIndex] = useState(0);
   const [isAddQuestionModalOpen, setAddQuestionModalOpen] = useState(false);
-
-  function sort(arr, setState, property) {
-    const sortedArr = [...arr].sort((a, b) => b[property] - a[property]);
-    setState(sortedArr);
-  }
 
   function showTwoMoreItems(indexToAdjust, stateToAdjust) {
     indexToAdjust(stateToAdjust + 2);
@@ -43,19 +37,11 @@ function Questions({ currentProduct }) {
     })
       .then((response) => {
         setQuestionArr(response.data.results);
-        sort(response.data.results, setQuestionArr, 'question_helpfulness');
-        console.log('RESPONSE IS', response.data.results);
-      })
-      .then(() => {
-
       })
       .catch((err) => {
         console.log('error fetching questions', err);
-      })
-      .finally(() => console.log('FINALLY',questionArr));
+      });
   }
-
-  console.log('state is: ', questionArr);
 
   function addQuestion(data) {
     axios({
@@ -71,14 +57,12 @@ function Questions({ currentProduct }) {
         product_id: currentProduct.id
       },
     })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         getQuestions(currentProduct.id);
       })
       .catch((err) => {
         console.log('Error posting question', err);
       });
-    console.log(data);
     closeAddQuestionsModal();
   }
 
@@ -97,10 +81,7 @@ function Questions({ currentProduct }) {
         currentProduct={currentProduct}
         questionArr={questionArr}
         questionsStartIndex={questionsStartIndex}
-        answersStartIndex={answersStartIndex}
-        setAnswersStartIndex={setAnswersStartIndex}
         showTwoMoreItems={showTwoMoreItems}
-        sort={sort}
       />
 
       <div className={styles.questions__buttons}>
