@@ -25,7 +25,7 @@ function Gallery({ currStyle }) {
   }
 
   return (
-    <div className={styles.container}>
+    <div data-testid="gallery" className={styles.container}>
       <div className={styles.overlay}>
         <Thumbnails selectionHandler={changeImg} imgs={currStyle.photos} currImg={currImg} />
         <nav>
@@ -34,7 +34,7 @@ function Gallery({ currStyle }) {
             <div className={styles.icon}>
               {currImg > 0 && (
               <ArrowBackIcon
-
+                data-testid="back-arrow"
                 onClick={() => {
                   changeImg('back');
                 }}
@@ -44,7 +44,7 @@ function Gallery({ currStyle }) {
             <div className={styles.icon}>
               {currImg < (currStyle.photos.length - 1) && (
               <ArrowForwardIcon
-
+                data-testid="next-arrow"
                 onClick={() => {
                   changeImg('forward');
                 }}
@@ -55,9 +55,9 @@ function Gallery({ currStyle }) {
           <div />
         </nav>
       </div>
-      <div style={{ transform: `translateX(-${currImg * (100 / currStyle.photos.length)}%)` }} className={styles.imgs}>
-        {currStyle.photos.map((img, index) => (
-          <GalleryImg src={img.url} />
+      <div data-testid="gallery-img" style={{ transform: `translateX(-${currImg * (100 / currStyle.photos.length)}%)` }} className={styles.imgs}>
+        {currStyle.photos.map((img, i) => (
+          <GalleryImg key={i} src={img.url} />
         ))}
       </div>
     </div>

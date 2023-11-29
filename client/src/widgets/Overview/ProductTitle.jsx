@@ -5,9 +5,8 @@ import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 function ProductTitle({
   product, price, averageRating, reviewCount,
 }) {
-  console.log(averageRating);
   return (
-    <div className={styles.container}>
+    <div data-testid="product-title" className={styles.container}>
       {/* TODO get review rating and render conditionally if no reviews */}
       {reviewCount > 0 && (
       <div className={styles.ratingsReviews}>

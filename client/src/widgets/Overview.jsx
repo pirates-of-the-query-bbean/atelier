@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import styles from './Overview.module.scss';
 import ProductTitle from './Overview/ProductTitle';
 import ProductStyle from './Overview/ProductStyle';
@@ -38,7 +39,7 @@ function Overview({ product, averageRating, reviewCount }) {
         setLoading(false);
       })
       .catch((err) => {
-        console.log('error fetching styles', err);
+        console.log('error fetching styles', err, '');
         setLoading('error');
       });
   };
@@ -77,11 +78,11 @@ function Overview({ product, averageRating, reviewCount }) {
   }, []);
 
   if (isLoading === true) {
-    return <h3>Loading...</h3>;
+    return <h3 data-testid="loading-overview">Loading...</h3>;
   }
 
   if (isLoading === 'error') {
-    return <h3>ERROR fetching content!</h3>;
+    return <h3 data-testid="err-overview">ERROR fetching content!</h3>;
   }
 
   return (
@@ -120,4 +121,20 @@ function Overview({ product, averageRating, reviewCount }) {
     </section>
   );
 }
+
+Overview.defaultProps = {
+  averageRating: 0,
+  reviewCount: 0,
+};
+
+Overview.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number,
+    default_price: PropTypes.string,
+  }).isRequired,
+  averageRating: PropTypes.number,
+  reviewCount: PropTypes.number,
+
+};
+
 export default Overview;
