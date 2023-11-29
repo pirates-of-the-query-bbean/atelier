@@ -1,65 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import AddIcon from '@mui/icons-material/Add';
 import CustomButton from '../sharedComponents/customButton/CustomButton';
 import Search from './questions/Search';
 import QuestionList from './questions/QuestionList';
-import AddIcon from '@mui/icons-material/Add';
 import styles from './Questions.module.scss';
 import AddQuestionModal from './questions/Modals/AddQuestionModal';
 
-function Questions({ currentProduct, questions }) {
-  const questionsObj = [{
-    "question_id": 37,
-    "question_body": "Why is this product cheaper here than other sites?",
-    "question_helpfulness": 2,
-    "reported": false,
-    "answers": {
-      70: {
-        "id": 70,
-        "body": "Some of the seams started splitting the first time I wore it!",
-        "date": "2019-11-28T00:00:00.000Z",
-        "answerer_name": "sillyguy",
-        "helpfulness": 6,
-        "photos": [],
-      },
-      78: {
-        "id": 78,
-        "body": "9 lives",
-        "date": "2019-11-12T00:00:00.000Z",
-        "answerer_name": "iluvdogz",
-        "helpfulness": 31,
-        "photos": [],
-      }
-    }
-  },
-  {
-    "question_id": 39,
-    "question_body": "Why is this product cheaper here than other sites?",
-    "question_helpfulness": 2,
-    "reported": false,
-    "answers": {
-      99: {
-        "id": 70,
-        "body": "Some of the seams started splitting the first time I wore it!",
-        "date": "2019-11-28T00:00:00.000Z",
-        "answerer_name": "sillyguy",
-        "helpfulness": 6,
-        "photos": [],
-      },
-      100: {
-        "id": 78,
-        "body": "9 lives",
-        "date": "2019-11-12T00:00:00.000Z",
-        "answerer_name": "iluvdogz",
-        "helpfulness": 31,
-        "photos": [],
-      }
-    }
-  }];
-
-  const [questionArr, setQuestionArr] = useState(questionsObj);
-  const [questionsStartIndex, setQuestionStartIndex] = useState(0);
+function Questions({ currentProduct }) {
+  const [questionArr, setQuestionArr] = useState([]);
+  const [questionsStartIndex, setQuestionStartIndex] = useState(3);
   const [answersStartIndex, setAnswersStartIndex] = useState(0);
   const [isAddQuestionModalOpen, setAddQuestionModalOpen] = useState(false);
 
@@ -72,7 +23,7 @@ function Questions({ currentProduct, questions }) {
     indexToAdjust(stateToAdjust + 2);
   }
 
-  function handleSubmit() {
+  function handleSearch() {
     console.log('handle submit invoked');
   }
 
@@ -83,6 +34,28 @@ function Questions({ currentProduct, questions }) {
   function closeAddQuestionsModal() {
     setAddQuestionModalOpen(false);
   }
+
+  function getQuestions(id) {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/?product_id=${id}&count=100`, {
+      headers: {
+        Authorization: process.env.REACT_APP_API_KEY,
+      },
+    })
+      .then((response) => {
+        setQuestionArr(response.data.results);
+        sort(response.data.results, setQuestionArr, 'question_helpfulness');
+        console.log('RESPONSE IS', response.data.results);
+      })
+      .then(() => {
+
+      })
+      .catch((err) => {
+        console.log('error fetching questions', err);
+      })
+      .finally(() => console.log('FINALLY',questionArr));
+  }
+
+  console.log('state is: ', questionArr);
 
   function addQuestion(data) {
     axios({
@@ -100,46 +73,29 @@ function Questions({ currentProduct, questions }) {
     })
       .then((response) => {
         console.log(response);
-        getQuestions();
+        getQuestions(currentProduct.id);
       })
       .catch((err) => {
         console.log('Error posting question', err);
       });
-
     console.log(data);
     closeAddQuestionsModal();
   }
 
-  function getQuestions() {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/?product_id=${currentProduct.id}`, {
-      headers: {
-        Authorization: process.env.REACT_APP_API_KEY,
-      },
-    })
-      .then((response) => {
-        setQuestionArr(response.data);
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log('error fetching questions', err);
-      });
-  }
-
   useEffect(() => {
-    getQuestions();
+    getQuestions(currentProduct.id);
   }, []);
 
   return (
     <section className={styles.questions__container}>
       <h5>Questions & Answers</h5>
       <Search
-        handleSubmit={handleSubmit}
+        handleSearch={handleSearch}
         questionArr={questionArr}
       />
       <QuestionList
         currentProduct={currentProduct}
         questionArr={questionArr}
-        setQuestionArr={setQuestionArr}
         questionsStartIndex={questionsStartIndex}
         answersStartIndex={answersStartIndex}
         setAnswersStartIndex={setAnswersStartIndex}

@@ -20,7 +20,7 @@ function Modal({ isOpen, children }) {
 
     if (modalElement) {
       if (isModalOpen) {
-        modalElement.showModal();
+        modalElement.show();
       } else {
         modalElement.close();
       }

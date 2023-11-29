@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CustomButton from '../../../sharedComponents/customButton/CustomButton';
 import Modal from './Modal.jsx';
-import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import styles from './AddQuestion.module.scss';
 
 function AddAnswerModal({
@@ -30,10 +29,10 @@ function AddAnswerModal({
   }
 
   return (
-    <div>
+    <div data-testid="addAnswerModal">
       <Modal isOpen={isAddAnswerModalOpen}>
         <form onSubmit={handleSubmit}>
-          <h4>{currentProduct.name}:</h4>
+          <h4>{currentProduct.name}</h4>
           <h5>{question.question_body}</h5>
           <div className={styles.modal__formRow}>
             <label htmlFor="answerBody">
@@ -81,7 +80,8 @@ function AddAnswerModal({
           <input
             type="file"
             accept="image/*"
-            multiple />
+            multiple
+          />
           <CustomButton
             style={styles.questions__customButton}
             text="Submit Answer"

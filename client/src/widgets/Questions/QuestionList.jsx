@@ -1,55 +1,35 @@
-import React, { useEffect } from 'react';
-import Question from './Question.jsx';
+import React from 'react';
+import Question from './Question';
 import styles from './Question.module.scss';
 
 function QuestionList({
   currentProduct,
   questionArr,
-  setQuestionArr,
   questionsStartIndex,
   answersStartIndex,
   setAnswersStartIndex,
   sort,
   showTwoMoreItems
 }) {
-  const getQuestions = () => {
-    // axios.get(`/questions/${product_id}/`)
-    //   .then((data) => {
-    //     const questions = [];
-
-    //     for (let key in data.data) {
-    //       questions.push(answerObj[key]);
-    //     }
-    //     setQuestionArr(questions);
-    //   })
-    //   .catch((err) => {
-    //     console.log('error fetching questions');
-    //   });
-  };
-
-  useEffect(() => {
-    // getQuestions(product._id);
-    sort(questionArr, setQuestionArr, 'question_helpfulness');
-  }, []);
+  if (questionArr.length === 0) {
+    return (
+      <p className={styles.question__placeholder}>There are no questions for this product yet.</p>
+    );
+  }
 
   return (
     <section>
-      {Array.isArray(questionArr) ? (
-        questionArr.slice(0, questionsStartIndex + 1).map((question) => (
-          <Question
-            currentProduct={currentProduct}
-            key={question.question_id}
-            question={question}
-            sort={sort}
-            answersStartIndex={answersStartIndex}
-            setAnswersStartIndex={setAnswersStartIndex}
-            showTwoMoreItems={showTwoMoreItems}
-          />
-        ))
-      ) : (
-        <p className={styles.question__placeholder}>There are no questions for this product yet.</p>
-      )}
-
+      {questionArr.slice(0, questionsStartIndex + 1).map((question) => (
+        <Question
+          currentProduct={currentProduct}
+          key={question.question_id}
+          question={question}
+          sort={sort}
+          answersStartIndex={answersStartIndex}
+          setAnswersStartIndex={setAnswersStartIndex}
+          showTwoMoreItems={showTwoMoreItems}
+        />
+      ))}
     </section>
   );
 }

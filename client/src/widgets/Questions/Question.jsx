@@ -26,7 +26,6 @@ function Question({
   } = question;
 
   const [isAddAnswerModalOpen, setAddAnswerModalOpen] = useState(false);
-
   function openAddAnswerModal() {
     setAddAnswerModalOpen(true);
   }
@@ -85,12 +84,8 @@ function Question({
     closeAddAnswerModal();
   }
 
-  useEffect(() => {
-
-  }, []);
-
   return (
-    <section className={styles.question__container}>
+    <section className={styles.question__container} data-testid="question">
       <h5 className={styles.question__heading}>
         Q:
         <span className={styles.question__body}>{question_body}</span>
@@ -105,7 +100,6 @@ function Question({
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-                console.log('clicked');
                 openAddAnswerModal();
               }}
             >
@@ -115,6 +109,7 @@ function Question({
         </div>
       </h5>
       <AnswerList
+        question={question}
         upvote={upvote}
         sort={sort}
         report={report}

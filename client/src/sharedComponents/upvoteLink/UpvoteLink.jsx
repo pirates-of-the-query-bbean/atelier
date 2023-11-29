@@ -12,14 +12,18 @@ import styles from './Upvote.module.scss';
 
 function UpvoteLink({ item, itemType, property }) {
   const [upvoteCount, setUpvoteCount] = useState(item[property]);
-  let upvoteURL = '';
+  let upvoteURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/';
+  let param = '';
 
   if (itemType === 'review') {
-    upvoteURL = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?${item.id}/helpful`;
+    upvoteURL += `reviews/?${item.id}/helpful`;
+    param = 'review_id';
   } else if (itemType === 'answer') {
-    upvoteURL = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/?${item.id}/helpful`;
+    upvoteURL += `qa/answers/?${item.id}/helpful`;
+    param = 'answer_id';
   } else {
-    upvoteURL = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/?${item.id}/helpful`;
+    upvoteURL += `qa/questions/?${item.id}/helpful`;
+    param = 'question_id';
   }
 
   const upvote = (obj, key) => {
@@ -29,6 +33,9 @@ function UpvoteLink({ item, itemType, property }) {
       headers: {
         Authorization: process.env.REACT_APP_API_KEY,
       },
+      data: {
+        param: obj.id,
+      },
     });
 
     const upvoteObj = obj;
@@ -36,7 +43,7 @@ function UpvoteLink({ item, itemType, property }) {
   };
 
   return (
-    <div className={styles.upvote__container}>
+    <div className={styles.upvote__container} data-testid="upvoteLink">
       <span>Helpful? </span>
       <button
         type="submit"

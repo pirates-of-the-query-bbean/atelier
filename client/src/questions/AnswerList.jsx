@@ -1,77 +1,29 @@
-import React, {useState, useEffect} from 'react';
-import Answer from './Answer.jsx';
+import React, { useState, useEffect } from 'react';
+import Answer from './Answer';
 import styles from './Answer.module.scss';
 import axios from 'axios';
 
-function AnswerList({ question, helpful, report, sort, answersStartIndex, setAnswersStartIndex, showTwoMoreItems }) {
+function AnswerList({
+  question, helpful, report, sort, answersStartIndex, setAnswersStartIndex, showTwoMoreItems
+}) {
   const [answerArr, setAnswerArr] = useState([]);
 
-  function getAnswers(question_id) {
-    // axios.get(`/qa/questions/${product_id}/answers`)
-    //   .then((data) => {
-    //     const questions = [];
-
-    //     for (let key in data.data) {
-    //       questions.push(answerObj[key]);
-    //     }
-    //     setQuestionArr(questions);
-    //   })
-    //   .catch((err) => {
-    //     console.log('error fetching questions');
-    //   });
+  function getAnswers(id) {
+    axios.get(`/qa/questions/?question_id=${id}/answers`)
+      .then((data) => {
+        console.log(data);
+        const answers = Object.values(data.data);
+        setAnswerArr(answers);
+        sort(answers, setAnswerArr, 'helpfulness');
+      })
+      .catch((err) => {
+        console.log('error fetching questions');
+      });
   }
-
-  function getAnswers2(answerObj) {
-    const answers = [];
-
-    for (let key in answerObj) {
-      answers.push(answerObj[key]);
-
-    }
-    sort(answers, setAnswerArr, 'helpfulness');
-
-  }
-
-  const testAnswer = {
-    73: {
-      "id": 73,
-      "body": "Last of the seams started splitting the first time I wore it!",
-      "date": "2019-11-28T00:00:00.000Z",
-      "answerer_name": "sillyguy",
-      "helpfulness": -6,
-      "photos": [],
-    },
-    78: {
-      "id": 78,
-      "body": "First 9 lives",
-      "date": "2019-11-12T00:00:00.000Z",
-      "answerer_name": "iluvdogz",
-      "helpfulness": 31,
-      "photos": [],
-    },
-    70: {
-      "id": 70,
-      "body": "Six of the seams started splitting the first time I wore it!",
-      "date": "2019-11-28T00:00:00.000Z",
-      "answerer_name": "sillyguy",
-      "helpfulness": 6,
-      "photos": [],
-    },
-    82: {
-      "id": 82,
-      "body": "Second of the seams started splitting the first time I wore it!",
-      "date": "2019-11-28T00:00:00.000Z",
-      "answerer_name": "Seller",
-      "helpfulness": 8,
-      "photos": [],
-    }
-  }
-
 
   useEffect(() => {
-    getAnswers2(testAnswer);
+    getAnswers(question.id);
   }, []);
-
 
   return (
     <section>
@@ -86,7 +38,7 @@ function AnswerList({ question, helpful, report, sort, answersStartIndex, setAns
           showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
         }}>See More Answers</a>
     </section>
-  )
+  );
 }
 
 export default AnswerList;

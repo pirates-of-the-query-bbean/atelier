@@ -1,19 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './Answer.module.scss';
+import ParsedDate from '../../sharedComponents/ParsedDate';
 
 function Answer({ answer, upvote, report }) {
   const {body, date, answerer_name, helpfulness, photos} = answer;
-
-  function formattedDate(date) {
-    date = new Date(date);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  }
-
-
 
   return (
     <section className={styles.answer__container}>
