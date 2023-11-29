@@ -6,7 +6,8 @@ import styles2 from './AddOutfitCard.module.scss';
 
 function AddOutfitCard({handleClick}) {
   return (
-    <main onClick={() => handleClick()} className={styles2.outfitCard}>
+    
+    <main onClick={() => handleClick()} className={styles2.outfitCard} data-testid="addOutfitCard">
       <div className={styles2.outfitCard__image}>
         <AddCircleOutlineIcon />
       </div>

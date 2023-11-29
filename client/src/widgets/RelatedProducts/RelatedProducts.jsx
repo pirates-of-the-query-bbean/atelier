@@ -7,8 +7,30 @@ import axios from 'axios';
 import AddOutfitCard from './AddOutfitCard/AddOutfitCard';
 import ItemContainer from './ItemContainer/ItemContainers';
 import styles from './RelatedProducts.module.scss';
+import OutfixCard from './OutfitCard/OutfixCard';
 
 function RelatedProducts({currentItem}) {
+  useEffect(() => {
+    if (currentItem && currentItem.id) {
+        axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${currentItem.id}/styles`, {
+            headers: {
+                Authorization: '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', 
+            },
+        })
+        .then((res) => {
+            const defaultStyle = res.data.results.find(style => style['default?'] === true);
+            if (defaultStyle) {
+                setCurrentStyle(defaultStyle); 
+            } else {
+                console.log("No default style found");
+            }
+        })
+        .catch(() => {
+            console.log('there was an error');
+        });
+    }
+}, [currentItem]);
+
   //  currentList state is the list given to us combined with its default styling and price
   const [currentList, setCurrentList] = useState([]);
 
@@ -21,9 +43,11 @@ function RelatedProducts({currentItem}) {
   //  might be able to not use this..
   //  this is to keep track of what the 'currentItem' will be compared against
   const [clickedItem, setClickedItem] = useState('');
-
+  const [comparisonTableInfo, setComparisonTableInfo] = useState({}); 
   //  keep track of what the user has added to the outfit list
   const [userOutfitlist, setUserOutfitList] = useState([]);
+
+  const [currentStyle, setCurrentStyle] = useState([]);
 
   //  combines the list of 'related items' with their default styles and prices
   useEffect(() => {
@@ -32,18 +56,18 @@ function RelatedProducts({currentItem}) {
         try {
           const response = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${currentItem.id}/related`, {
             headers: {
-              Authorization: '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',
+              Authorization: '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',
             },
           });
           const relatedItemsID = response.data;
           const relatedItemsInfo = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, {
             headers: {
-              Authorization: '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',
+              Authorization: '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',
             },
           }).then((res) => res.data)));
           const relatedItemsStyles = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, {
             headers: {
-              Authorization: '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',
+              Authorization: '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',
             },
           }).then((res) => res.data)));
           const combinedList = relatedItemsInfo.map((item, index) => {
@@ -61,6 +85,39 @@ function RelatedProducts({currentItem}) {
   const handleTableClick = (item) => {
     setClickedItem(item);
     setOpenTable(!openTable);
+    compareItems();
+  };
+
+  //gets invoked when the item card is clicked, to compare with the main item
+  const compareItems = () => {
+    const currentItem = new Set(currentItem.features.map(f => f.feature));
+    const clickedItem = new Set(clickedItem.features.map(f => f.feature));
+
+    const sharedFeatures = [];
+    const uniqueToCurrentItem = [];
+    const uniqueToClickedItem = [];
+
+    product1.features.forEach(f => {
+      if (product2Features.has(f.feature)) {
+        sharedFeatures.push(f);
+      } else {
+        uniqueToCurrentItem.push(f);
+      }
+    });
+
+    product2.features.forEach(f => {
+      if (!product1Features.has(f.feature)) {
+        uniqueToClickedItem.push(f);
+      }
+    });
+
+    const result = {
+      sharedFeatures,
+      uniqueToCurrentItem,
+      uniqueToClickedItem
+    };
+
+    setComparisonTableInfo(result); 
   };
 
   const handleArrowClick = (value) => {
@@ -94,6 +151,7 @@ function RelatedProducts({currentItem}) {
           {/* //TODO when card is clicked display the table */}
           {currentList.map((product) => (
             <ItemContainer
+              dataTestId="itemCardContainers"
               handleClick={handleTableClick}
               key={product.id}
               item={product}
@@ -102,18 +160,18 @@ function RelatedProducts({currentItem}) {
           ))}
         </div>
       </div>
-      {/* //TODO 4* /}
-      {/* //TODO set up the table* /}
-      {/* <div style={{display: 'none'}}className='comparisonTable'>
-            <div className='comparisonTable__row-one'>
-                <span>Comparing</span>
-                <div>
-                  <span>{currentItem.name}</span>
-                  <span>{clickedItem.name}</span>
-                </div>
-            </div>
-            <div className='comparisonTable__row-two'>
-            </div>
+     
+     {/* style={{display: 'none'}} 
+      <div className={styles.comparisonTable}>
+        <div className={styles.comparisonTable__firstRow}>
+          <span>{currentItem.name}</span>
+          <span>Comparing</span>
+          <span>{clickedItem.name}</span>
+        </div>
+        {comparisonTableInfo.result.map((item) => {
+          
+        })}
+
       </div> */}
 
       <div>
@@ -123,12 +181,13 @@ function RelatedProducts({currentItem}) {
           {(userOutfitlist.length > 0)
             ? userOutfitlist.map((product) => (
               //  TODO two
-              //TODO change function that we're giving as a prop into its proper function 
-              <ItemContainer
+              <OutfixCard
+                datatestid="newOutfitCard"
                 handleClick={handleRemoveOutfit}
                 key={product.id}
                 item={product}
                 Icon={CloseIcon}
+                currentStyle={currentStyle}
               />
             )) : ''}
         </div>

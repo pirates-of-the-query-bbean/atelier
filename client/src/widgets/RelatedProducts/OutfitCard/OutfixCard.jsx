@@ -1,16 +1,14 @@
 import React from 'react';
-import style1 from './ItemContainer.module.scss';
+import style1 from '../ItemContainer/ItemContainer.module.scss'
+
 import mainCard from '../assets/noimageavai.png';
 
 
-function ItemContainer({item, handleClick, Icon, dataTestId}) {
+function OutfixCard({item, handleClick, Icon, dataTestId, currentStyle}) {
   return (
-    
     <main data-testid={dataTestId} onClick={() => handleClick(item)} className={style1.itemContainer}>
       <div className={style1.itemContainer__image}>
-        {item.style && item.style.photos && item.style.photos.length > 0 && item.style.photos[0].thumbnail_url
-          ? <img src={item.style.photos[0].thumbnail_url} alt={item.name} />
-          : <img src={mainCard} alt={item.name} />}
+      <img src={currentStyle && currentStyle.photos && currentStyle.photos[0] ? currentStyle.photos[0].thumbnail_url : mainCard} alt={item.name} />
         <div className={style1.itemContainer__icon}><Icon/></div>
       </div>
       <div className={style1.itemContainer__text}>
@@ -28,4 +26,4 @@ function ItemContainer({item, handleClick, Icon, dataTestId}) {
   );
 }
 
-export default ItemContainer;
+export default OutfixCard;
