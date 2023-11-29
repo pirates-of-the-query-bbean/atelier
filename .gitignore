@@ -3,3 +3,4 @@ client/dist/main.js
 client/dist/main.css
 package-lock.json
 .env
+coverage/
