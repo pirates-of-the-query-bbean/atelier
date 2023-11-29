@@ -6,7 +6,7 @@ import styles from './Gallery.module.scss';
 import Thumbnails from './Thumbnails';
 import GalleryImg from './GalleryImg';
 
-function Gallery({ currStyle }) {
+function Gallery({ currStyle, expandImg }) {
   const [currImg, setCurrImg] = useState(0);
   const changeImg = (dir) => {
     if (dir === 'forward' && currImg < (currStyle.photos.length - 1)) {
@@ -29,7 +29,12 @@ function Gallery({ currStyle }) {
       <div className={styles.overlay}>
         <Thumbnails selectionHandler={changeImg} imgs={currStyle.photos} currImg={currImg} />
         <nav>
-          <FullscreenIcon className={`${styles.fullscreen} ${styles.icon}`} />
+          <FullscreenIcon
+            onClick={() => {
+              expandImg(currImg);
+            }}
+            className={`${styles.fullscreen} ${styles.icon}`}
+          />
           <div className={styles.arrows}>
             <div className={styles.icon}>
               {currImg > 0 && (
@@ -55,9 +60,18 @@ function Gallery({ currStyle }) {
           <div />
         </nav>
       </div>
-      <div data-testid="gallery-img" style={{ transform: `translateX(-${currImg * (100 / currStyle.photos.length)}%)` }} className={styles.imgs}>
+      <div
+
+        data-testid="gallery-img"
+        style={{ transform: `translateX(-${currImg * (100 / currStyle.photos.length)}%)` }}
+        className={styles.imgs}
+      >
         {currStyle.photos.map((img, i) => (
-          <GalleryImg key={i} src={img.url} />
+          <GalleryImg
+            expandImg={expandImg}
+            key={i}
+            src={img.url}
+          />
         ))}
       </div>
     </div>
