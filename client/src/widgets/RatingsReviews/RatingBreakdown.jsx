@@ -33,7 +33,7 @@ const RatingBreakdown = function ({ productReviews, averageRating }) {
   });
 
   return (
-    <div className={styles.ratingBreakdown}>
+    <div className={styles.ratingBreakdown} data-testid="ratingBreakdown">
       <div className={styles.averageRating}>
         {averageRating}
         <span className={styles.stars}>
@@ -44,12 +44,17 @@ const RatingBreakdown = function ({ productReviews, averageRating }) {
         {recommendPercentage}
         % of reviews recommend this product
       </div>
-      {Object.keys(ratingCounts).reverse().map(star => (
+      {Object.keys(ratingCounts).reverse().map((star) => (
         <div key={star} className={styles.ratingRow}>
-          <div className={styles.starLabel}>{star} stars</div>
+          <div className={styles.starLabel}>
+            {star}
+            stars
+          </div>
           <div className={styles.ratingBarContainer}>
-            <div className={styles.ratingBar}
-              style={{ width: `${ratingPercentages[star]}%` }}>
+            <div
+              className={styles.ratingBar}
+              style={{ width: `${ratingPercentages[star]}%` }}
+            >
               {/* bar */}
             </div>
           </div>
