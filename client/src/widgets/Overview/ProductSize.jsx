@@ -7,7 +7,6 @@ import CustomButton from '../../sharedComponents/customButton/CustomButton';
 function ProductSize({
   productStyles, addToBag, favorite, setCurrSize, setCurrQty, setSku, sizeFocus, sizeNeeded,
 }) {
-  console.log(productStyles);
   const [isDisabled, setDisabled] = useState(true);
   const [isSizeQty, setSizeQty] = useState(null);
   const [isOutOfStock, setIsOutOfStock] = useState(false);
@@ -16,9 +15,7 @@ function ProductSize({
     const [sku, size] = e.target.value.split(',');
     const qty = productStyles[sku].quantity;
     setSizeQty(qty);
-    if (qty > 0) {
-      setDisabled(false);
-    }
+    setDisabled(false);
     setCurrSize(size);
     setSku(Number(sku));
   };
@@ -31,7 +28,6 @@ function ProductSize({
     let qty = 0;
     Object.keys(productStyles).forEach((style) => {
       qty += productStyles[style].quantity;
-      console.log('qty', qty, 'style', style);
     });
     if (!qty > 0) {
       setIsOutOfStock(true);

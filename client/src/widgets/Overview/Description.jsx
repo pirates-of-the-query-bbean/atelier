@@ -5,7 +5,7 @@ import SocialShare from './SocialShare';
 
 function Description({ product }) {
   return (
-    <div className={styles.container}>
+    <div data-testid="description" className={styles.container}>
       <div className={styles.text}>
         <h3>{product.slogan}</h3>
         <p>
@@ -16,8 +16,8 @@ function Description({ product }) {
       <aside>
         <ul>
 
-          {product.features ? product.features.map((feature) => (
-            <li>
+          {product.features ? product.features.map((feature, i) => (
+            <li key={i}>
               <CheckIcon />
               {feature.value}
               {' '}
