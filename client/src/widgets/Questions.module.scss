@@ -1,5 +1,6 @@
 .questions__container {
-  margin: 10px 0;
+  margin: 10px auto;
+  width: 95%;
 
   h5 {
     text-transform: uppercase;
@@ -12,5 +13,6 @@
     font-size: 14px;
     font-weight: 700;
     margin-right: 20px;
+    text-decoration: none;
   }
 }
