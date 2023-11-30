@@ -12,6 +12,8 @@ function Questions({ currentProduct }) {
   const [questionArr, setQuestionArr] = useState([]);
   const [questionsStartIndex, setQuestionStartIndex] = useState(3);
   const [isAddQuestionModalOpen, setAddQuestionModalOpen] = useState(false);
+  const [questionsQuery, setQuestionsQuery] = useState('');
+  const [searchedQuestions, setSearchedQuestions] = useState([]);
 
   function showTwoMoreItems(indexToAdjust, stateToAdjust) {
     indexToAdjust(stateToAdjust + 2);
@@ -76,6 +78,10 @@ function Questions({ currentProduct }) {
       <Search
         handleSearch={handleSearch}
         questionArr={questionArr}
+        questionsQuery
+        setQuestionsQuery={setQuestionsQuery}
+        searchedQuestions={searchedQuestions}
+        setSearchedQuestions={setSearchedQuestions}
       />
       <QuestionList
         currentProduct={currentProduct}

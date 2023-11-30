@@ -14,12 +14,6 @@ function Modal({ isOpen, onClose, hasCloseBtn = true, children }) {
     setModalOpen(false);
   }
 
-  function handleKeyDown(e) {
-    if (e.key === 'Escape') {
-      setModalOpen(false);
-    }
-  }
-
   useEffect(() => {
     setModalOpen(isOpen);
   }, [isOpen]);
@@ -37,10 +31,15 @@ function Modal({ isOpen, onClose, hasCloseBtn = true, children }) {
   }, [isModalOpen]);
 
   return (
-    <dialog ref={modalRef} onKeyDown={handleKeyDown} className={styles.modal}>
+    <dialog
+      data-testid="modalEl"
+      ref={modalRef}
+      className={styles.modal}
+    >
       {hasCloseBtn && (
       <button
         type="button"
+        aria-label="Close Modal"
         className={styles.modal__closeButton}
         onClick={handleCloseModal}
       >
