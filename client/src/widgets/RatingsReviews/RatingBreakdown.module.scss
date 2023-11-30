@@ -1,31 +1,32 @@
 .ratingBreakdown {
   .averageRating {
-    font-size: 48px; // Large font size for the average rating
-    .stars {
-      // Styles for the stars, perhaps color or shadows
-    }
+    font-size: 48px;
+    display: flex;
   }
 
   .recommendation {
-    // Styles for the recommendation percentage
+    margin-bottom: 15px;
+    margin-top: 10px;
   }
 
   .ratingRow {
     display: flex;
     align-items: center;
-    margin-bottom: 8px; // Space between rows
+    margin-bottom: 8px;
 
     .starLabel {
-      // Styles for the star label
+      display: flex;
+      align-items: center;
     }
+
     .ratingBarContainer {
       flex-grow: 1;
-      background-color: #e0e0e0; // Light gray background for the bar
+      background-color: #e0e0e0;
       margin-left: 8px;
 
       .ratingBar {
         height: 10px;
-        background-color: #000; // Dark bar color
+        background-color: #000;
       }
     }
   }

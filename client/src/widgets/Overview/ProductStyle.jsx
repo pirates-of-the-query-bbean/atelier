@@ -10,7 +10,7 @@ function ProductStyle({
     currStyle = { name: 'Select a style' };
   }
   return (
-    <div className={styles.container}>
+    <div data-testid="product-style" className={styles.container}>
       <h3>
         {'STYLE > '}
         <span>{currStyle.name}</span>
