@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import RRListItem from './RRListItem';
 import NewReviewForm from './NewReviewForm';
 import CustomButton from '../../sharedComponents/customButton/CustomButton';
 import styles from './RRList.module.scss';
 
-const RRList = function ({ productReviews, currentProduct }) {
+function RRList({ productReviews, currentProduct }) {
+  RRList.propTypes = {
+    productReviews: PropTypes.arrayOf.isRequired,
+    currentProduct: PropTypes.shape.isRequired,
+  };
   const [reviewRenderCount, setReviewRenderCount] = useState(2);
   const [showReviewForm, setShowReviewForm] = useState(false);
 
@@ -17,16 +22,12 @@ const RRList = function ({ productReviews, currentProduct }) {
     setReviewRenderCount(newCount);
   };
 
-  const handleAddReviewClick = () => {
-    setShowReviewForm(true);
-  };
-
-  const handleCloseReviewForm = () => {
-    setShowReviewForm(false);
+  const toggleReviewForm = () => {
+    setShowReviewForm(!showReviewForm);
   };
 
   return (
-    <div>
+    <div className={styles.reviewList}>
       <div>
         {productReviews.results.slice(0, reviewRenderCount).map((review, index) => (
           <RRListItem
@@ -35,20 +36,25 @@ const RRList = function ({ productReviews, currentProduct }) {
           />
         ))}
       </div>
-      <div className={styles.review__buttons}>
+      <div className={styles.reviewButtons}>
         {reviewRenderCount < productReviews.results.length && (
           <div><CustomButton text="More Reviews" onClickFunction={handleMoreReviewsClick} /></div>
         )}
-        <div><CustomButton text="Add a Review +" onClickFunction={handleAddReviewClick} /></div>
+        <div>
+          <CustomButton
+            text={showReviewForm ? 'Cancel' : 'Add a Review +'}
+            onClickFunction={toggleReviewForm}
+          />
+        </div>
       </div>
       {showReviewForm && (
         <NewReviewForm
-          closeForm={handleCloseReviewForm}
+          closeForm={toggleReviewForm}
           currentProduct={currentProduct}
         />
       )}
     </div>
   );
-};
+}
 
 export default RRList;

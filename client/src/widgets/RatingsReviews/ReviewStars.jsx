@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
@@ -11,6 +12,9 @@ const ratingDescriptions = {
 };
 
 function ReviewStars({ setRating }) {
+  ReviewStars.propTypes = {
+    setRating: PropTypes.func.isRequired,
+  };
   const [currentRating, setCurrentRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(undefined);
 
@@ -28,7 +32,7 @@ function ReviewStars({ setRating }) {
   };
 
   const renderStars = () => {
-    let stars = [];
+    const stars = [];
     const finalRating = hoverRating || currentRating;
 
     for (let i = 1; i <= 5; i += 1) {
@@ -38,9 +42,9 @@ function ReviewStars({ setRating }) {
           onClick={() => onStarClick(i)}
           onMouseOver={() => onStarHover(i)}
           onMouseOut={onStarHoverOut}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
         >
-          {i <= finalRating ? <StarIcon color='primary' /> : <StarOutlineIcon />}
+          {i <= finalRating ? <StarIcon color="black" /> : <StarOutlineIcon />}
         </span>,
       );
     }
@@ -48,9 +52,9 @@ function ReviewStars({ setRating }) {
   };
 
   return (
-    <div className='review-stars'>
+    <div className="review-stars">
       {renderStars()}
-      {currentRating !== 0 && <span className='review-stars__description'>{ratingDescriptions[currentRating]}</span>}
+      {currentRating !== 0 && <span className="review-stars__description">{ratingDescriptions[currentRating]}</span>}
     </div>
   );
 }

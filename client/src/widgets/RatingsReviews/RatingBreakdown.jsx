@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import StarIcon from '@mui/icons-material/Star';
 import styles from './RatingBreakdown.module.scss';
 import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 
-const RatingBreakdown = function ({ productReviews, averageRating }) {
+function RatingBreakdown({ productReviews, averageRating }) {
+  RatingBreakdown.propTypes = {
+    productReviews: PropTypes.arrayOf.isRequired,
+    averageRating: PropTypes.number.isRequired,
+  };
   let recommendPercentage = 0;
   const ratingCounts = {
     5: 0,
@@ -15,11 +20,11 @@ const RatingBreakdown = function ({ productReviews, averageRating }) {
 
   if (productReviews && productReviews.results) {
     recommendPercentage = (
-      (productReviews.results.filter(review => review.recommend).length
+      (productReviews.results.filter((review) => review.recommend).length
         / productReviews.results.length) * 100
     ).toFixed(0);
 
-    productReviews.results.forEach(review => {
+    productReviews.results.forEach((review) => {
       if (ratingCounts.hasOwnProperty(review.rating)) {
         ratingCounts[review.rating]++;
       }
@@ -27,7 +32,7 @@ const RatingBreakdown = function ({ productReviews, averageRating }) {
   }
 
   const totalReviews = productReviews.results ? productReviews.results.length : 0;
-  let ratingPercentages = {};
+  const ratingPercentages = {};
 
   Object.keys(ratingCounts).forEach((key) => {
     const value = ratingCounts[key];
@@ -62,6 +67,6 @@ const RatingBreakdown = function ({ productReviews, averageRating }) {
       ))}
     </div>
   );
-};
+}
 
 export default RatingBreakdown;

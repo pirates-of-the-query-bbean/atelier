@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './NewReviewForm.module.scss';
 import ReviewStars from './ReviewStars';
 
-const NewReviewForm = function ({ currentProduct, onClose }) {
+function NewReviewForm({ currentProduct, onClose }) {
+  NewReviewForm.propTypes = {
+    currentProduct: PropTypes.shape.isRequired,
+    onClose: PropTypes.func.isRequired,
+  };
+
   const [rating, setRating] = useState(0);
   const [productCharacteristics, setProductCharacteristics] = useState({});
   const [reviewCharacteristics, setReviewCharacteristics] = useState({});
@@ -15,7 +21,7 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
   const [email, setEmail] = useState('');
 
   const handleCharacteristicChange = (charId, value) => {
-    setReviewCharacteristics(prev => ({ ...prev, [charId]: parseInt(value) }));
+    setReviewCharacteristics((prev) => ({ ...prev, [charId]: parseInt(value) }));
   };
 
   const handleSubmit = async (e) => {
@@ -30,7 +36,6 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
       email,
       characteristics: reviewCharacteristics,
     };
-    console.log('payload baby!', payload);
 
     try {
       const response = await axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews', payload, {
@@ -151,6 +156,6 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
       <button type="submit" className={styles.submitButton}>Submit Review</button>
     </form>
   );
-};
+}
 
 export default NewReviewForm;

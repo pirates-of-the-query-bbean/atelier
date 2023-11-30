@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './RRListItem.module.scss';
 import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 import ParsedDate from '../../sharedComponents/ParsedDate';
 import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
 
-const RRListItem = function ({ review }) {
+function RRListItem({ review }) {
+  RRListItem.propTypes = {
+    review: PropTypes.shape.isRequired,
+  };
+
   return (
     <div className={styles.review__item}>
       <FiveStars rating={review.rating} className={styles.starRatingContainer} />
@@ -28,6 +33,6 @@ const RRListItem = function ({ review }) {
       </div>
     </div>
   );
-};
+}
 
 export default RRListItem;

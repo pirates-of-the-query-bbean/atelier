@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './App.module.scss';
 import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
-import UpvoteLink from './sharedComponents/upvoteLink/UpvoteLink.jsx';
-import FiveStars from './sharedComponents/fiveStars/FiveStars.jsx';
-import Questions from './widgets/Questions.jsx';
+import Questions from './widgets/Questions';
 import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
 import Overview from './widgets/Overview';
 
@@ -15,10 +13,6 @@ function App() {
   const [averageRating, setAverageRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
-
-  useEffect(() => {
-    getProducts();
-  }, []);
 
   const getProducts = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
@@ -35,6 +29,18 @@ function App() {
         console.log('error fetching products', err);
       });
   };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  function getAverageRating(reviews) {
+    let reviewTotal = 0;
+    for (let i = 0; i < reviews.length; i += 1) {
+      reviewTotal += reviews[i].rating;
+    }
+    setAverageRating(reviewTotal / reviews.length);
+  }
 
   const getReviews = () => {
     setIsLoading(true);
@@ -68,14 +74,6 @@ function App() {
       </div>
     );
   }
-
-  const getAverageRating = function (reviews) {
-    let reviewTotal = 0;
-    for (let i = 0; i < reviews.length; i += 1) {
-      reviewTotal += reviews[i].rating;
-    }
-    setAverageRating(reviewTotal / reviews.length);
-  };
 
   return (
     <div className={styles.container}>
