@@ -17,16 +17,12 @@ const RRList = function ({ productReviews, currentProduct }) {
     setReviewRenderCount(newCount);
   };
 
-  const handleAddReviewClick = () => {
-    setShowReviewForm(true);
-  };
-
-  const handleCloseReviewForm = () => {
-    setShowReviewForm(false);
+  const toggleReviewForm = () => {
+    setShowReviewForm(!showReviewForm);
   };
 
   return (
-    <div>
+    <div className={styles.reviewList}>
       <div>
         {productReviews.results.slice(0, reviewRenderCount).map((review, index) => (
           <RRListItem
@@ -35,15 +31,20 @@ const RRList = function ({ productReviews, currentProduct }) {
           />
         ))}
       </div>
-      <div className={styles.review__buttons}>
+      <div className={styles.reviewButtons}>
         {reviewRenderCount < productReviews.results.length && (
           <div><CustomButton text="More Reviews" onClickFunction={handleMoreReviewsClick} /></div>
         )}
-        <div><CustomButton text="Add a Review +" onClickFunction={handleAddReviewClick} /></div>
+        <div>
+          <CustomButton
+            text={showReviewForm ? "Cancel" : "Add a Review +"}
+            onClickFunction={toggleReviewForm}
+          />
+        </div>
       </div>
       {showReviewForm && (
         <NewReviewForm
-          closeForm={handleCloseReviewForm}
+          closeForm={toggleReviewForm}
           currentProduct={currentProduct}
         />
       )}

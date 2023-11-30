@@ -90,6 +90,7 @@ function App() {
       <RelatedProducts currentItem={currentProduct} />
       <Questions currentProduct={currentProduct} />
       <RatingsReviews
+        setProductReviews={setProductReviews}
         productReviews={productReviews}
         currentProduct={currentProduct}
         averageRating={averageRating}

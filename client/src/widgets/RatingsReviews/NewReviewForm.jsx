@@ -39,10 +39,9 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
         },
       });
       console.log('Review submitted successfully:', response.data);
-      onClose(); // Close the form upon successful submission
+      onClose();
     } catch (error) {
       console.error('Error submitting review:', error);
-      // Handle error appropriately
     }
   };
 
@@ -72,10 +71,14 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
   return (
     <form onSubmit={handleSubmit} className={styles.newReviewForm}>
       <div className={styles.reviewRating}>
-        <h2>
-          Rate this product
-        </h2>
-        <ReviewStars setRating={setRating} />
+        <div>
+          <h2>
+            Rate this product
+          </h2>
+        </div>
+        <div>
+          <ReviewStars setRating={setRating} />
+        </div>
       </div>
 
       <div className={styles.formField}>
@@ -99,7 +102,7 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
 
       <div className={styles.formField}>
         <label className={styles.checkboxLabel}>
-          {'Recommend this product? '}
+          {'Recommend this product?  '}
           <input
             type="checkbox"
             checked={recommend}

@@ -40,7 +40,7 @@ function ReviewStars({ setRating }) {
           onMouseOut={onStarHoverOut}
           style={{ cursor: 'pointer' }}
         >
-          {i <= finalRating ? <StarIcon color='primary' /> : <StarOutlineIcon />}
+          {i <= finalRating ? <StarIcon color='black' /> : <StarOutlineIcon />}
         </span>,
       );
     }
