@@ -7,7 +7,6 @@ import ProductStyle from './Overview/ProductStyle';
 import ProductSize from './Overview/ProductSize';
 import Description from './Overview/Description';
 import Gallery from './Overview/Gallery';
-import ExpandedImg from './Overview/ExpandedImg';
 
 function Overview({ product, averageRating, reviewCount }) {
   const [currPrice, setCurrPrice] = useState({
@@ -22,7 +21,6 @@ function Overview({ product, averageRating, reviewCount }) {
   const [isLoading, setLoading] = useState(true);
   const sizeFocus = useRef(null);
   const [sizeNeeded, setSizeNeeded] = useState(false);
-  const [isExpanded, setExpanded] = useState({ vis: false, i: 0 });
 
   const getStyles = () => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product.id}/styles`, {
@@ -76,11 +74,6 @@ function Overview({ product, averageRating, reviewCount }) {
     console.log('Favorite', product.id);
   };
 
-  const expandImg = (index = 0) => {
-    console.log('EXP');
-    setExpanded((curr) => ({ vis: !curr.vis, i: index }));
-  };
-
   useEffect(() => {
     getStyles();
   }, []);
@@ -99,7 +92,6 @@ function Overview({ product, averageRating, reviewCount }) {
         <div className={styles.gallery}>
           <Gallery
             currStyle={currStyle}
-            expandImg={expandImg}
           />
         </div>
         <aside>
@@ -127,14 +119,7 @@ function Overview({ product, averageRating, reviewCount }) {
           />
         </aside>
       </div>
-
       <Description product={product} />
-      {isExpanded.vis && (
-      <ExpandedImg
-        expandImg={expandImg}
-        src={currStyle.photos[isExpanded.i].url}
-      />
-      )}
     </section>
   );
 }

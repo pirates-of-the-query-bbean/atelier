@@ -29,4 +29,5 @@ li.selected div {
   background-color: rgb(161, 161, 161);
   border: 1px solid var(--text-color);
   object-fit: cover;
+  pointer-events: auto;
 }
