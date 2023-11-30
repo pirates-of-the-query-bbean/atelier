@@ -13,7 +13,7 @@ function Questions({ currentProduct }) {
   const [questionsStartIndex, setQuestionStartIndex] = useState(3);
   const [isAddQuestionModalOpen, setAddQuestionModalOpen] = useState(false);
   const [questionsQuery, setQuestionsQuery] = useState('');
-  const [searchedQuestions, setSearchedQuestions] = useState([]);
+  const [initialQuestionArr, setInitialQuestionArr] = useState([]);
 
   function showTwoMoreItems(indexToAdjust, stateToAdjust) {
     indexToAdjust(stateToAdjust + 2);
@@ -35,7 +35,7 @@ function Questions({ currentProduct }) {
 
   function resetSearch() {
     setQuestionsQuery('');
-    setQuestionArr(searchedQuestions);
+    setQuestionArr(initialQuestionArr);
   }
 
   function openAddQuestionsModal() {
@@ -54,7 +54,7 @@ function Questions({ currentProduct }) {
     })
       .then((response) => {
         setQuestionArr(response.data.results);
-        setSearchedQuestions(response.data.results);
+        setInitialQuestionArr(response.data.results);
       })
       .catch((err) => {
         console.log('error fetching questions', err);
@@ -135,19 +135,18 @@ function Questions({ currentProduct }) {
   );
 }
 
-// Questions.propTypes = {
-//   currentProduct: PropTypes.shape({
-
-//   }).isRequired,
-//   questions: PropTypes.arrayOf({
-//     question_id: PropTypes.number,
-//     question_body: PropTypes.string,
-//     question_helpfulness: PropTypes.number,
-//     reported: PropTypes.boolean,
-//     answers: PropTypes.shape({
-//       id: PropTypes.number,
-//     }),
-//   }).isRequired,
-// };
+Questions.propTypes = {
+  currentProduct: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    campus: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    slogan: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    default_price: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
+    updated_at: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Questions;
