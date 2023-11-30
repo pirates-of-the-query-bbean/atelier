@@ -19,8 +19,23 @@ function Questions({ currentProduct }) {
     indexToAdjust(stateToAdjust + 2);
   }
 
-  function handleSearch() {
-    console.log('handle submit invoked');
+  function searchQuestions(query) {
+    const searchArr = [...questionArr];
+    const filteredQuestions = searchArr.filter((question) => {
+      const regex = new RegExp(query, 'i');
+      return regex.test(question.question_body);
+    });
+    setQuestionArr(filteredQuestions);
+  }
+
+  function handleSearch(e) {
+    e.preventDefault();
+    searchQuestions(questionsQuery);
+  }
+
+  function resetSearch() {
+    setQuestionsQuery('');
+    setQuestionArr(searchedQuestions);
   }
 
   function openAddQuestionsModal() {
@@ -39,6 +54,7 @@ function Questions({ currentProduct }) {
     })
       .then((response) => {
         setQuestionArr(response.data.results);
+        setSearchedQuestions(response.data.results);
       })
       .catch((err) => {
         console.log('error fetching questions', err);
@@ -77,11 +93,10 @@ function Questions({ currentProduct }) {
       <h5>Questions & Answers</h5>
       <Search
         handleSearch={handleSearch}
-        questionArr={questionArr}
-        questionsQuery
         setQuestionsQuery={setQuestionsQuery}
-        searchedQuestions={searchedQuestions}
-        setSearchedQuestions={setSearchedQuestions}
+        questionsQuery={questionsQuery}
+        searchQuestions={searchQuestions}
+        resetSearch={resetSearch}
       />
       <QuestionList
         currentProduct={currentProduct}
