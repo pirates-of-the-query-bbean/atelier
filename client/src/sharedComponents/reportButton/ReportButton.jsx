@@ -52,7 +52,7 @@ function ReportButton({
 
 ReportButton.propTypes = {
   itemType: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default ReportButton;

@@ -100,23 +100,23 @@ function Questions({ currentProduct }) {
         resetSearch={() => resetSearch}
       />
       <QuestionList
-currentProduct={currentProduct}
+        currentProduct={currentProduct}
         questionArr={questionArr}
-                questionsStartIndex={questionsStartIndex}
+        questionsStartIndex={questionsStartIndex}
         showTwoMoreItems={() => showTwoMoreItems}
-              />
+      />
 
       <div className={styles.questions__buttons}>
-{questionArr.length > questionsStartIndex && (
-        <CustomButton
-          style={styles.questions__customButton}
-          text="More Answered Questions"
-          buttonWidth={255}
-          onClickFunction={() => {
-            showTwoMoreItems(setQuestionStartIndex, questionsStartIndex);
-          }}
-        />
-)}
+        {questionArr.length > questionsStartIndex && (
+          <CustomButton
+            style={styles.questions__customButton}
+            text="More Answered Questions"
+            buttonWidth={255}
+            onClickFunction={() => {
+              showTwoMoreItems(setQuestionStartIndex, questionsStartIndex);
+            }}
+          />
+        )}
 
         <CustomButton
           style={styles.questions__customButton}

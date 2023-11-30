@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
 import ParsedDate from '../../sharedComponents/ParsedDate';
 import ReportButton from '../../sharedComponents/reportButton/ReportButton';
 import styles from './Answer.module.scss';
 
-function Answer({ answer, report }) {
+function Answer({ answer }) {
   const {answer_id, body, date, answerer_name, photos} = answer;
 
   return (
@@ -33,5 +34,16 @@ function Answer({ answer, report }) {
     </section>
   );
 }
+
+Answer.propTypes = {
+  answer: PropTypes.shape({
+    answer_id: PropTypes.number.isRequired,
+    body: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    answerer_name: PropTypes.string.isRequired,
+    helpfulness: PropTypes.number.isRequired,
+    photos: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+};
 
 export default Answer;
