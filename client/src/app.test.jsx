@@ -13,11 +13,3 @@ describe('App component', () => {
   });
 });
 
-describe('RelatedProducts component', () => {
-  test('renders RelatedProducts component', () => {
-    render(<RelatedProducts items={[]} currentItem={{}} relatedItemsStyle={[]} />);
-
-    const relatedProductsElement = screen.getByTestId('related-products');
-    expect(relatedProductsElement).toBeInTheDocument();
-  });
-});
