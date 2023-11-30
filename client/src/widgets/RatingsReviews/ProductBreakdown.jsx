@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './ProductBreakdown.module.scss';
 
-const ProductBreakdown = function ({ currentProduct }) {
+function ProductBreakdown({ currentProduct }) {
+  ProductBreakdown.propTypes = {
+    currentProduct: PropTypes.shape.isRequired,
+  };
   const [productData, setProductData] = useState({ characteristics: {} });
 
   const getProductData = () => {
@@ -46,14 +50,14 @@ const ProductBreakdown = function ({ currentProduct }) {
               </div>
             </div>
             <div className={styles.characteristicLabels}>
-              <span>{charName === "Size" || charName === "Width" || charName === "Fit" ? "Too small" : "Poor"}</span>
-              <span>{charName === "Size" || charName === "Width" || charName === "Fit" ? "Too large" : "Great"}</span>
+              <span>{charName === 'Size' || charName === 'Width' || charName === 'Fit' ? 'Too small' : 'Poor'}</span>
+              <span>{charName === 'Size' || charName === 'Width' || charName === 'Fit' ? 'Too large' : 'Great'}</span>
             </div>
           </div>
         );
       })}
     </div>
   );
-};
+}
 
 export default ProductBreakdown;

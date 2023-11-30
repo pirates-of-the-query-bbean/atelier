@@ -11,7 +11,6 @@ function App() {
   const [currentProduct, setCurrentProduct] = useState({});
   const [productReviews, setProductReviews] = useState({});
   const [averageRating, setAverageRating] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
 
   const getProducts = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
@@ -21,13 +20,24 @@ function App() {
     })
       .then((response) => {
         setProducts(response.data);
-        // set current product to first product in array
         setCurrentProduct(response.data[3]);
       })
       .catch((err) => {
         console.log('error fetching products', err);
       });
   };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  function getAverageRating(reviews) {
+    let reviewTotal = 0;
+    for (let i = 0; i < reviews.length; i += 1) {
+      reviewTotal += reviews[i].rating;
+    }
+    setAverageRating(reviewTotal / reviews.length);
+  }
 
   const getReviews = () => {
     setIsLoading(true);
@@ -65,14 +75,6 @@ function App() {
       </div>
     );
   }
-
-  const getAverageRating = function (reviews) {
-    let reviewTotal = 0;
-    for (let i = 0; i < reviews.length; i += 1) {
-      reviewTotal += reviews[i].rating;
-    }
-    setAverageRating(reviewTotal / reviews.length);
-  };
 
   return (
     <div className={styles.container}>
