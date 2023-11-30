@@ -5,6 +5,7 @@ import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
 import Questions from './widgets/Questions';
 import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
 import Overview from './widgets/Overview';
+import ReportButton from './sharedComponents/reportButton/ReportButton';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -86,6 +87,7 @@ function App() {
       )}
       <RelatedProducts currentItem={currentProduct} />
       <Questions currentProduct={currentProduct} />
+      <ReportButton itemType="question" id="644740" />
       <RatingsReviews
         setProductReviews={setProductReviews}
         productReviews={productReviews}
