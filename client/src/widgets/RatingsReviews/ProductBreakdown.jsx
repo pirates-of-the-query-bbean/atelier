@@ -4,9 +4,6 @@ import axios from 'axios';
 import styles from './ProductBreakdown.module.scss';
 
 function ProductBreakdown({ currentProduct }) {
-  ProductBreakdown.propTypes = {
-    currentProduct: PropTypes.shape.isRequired,
-  };
   const [productData, setProductData] = useState({ characteristics: {} });
 
   const getProductData = () => {
@@ -59,5 +56,19 @@ function ProductBreakdown({ currentProduct }) {
     </div>
   );
 }
+
+ProductBreakdown.propTypes = {
+  currentProduct: PropTypes.shape({
+    campus: PropTypes.string,
+    category: PropTypes.string,
+    created_at: PropTypes.string,
+    default_price: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    slogan: PropTypes.string,
+    updated_at: PropTypes.string,
+  }).isRequired,
+};
 
 export default ProductBreakdown;

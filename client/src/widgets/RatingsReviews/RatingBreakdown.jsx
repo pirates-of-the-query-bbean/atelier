@@ -5,10 +5,6 @@ import styles from './RatingBreakdown.module.scss';
 import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 
 function RatingBreakdown({ productReviews, averageRating }) {
-  RatingBreakdown.propTypes = {
-    productReviews: PropTypes.arrayOf.isRequired,
-    averageRating: PropTypes.number.isRequired,
-  };
   let recommendPercentage = 0;
   const ratingCounts = {
     5: 0,
@@ -68,5 +64,26 @@ function RatingBreakdown({ productReviews, averageRating }) {
     </div>
   );
 }
+
+RatingBreakdown.propTypes = {
+  productReviews: PropTypes.shape({
+    product: PropTypes.string,
+    page: PropTypes.number,
+    count: PropTypes.number,
+    results: PropTypes.arrayOf(PropTypes.shape({
+      body: PropTypes.string,
+      date: PropTypes.string,
+      helpfulness: PropTypes.number,
+      photos: PropTypes.arrayOf(PropTypes.string),
+      rating: PropTypes.number,
+      recommend: PropTypes.bool,
+      response: PropTypes.string,
+      review_id: PropTypes.number,
+      reviewer_name: PropTypes.string,
+      summary: PropTypes.string,
+    })),
+  }).isRequired,
+  averageRating: PropTypes.number.isRequired,
+};
 
 export default RatingBreakdown;

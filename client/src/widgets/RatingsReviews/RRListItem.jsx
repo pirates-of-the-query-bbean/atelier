@@ -6,10 +6,6 @@ import ParsedDate from '../../sharedComponents/ParsedDate';
 import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
 
 function RRListItem({ review }) {
-  RRListItem.propTypes = {
-    review: PropTypes.shape.isRequired,
-  };
-
   return (
     <div className={styles.reviewItem}>
       <div className={styles.reviewHeader}>
@@ -48,5 +44,20 @@ function RRListItem({ review }) {
     </div>
   );
 }
+
+RRListItem.propTypes = {
+  review: PropTypes.shape({
+    body: PropTypes.string,
+    date: PropTypes.string,
+    helpfulness: PropTypes.number,
+    photos: PropTypes.arrayOf(PropTypes.string),
+    rating: PropTypes.number,
+    recommend: PropTypes.bool,
+    response: PropTypes.string,
+    review_id: PropTypes.number,
+    reviewer_name: PropTypes.string,
+    summary: PropTypes.string,
+  }).isRequired,
+};
 
 export default RRListItem;
