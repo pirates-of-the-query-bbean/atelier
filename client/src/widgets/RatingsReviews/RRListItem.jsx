@@ -4,8 +4,10 @@ import styles from './RRListItem.module.scss';
 import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 import ParsedDate from '../../sharedComponents/ParsedDate';
 import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
+import ReportButton from '../../sharedComponents/reportButton/ReportButton';
 
 function RRListItem({ review }) {
+  console.log(review, review.review_id)
   return (
     <div className={styles.reviewItem}>
       <div className={styles.reviewHeader}>
@@ -16,14 +18,10 @@ function RRListItem({ review }) {
           <ParsedDate date={review.date} />
         </div>
       </div>
-      <div className={styles.reviewBody}>
-        Summary:
-        {' '}
+      <div className={styles.reviewSummary}>
         {review.summary}
       </div>
       <div className={styles.reviewBody}>
-        Review:
-        {' '}
         {review.body}
       </div>
       {review.recommend === true && (
@@ -38,8 +36,13 @@ function RRListItem({ review }) {
         {review.response}
       </div>
       )}
-      <div>
-        <UpvoteLink item={review} itemType="review" property="helpfulness" />
+      <div className={styles.reviewFooter}>
+        <div>
+          <UpvoteLink item={review} itemType="review" property="helpfulness" />
+        </div>
+        <div>
+          <ReportButton itemType="review" id={review.review_id.toString()} />
+        </div>
       </div>
     </div>
   );
