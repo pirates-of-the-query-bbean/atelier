@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import RRListItem from './RRListItem';
 import NewReviewForm from './NewReviewForm';
 import CustomButton from '../../sharedComponents/customButton/CustomButton';
 import styles from './RRList.module.scss';
 
-const RRList = function ({ productReviews, currentProduct }) {
+function RRList({ productReviews, currentProduct }) {
+  RRList.propTypes = {
+    productReviews: PropTypes.arrayOf.isRequired,
+    currentProduct: PropTypes.shape.isRequired,
+  };
   const [reviewRenderCount, setReviewRenderCount] = useState(2);
   const [showReviewForm, setShowReviewForm] = useState(false);
 
@@ -37,7 +42,7 @@ const RRList = function ({ productReviews, currentProduct }) {
         )}
         <div>
           <CustomButton
-            text={showReviewForm ? "Cancel" : "Add a Review +"}
+            text={showReviewForm ? 'Cancel' : 'Add a Review +'}
             onClickFunction={toggleReviewForm}
           />
         </div>
@@ -50,6 +55,6 @@ const RRList = function ({ productReviews, currentProduct }) {
       )}
     </div>
   );
-};
+}
 
 export default RRList;
