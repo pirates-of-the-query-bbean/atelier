@@ -17,7 +17,7 @@ function Search({
       <input
         type="text"
         onChange={(e) => {
-          if (e.target.value.length >= 3) {
+          if (e.target.value.length > 2) {
             setQuestionsQuery(e.target.value);
             searchQuestions(questionsQuery);
           } else {

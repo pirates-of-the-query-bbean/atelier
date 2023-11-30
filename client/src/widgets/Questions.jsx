@@ -22,8 +22,10 @@ function Questions({ currentProduct }) {
   function searchQuestions(query) {
     const searchArr = [...questionArr];
     const filteredQuestions = searchArr.filter((question) => {
-      const regex = new RegExp(query, 'i');
-      return regex.test(question.question_body);
+      const regex = new RegExp(query, 'gi');
+      const combinedText = `${question.question_body} ${question.asker_name}}`;
+
+      return regex.test(combinedText);
     });
     setQuestionArr(filteredQuestions);
   }
