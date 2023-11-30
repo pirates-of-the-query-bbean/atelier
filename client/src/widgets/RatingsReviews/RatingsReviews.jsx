@@ -26,6 +26,7 @@ const RatingsReviews = function ({ productReviews, currentProduct, averageRating
         </h3>
         <RRList
           productReviews={productReviews}
+          currentProduct={currentProduct}
         />
       </div>
     </div>

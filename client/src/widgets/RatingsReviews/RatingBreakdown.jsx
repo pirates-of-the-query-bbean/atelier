@@ -1,5 +1,7 @@
 import React from 'react';
+import StarIcon from '@mui/icons-material/Star';
 import styles from './RatingBreakdown.module.scss';
+import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 
 const RatingBreakdown = function ({ productReviews, averageRating }) {
   let recommendPercentage = 0;
@@ -33,23 +35,26 @@ const RatingBreakdown = function ({ productReviews, averageRating }) {
   });
 
   return (
-    <div className={styles.ratingBreakdown}>
+    <div className={styles.ratingBreakdown} data-testid="ratingBreakdown">
       <div className={styles.averageRating}>
         {averageRating}
-        <span className={styles.stars}>
-          ★★★★★
-        </span>
+        <FiveStars rating={averageRating} />
       </div>
       <div className={styles.recommendation}>
         {recommendPercentage}
         % of reviews recommend this product
       </div>
-      {Object.keys(ratingCounts).reverse().map(star => (
+      {Object.keys(ratingCounts).reverse().map((star) => (
         <div key={star} className={styles.ratingRow}>
-          <div className={styles.starLabel}>{star} stars</div>
+          <div className={styles.starLabel}>
+            {star}
+            <StarIcon />
+          </div>
           <div className={styles.ratingBarContainer}>
-            <div className={styles.ratingBar}
-              style={{ width: `${ratingPercentages[star]}%` }}>
+            <div
+              className={styles.ratingBar}
+              style={{ width: `${ratingPercentages[star]}%` }}
+            >
               {/* bar */}
             </div>
           </div>

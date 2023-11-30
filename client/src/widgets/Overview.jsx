@@ -7,6 +7,7 @@ import ProductStyle from './Overview/ProductStyle';
 import ProductSize from './Overview/ProductSize';
 import Description from './Overview/Description';
 import Gallery from './Overview/Gallery';
+import ExpandedImg from './Overview/ExpandedImg';
 
 function Overview({ product, averageRating, reviewCount }) {
   const [currPrice, setCurrPrice] = useState({
@@ -21,6 +22,7 @@ function Overview({ product, averageRating, reviewCount }) {
   const [isLoading, setLoading] = useState(true);
   const sizeFocus = useRef(null);
   const [sizeNeeded, setSizeNeeded] = useState(false);
+  const [isExpanded, setExpanded] = useState({ vis: false, i: 0 });
 
   const getStyles = () => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product.id}/styles`, {
@@ -46,6 +48,7 @@ function Overview({ product, averageRating, reviewCount }) {
 
   const updateStyle = (style) => {
     setCurrStyle(style);
+    console.log('Curr Style', currStyle);
     setCurrPrice({
       sale_price: style.sale_price,
       original_price: style.original_price,
@@ -73,6 +76,11 @@ function Overview({ product, averageRating, reviewCount }) {
     console.log('Favorite', product.id);
   };
 
+  const expandImg = (index = 0) => {
+    console.log('EXP');
+    setExpanded((curr) => ({ vis: !curr.vis, i: index }));
+  };
+
   useEffect(() => {
     getStyles();
   }, []);
@@ -89,7 +97,10 @@ function Overview({ product, averageRating, reviewCount }) {
     <section data-testid="overview" className={styles.container}>
       <div className={styles.galleryAndAside}>
         <div className={styles.gallery}>
-          <Gallery currStyle={currStyle} />
+          <Gallery
+            currStyle={currStyle}
+            expandImg={expandImg}
+          />
         </div>
         <aside>
           <ProductTitle
@@ -118,6 +129,12 @@ function Overview({ product, averageRating, reviewCount }) {
       </div>
 
       <Description product={product} />
+      {isExpanded.vis && (
+      <ExpandedImg
+        expandImg={expandImg}
+        src={currStyle.photos[isExpanded.i].url}
+      />
+      )}
     </section>
   );
 }
