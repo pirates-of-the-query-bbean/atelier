@@ -14,6 +14,7 @@ function AddAnswerModal({
   };
 
   const [formState, setFormState] = useState(initialModalData);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -28,10 +29,13 @@ function AddAnswerModal({
     setFormState(initialModalData);
   }
 
+  function handleFileUpload(e) {
+
+  }
   return (
     <div data-testid="addAnswerModal">
       <Modal isOpen={isAddAnswerModalOpen}>
-        <form onSubmit={handleSubmit}>
+        <form>
           <h4>{currentProduct.name}</h4>
           <h5>{question.question_body}</h5>
           <div className={styles.modal__formRow}>
@@ -77,11 +81,12 @@ function AddAnswerModal({
             </label>
             <p>For authentication reasons, you will not be emailed.</p>
           </div>
-          <input
+          {/* <input
             type="file"
             accept="image/*"
             multiple
-          />
+            onChange={handleFileUpload}
+          /> */}
           <CustomButton
             style={styles.questions__customButton}
             text="Submit Answer"
@@ -96,7 +101,15 @@ function AddAnswerModal({
 
 AddAnswerModal.propTypes = {
   currentProduct: PropTypes.shape({
-
+    id: PropTypes.number.isRequired,
+    campus: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    slogan: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    default_price: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
+    updated_at: PropTypes.string.isRequired,
   }).isRequired,
   question: PropTypes.shape({
 

@@ -20,16 +20,18 @@ function AnswerList({
           answer={answer}
         />
       ))}
-      <button
-        type="submit"
-        className={styles.loadMoreAnswers}
-        onClick={(e) => {
-          e.preventDefault();
-          showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
-        }}
-      >
-        See More Answers
-      </button>
+      {answersStartIndex < answerArr.length && (
+        <button
+          type="submit"
+          className={styles.loadMoreAnswers}
+          onClick={(e) => {
+            e.preventDefault();
+            showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
+          }}
+        >
+          See More Answers
+        </button>
+      )}
     </section>
   );
 }
@@ -37,11 +39,18 @@ function AnswerList({
 AnswerList.propTypes = {
   question: PropTypes.shape({
 
-    }).isRequired,
-  showTwoMoreItems: PropTypes.isRequired,
-  answerArr: PropTypes.isRequired,
-  answersStartIndex: PropTypes.isRequired,
-  setAnswersStartIndex: PropTypes.isRequired,
-  getAnswers: PropTypes.isRequired,
+  }).isRequired,
+  showTwoMoreItems: PropTypes.func.isRequired,
+  answerArr: PropTypes.arrayOf(PropTypes.shape({
+    answer_id: PropTypes.number.isRequired,
+    body: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    answerer_name: PropTypes.string.isRequired,
+    helpfulness: PropTypes.number.isRequired,
+    photos: PropTypes.arrayOf(PropTypes.string).isRequired,
+  })).isRequired,
+  answersStartIndex: PropTypes.number.isRequired,
+  setAnswersStartIndex: PropTypes.func.isRequired,
+  getAnswers: PropTypes.func.isRequired,
 }
 export default AnswerList;
