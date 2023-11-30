@@ -7,19 +7,9 @@ import AddAnswerModal from './Modals/AddAnswerModal';
 import styles from './Question.module.scss';
 
 function Question({
-  currentProduct,
-  question,
-  showTwoMoreItems,
+  currentProduct, question, showTwoMoreItems,
 }) {
-  const {
-    question_id,
-    question_body,
-    question_date,
-    asker_name,
-    question_helpfulness,
-    answers,
-    reported
-  } = question;
+  const { question_id, question_body } = question;
 
   const [isAddAnswerModalOpen, setAddAnswerModalOpen] = useState(false);
   const [answerArr, setAnswerArr] = useState([]);
@@ -60,7 +50,7 @@ function Question({
         email: data.email
       },
     })
-      .then((response) => {
+      .then(() => {
         getAnswers(questionID);
       })
       .catch((err) => {
@@ -127,7 +117,6 @@ function Question({
       <AnswerList
         answerArr={answerArr}
         question={question}
-        report={report}
         showTwoMoreItems={showTwoMoreItems}
         getAnswers={getAnswers}
         answersStartIndex={answersStartIndex}
@@ -142,15 +131,35 @@ function Question({
     </section>
   );
 }
-// Question.propTypes = {
-//   question: PropTypes.shape({
-
-//   }),
-//   upvote: PropTypes.function,
-//   sort: PropTypes.function,
-//   answersStartIndex: PropTypes.number,
-//   setAnswersStartIndex: PropTypes.function,
-//   showTwoMoreItems: PropTypes.function,
-// };
+Question.propTypes = {
+  question: PropTypes.shape({
+    question_id: PropTypes.number.isRequired,
+    question_body: PropTypes.string.isRequired,
+    question_date: PropTypes.string.isRequired,
+    asker_name: PropTypes.string.isRequired,
+    question_helpfulness: PropTypes.number.isRequired,
+    reported: PropTypes.bool.isRequired,
+    answers: PropTypes.arrayOf(PropTypes.shape({
+      answer_id: PropTypes.number.isRequired,
+      body: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      answerer_name: PropTypes.string.isRequired,
+      helpfulness: PropTypes.number.isRequired,
+      photos: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })).isRequired,
+  }).isRequired,
+  currentProduct: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    campus: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    slogan: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    default_price: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
+    updated_at: PropTypes.string.isRequired,
+  }).isRequired,
+  showTwoMoreItems: PropTypes.func.isRequired,
+};
 
 export default Question;

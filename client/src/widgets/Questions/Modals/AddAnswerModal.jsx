@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CustomButton from '../../../sharedComponents/customButton/CustomButton';
-import Modal from './Modal.jsx';
+import Modal from './Modal';
 import styles from './AddQuestion.module.scss';
 
 function AddAnswerModal({
-  currentProduct, setCurrentProduct, question, isAddAnswerModalOpen, onSubmit
+  currentProduct, question, isAddAnswerModalOpen, onSubmit,
 }) {
   const initialModalData = {
     body: '',
@@ -94,15 +94,15 @@ function AddAnswerModal({
   );
 }
 
-// AddAnswerModal.propTypes = {
-//   product: PropTypes.shape({
+AddAnswerModal.propTypes = {
+  currentProduct: PropTypes.shape({
 
-//   }).isRequired,
-//   question: PropTypes.shape({
+  }).isRequired,
+  question: PropTypes.shape({
 
-//   }).isRequired,
-//   isOpen: PropTypes.function.isRequired,
-//   onSubmit: PropTypes.function.isRequired,
-// };
+  }).isRequired,
+  isAddAnswerModalOpen: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default AddAnswerModal;

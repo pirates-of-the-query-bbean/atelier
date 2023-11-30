@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-import Answer from './Answer.jsx';
+import Answer from './Answer';
 import styles from './Answer.module.scss';
-import axios from 'axios';
 
 function AnswerList({
-  question, helpful, report, showTwoMoreItems,
+  question, showTwoMoreItems,
   answerArr, answersStartIndex, setAnswersStartIndex, getAnswers,
 }) {
   useEffect(() => {
@@ -15,7 +15,10 @@ function AnswerList({
   return (
     <section>
       {answerArr.slice(0, answersStartIndex).map((answer) => (
-        <Answer key={uuidv4()} answer={answer} helpful={helpful} report={report} />
+        <Answer
+          key={uuidv4()}
+          answer={answer}
+        />
       ))}
       <button
         type="submit"
@@ -31,4 +34,14 @@ function AnswerList({
   );
 }
 
+AnswerList.propTypes = {
+  question: PropTypes.shape({
+
+    }).isRequired,
+  showTwoMoreItems: PropTypes.isRequired,
+  answerArr: PropTypes.isRequired,
+  answersStartIndex: PropTypes.isRequired,
+  setAnswersStartIndex: PropTypes.isRequired,
+  getAnswers: PropTypes.isRequired,
+}
 export default AnswerList;

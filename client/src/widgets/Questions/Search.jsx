@@ -35,6 +35,9 @@ function Search({
 Search.propTypes = {
   handleSearch: PropTypes.func.isRequired,
   setQuestionsQuery: PropTypes.func.isRequired,
+  searchQuestions: PropTypes.func.isRequired,
+  questionsQuery: PropTypes.string.isRequired,
+  resetSearch: PropTypes.func.isRequired,
 };
 
 export default Search;

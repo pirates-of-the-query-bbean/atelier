@@ -20,7 +20,6 @@ function Questions({ currentProduct }) {
   }
 
   function searchQuestions(query) {
-    console.log(query);
     const searchArr = [...questionArr];
     const filteredQuestions = searchArr.filter((question) => {
       const regex = new RegExp(query, 'i');
@@ -93,17 +92,17 @@ function Questions({ currentProduct }) {
     <section className={styles.questions__container}>
       <h5>Questions & Answers</h5>
       <Search
-        handleSearch={() => handleSearch}
+        handleSearch={handleSearch}
         setQuestionsQuery={setQuestionsQuery}
         questionsQuery={questionsQuery}
-        searchQuestions={() => searchQuestions}
-        resetSearch={() => resetSearch}
+        searchQuestions={searchQuestions}
+        resetSearch={resetSearch}
       />
       <QuestionList
         currentProduct={currentProduct}
         questionArr={questionArr}
         questionsStartIndex={questionsStartIndex}
-        showTwoMoreItems={() => showTwoMoreItems}
+        showTwoMoreItems={showTwoMoreItems}
       />
 
       <div className={styles.questions__buttons}>
@@ -123,14 +122,14 @@ function Questions({ currentProduct }) {
           text="Add A Question"
           Icon={AddIcon}
           buttonWidth={200}
-          onClickFunction={() => openAddQuestionsModal}
+          onClickFunction={openAddQuestionsModal}
         />
       </div>
       <AddQuestionModal
         currentProduct={currentProduct}
         isAddQuestionModalOpen={isAddQuestionModalOpen}
-        onClose={() => closeAddQuestionsModal}
-        onSubmit={() => addQuestion}
+        onClose={closeAddQuestionsModal}
+        onSubmit={addQuestion}
       />
     </section>
   );
