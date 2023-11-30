@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
 import ParsedDate from '../../sharedComponents/ParsedDate';
+import ReportButton from '../../sharedComponents/reportButton/ReportButton';
 import styles from './Answer.module.scss';
 
 function Answer({ answer, report }) {
   const {answer_id, body, date, answerer_name, photos} = answer;
 
   return (
-    <section className={styles.answer__container}>
+    <section className={styles.answer__container} data-testid="answer">
       <h5 className={styles.answer__heading}>
         A:
         <span className={styles.answer__body}>{body}</span>
@@ -27,17 +28,7 @@ function Answer({ answer, report }) {
         <p>
           <UpvoteLink item={answer} itemType="answer" id={answer_id} property="helpfulness" />
         </p>
-        <p>
-          <button
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              report('answer', answer_id);
-            }}
-          >
-            Report
-          </button>
-        </p>
+        <ReportButton itemType="answer" id={answer_id}/>
       </div>
     </section>
   );

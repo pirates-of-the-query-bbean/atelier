@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './Report.module.scss';
@@ -6,6 +6,8 @@ import styles from './Report.module.scss';
 function ReportButton({
   itemType, id,
 }) {
+  const [buttonText, setButtonText] = useState('Report');
+
   const report = () => {
     let reportURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa';
     let param = '';
@@ -31,9 +33,6 @@ function ReportButton({
         [param]: id,
       },
     })
-      .then((response) => {
-        console.log(response);
-      })
       .catch((err) => {
         console.log('error reporting answer', err);
       });
@@ -43,10 +42,10 @@ function ReportButton({
     <button
       type="button"
       className={styles.report__button}
-      onClick={report}
+      onClick={() => { report(); setButtonText('Reported'); }}
       data-testid="reportButton"
     >
-      Report
+      {buttonText}
     </button>
   );
 }
