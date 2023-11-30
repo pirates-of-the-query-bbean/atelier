@@ -5,6 +5,7 @@ import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
 import Questions from './widgets/Questions';
 import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
 import Overview from './widgets/Overview';
+import ReportButton from './sharedComponents/reportButton/ReportButton';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -22,8 +23,7 @@ function App() {
     })
       .then((response) => {
         setProducts(response.data);
-        // set current product to first product in array
-        setCurrentProduct(response.data[0]);
+        setCurrentProduct(response.data[3]);
       })
       .catch((err) => {
         console.log('error fetching products', err);
@@ -78,10 +78,18 @@ function App() {
   return (
     <div className={styles.container}>
       <nav>ADD HEADER HERE</nav>
-      {Object.keys(currentProduct).length > 0 && <Overview product={currentProduct} />}
+      {Object.keys(currentProduct).length > 0 && (
+      <Overview
+        product={currentProduct}
+        averageRating={averageRating}
+        reviewCount={productReviews.count}
+      />
+      )}
       <RelatedProducts currentItem={currentProduct} />
       <Questions currentProduct={currentProduct} />
+      <ReportButton itemType="question" id="644740" />
       <RatingsReviews
+        setProductReviews={setProductReviews}
         productReviews={productReviews}
         currentProduct={currentProduct}
         averageRating={averageRating}

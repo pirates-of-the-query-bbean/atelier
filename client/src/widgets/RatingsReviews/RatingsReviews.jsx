@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import RRList from './RRList';
 import RatingBreakdown from './RatingBreakdown';
 import ProductBreakdown from './ProductBreakdown';

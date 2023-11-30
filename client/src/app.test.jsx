@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import App from './App';
 import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
 
-
 describe('App component', () => {
   test('renders app.jsx', () => {
     render(<App />);

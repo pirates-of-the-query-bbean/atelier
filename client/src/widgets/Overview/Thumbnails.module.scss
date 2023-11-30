@@ -12,21 +12,13 @@
 
 li.selected {
   position: relative;
-  border: 1px solid red;
+
 
 }
 
 li.selected div {
-
-  // position: absolute;
-  // top: -3px;
-  // left: 0;
-  // height: 10px;
-  // background-color: orange;
-
-
-  border-bottom: 3px solid var(--text-color);
-
+  margin-top: 1px;
+  border-bottom: 4px solid var(--text-color);
 }
 
 
