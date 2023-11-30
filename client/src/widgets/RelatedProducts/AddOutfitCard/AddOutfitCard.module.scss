@@ -18,7 +18,7 @@ main {
 .outfitCard__image {
     height: 66%; 
     width: 248px;
-    background-color: aliceblue;
+    background-color: #fcf3f6; 
     border-bottom: 1px black solid;
     
     position: relative;
@@ -46,3 +46,10 @@ main {
 }
 
 
+.addOutfitspan {
+    position: absolute; 
+    bottom: 15px; 
+    left: 22%; 
+    font-size: 30px;
+    color: rgb(206, 205, 205);
+}
