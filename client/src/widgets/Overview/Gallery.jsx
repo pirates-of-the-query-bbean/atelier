@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
@@ -56,12 +58,21 @@ function Gallery({ currStyle }) {
         </nav>
       </div>
       <div data-testid="gallery-img" style={{ transform: `translateX(-${currImg * (100 / currStyle.photos.length)}%)` }} className={styles.imgs}>
-        {currStyle.photos.map((img, i) => (
-          <GalleryImg key={i} src={img.url} />
+        {currStyle.photos.map((img) => (
+          <GalleryImg key={uuidv4()} src={img.url} />
         ))}
       </div>
     </div>
   );
 }
+
+Gallery.propTypes = {
+  currStyle: PropTypes.shape({
+    photos: PropTypes.arrayOf(PropTypes.shape({
+      url: PropTypes.string,
+      thumbnail_url: PropTypes.string,
+    })),
+  }).isRequired,
+};
 
 export default Gallery;

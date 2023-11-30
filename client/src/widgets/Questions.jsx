@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 import CustomButton from '../sharedComponents/customButton/CustomButton';
 import Search from './Questions/Search.jsx';
 import QuestionList from './Questions/QuestionList.jsx';
@@ -53,7 +54,7 @@ function Questions({ currentProduct }) {
         <CustomButton
           style={styles.questions__customButton}
           text="Add A Question"
-          Icon="AddIcon"
+          Icon={AddIcon}
           buttonWidth={200}
           onClickFunction={() => { setModalOpen(true); }}
         />

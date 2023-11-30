@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CheckIcon from '@mui/icons-material/Check';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './Description.module.scss';
 import SocialShare from './SocialShare';
 
@@ -17,8 +18,8 @@ function Description({ product }) {
       <aside>
         <ul>
 
-          {product.features ? product.features.map((feature, i) => (
-            <li key={i}>
+          {product.features ? product.features.map((feature) => (
+            <li key={uuidv4()}>
               <CheckIcon />
               {feature.value}
               {' '}
