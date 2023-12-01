@@ -7,7 +7,6 @@ import UpvoteLink from '../../sharedComponents/upvoteLink/UpvoteLink';
 import ReportButton from '../../sharedComponents/reportButton/ReportButton';
 
 function RRListItem({ review }) {
-  console.log(review, review.review_id)
   return (
     <div className={styles.reviewItem}>
       <div className={styles.reviewHeader}>
@@ -38,7 +37,7 @@ function RRListItem({ review }) {
       )}
       <div className={styles.reviewFooter}>
         <div>
-          <UpvoteLink item={review} itemType="review" property="helpfulness" />
+          <UpvoteLink item={review} itemType="review" id={review.review_id} property="helpfulness" />
         </div>
         <div>
           <ReportButton itemType="review" id={review.review_id.toString()} />
