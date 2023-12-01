@@ -52,8 +52,10 @@ function Gallery({ currStyle }) {
       const travelY = Math.max(0, imgHeight - pgHeight);
       const xPercent = (e.clientX / pgWidth) * 2 - 1;
       const yPercent = (e.clientY / pgHeight) * 2 - 1;
-      setXPos(travelX * xPercent);
-      setYPos(travelY * yPercent);
+      setTimeout(() => {
+        setXPos(travelX * xPercent);
+        setYPos(travelY * yPercent);
+      }, 50);
     }
   };
 
