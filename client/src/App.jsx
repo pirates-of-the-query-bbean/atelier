@@ -78,6 +78,8 @@ function App() {
     );
   }
 
+
+
   return (
     <div className={styles.container}>
       <nav>ADD HEADER HERE</nav>
@@ -89,6 +91,7 @@ function App() {
       />
       )}
       <RelatedProducts currentItem={currentProduct} />
+     
       <Questions currentProduct={currentProduct} />
       <RatingsReviews
         productReviews={productReviews}
