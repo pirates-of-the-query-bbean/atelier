@@ -76,7 +76,7 @@ ProductSize.propTypes = {
   setCurrQty: PropTypes.func.isRequired,
   setSku: PropTypes.func.isRequired,
   sizeFocus: PropTypes.shape({
-    current: PropTypes.string,
+    current: PropTypes.object,
   }).isRequired,
   sizeNeeded: PropTypes.bool.isRequired,
 

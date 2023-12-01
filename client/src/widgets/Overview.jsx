@@ -46,7 +46,6 @@ function Overview({ product, averageRating, reviewCount }) {
 
   const updateStyle = (style) => {
     setCurrStyle(style);
-    console.log('Curr Style', currStyle);
     setCurrPrice({
       sale_price: style.sale_price,
       original_price: style.original_price,
@@ -136,7 +135,6 @@ Overview.propTypes = {
   }).isRequired,
   averageRating: PropTypes.number,
   reviewCount: PropTypes.number,
-
 };
 
 export default Overview;

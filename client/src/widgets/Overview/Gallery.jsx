@@ -9,7 +9,7 @@ import styles from './Gallery.module.scss';
 import Thumbnails from './Thumbnails';
 import GalleryImg from './GalleryImg';
 
-function Gallery({ currStyle, expandImg }) {
+function Gallery({ currStyle }) {
   const [currImg, setCurrImg] = useState(0);
   const [isExpanded, setExpanded] = useState(false);
   const [isZoomed, setZoomed] = useState(false);
@@ -28,7 +28,6 @@ function Gallery({ currStyle, expandImg }) {
   };
 
   const handleClick = (e) => {
-    console.log(e.target.classList);
     if (e.target.classList.contains('img')) {
       if (isExpanded) {
         setZoomed(!isZoomed);
@@ -44,7 +43,6 @@ function Gallery({ currStyle, expandImg }) {
   };
 
   const pointerHandler = (e) => {
-    // console.log(window.getComputedStyle(e.target).width, (window.getComputedStyle(e.target).height));
     if (isZoomed && e.target.classList.contains('img')) {
       const pgWidth = e.view.innerWidth;
       const pgHeight = e.view.innerHeight;
@@ -52,13 +50,8 @@ function Gallery({ currStyle, expandImg }) {
       const imgHeight = Number(window.getComputedStyle(e.target).height.slice(0, -2)) * 2.5;
       const travelX = Math.max(0, imgWidth - pgWidth);
       const travelY = Math.max(0, imgHeight - pgHeight);
-
       const xPercent = (e.clientX / pgWidth) * 2 - 1;
       const yPercent = (e.clientY / pgHeight) * 2 - 1;
-
-      console.log(xPercent, yPercent);
-
-      // console.log('X:', Math.floor((e.clientX / e.view.innerWidth) * 100), 'Y:', Math.floor((e.clientY / e.view.innerHeight) * 100));
       setXPos(travelX * xPercent);
       setYPos(travelY * yPercent);
     }
@@ -71,7 +64,12 @@ function Gallery({ currStyle, expandImg }) {
   return (
     <div data-testid="gallery" className={`${styles.container} ${isExpanded ? styles.expanded : ''}`}>
       <div className={styles.overlay}>
-        <Thumbnails selectionHandler={changeImg} imgs={currStyle.photos} currImg={currImg} />
+        <Thumbnails
+          expanded={isExpanded}
+          selectionHandler={changeImg}
+          imgs={currStyle.photos}
+          currImg={currImg}
+        />
         <nav id="nav" onClick={handleClick}>
           {isExpanded ? (
             <CloseIcon

@@ -107,14 +107,33 @@
     margin: 15px;
   }
 
+  .overlay {
+    flex-direction: column-reverse;
+    justify-content: space-between;
+  }
+
+  .overlay nav {
+    height: 100%;
+  }
+
+  ul {
+    flex-direction: row;
+    align-self: center;
+    margin-bottom: 10px;
+  }
+
+  li img {
+    width: 0px;
+    height: 0px;
+    border: 8px solid var(--text-color);
+    border-radius: 100%;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.505);
+  }
+
 }
 
 .imgs.zoomed img {
   object-fit: cover;
-  // transform: scale(2.5) translateX(0%) translateY(0%);
-
-
-
 }
 
 .imgs.zoomed img:hover {
