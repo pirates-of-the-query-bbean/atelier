@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "npx live-server ./client/dist",
+    "start-actualServer": "npx live-server ./client/dist --host=0.0.0.0",
     "start-webpack": "npx webpack watch --mode development && eslint . --fix",
     "test": "jest --env=jsdom",
     "build": "webpack --mode=production --node-env=production",
