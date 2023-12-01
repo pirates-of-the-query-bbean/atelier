@@ -12,9 +12,6 @@ const ratingDescriptions = {
 };
 
 function ReviewStars({ setRating }) {
-  ReviewStars.propTypes = {
-    setRating: PropTypes.func.isRequired,
-  };
   const [currentRating, setCurrentRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(undefined);
 
@@ -58,5 +55,9 @@ function ReviewStars({ setRating }) {
     </div>
   );
 }
+
+ReviewStars.propTypes = {
+  setRating: PropTypes.func.isRequired,
+};
 
 export default ReviewStars;

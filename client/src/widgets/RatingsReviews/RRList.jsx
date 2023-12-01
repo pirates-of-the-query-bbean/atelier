@@ -6,10 +6,6 @@ import CustomButton from '../../sharedComponents/customButton/CustomButton';
 import styles from './RRList.module.scss';
 
 function RRList({ productReviews, currentProduct }) {
-  RRList.propTypes = {
-    productReviews: PropTypes.arrayOf.isRequired,
-    currentProduct: PropTypes.shape.isRequired,
-  };
   const [reviewRenderCount, setReviewRenderCount] = useState(2);
   const [showReviewForm, setShowReviewForm] = useState(false);
 
@@ -56,5 +52,36 @@ function RRList({ productReviews, currentProduct }) {
     </div>
   );
 }
+
+RRList.propTypes = {
+  productReviews: PropTypes.shape({
+    product: PropTypes.string,
+    page: PropTypes.number,
+    count: PropTypes.number,
+    results: PropTypes.arrayOf(PropTypes.shape({
+      body: PropTypes.string,
+      date: PropTypes.string,
+      helpfulness: PropTypes.number,
+      photos: PropTypes.arrayOf(PropTypes.string),
+      rating: PropTypes.number,
+      recommend: PropTypes.bool,
+      response: PropTypes.string,
+      review_id: PropTypes.number,
+      reviewer_name: PropTypes.string,
+      summary: PropTypes.string,
+    })),
+  }).isRequired,
+  currentProduct: PropTypes.shape({
+    campus: PropTypes.string,
+    category: PropTypes.string,
+    created_at: PropTypes.string,
+    default_price: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    slogan: PropTypes.string,
+    updated_at: PropTypes.string,
+  }).isRequired,
+};
 
 export default RRList;

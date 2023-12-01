@@ -12,12 +12,6 @@ function RatingsReviews({
   currentProduct,
   averageRating,
 }) {
-  RatingsReviews.propTypes = {
-    setProductReviews: PropTypes.func.isRequired,
-    productReviews: PropTypes.arrayOf.isRequired,
-    currentProduct: PropTypes.shape.isRequired,
-    averageRating: PropTypes.number.isRequired,
-  };
   const [sortOption, setSortOption] = useState('relevance');
 
   function fetchSortedReviews(productId, sort) {
@@ -32,7 +26,7 @@ function RatingsReviews({
       .catch((err) => {
         console.error('Error fetching sorted reviews', err);
       });
-  };
+  }
 
   useEffect(() => {
     fetchSortedReviews(currentProduct.id, sortOption);
@@ -43,8 +37,8 @@ function RatingsReviews({
   };
 
   return (
-    <div className={styles.rating__components}>
-      <div className={styles.review__breakdow}>
+    <div className={styles.ratingComponents}>
+      <div className={styles.reviewBreakdow}>
         <RatingBreakdown
           productReviews={productReviews}
           averageRating={averageRating}
@@ -53,8 +47,8 @@ function RatingsReviews({
           currentProduct={currentProduct}
         />
       </div>
-      <div className={styles.review__cards}>
-        <h3>
+      <div className={styles.reviewCards}>
+        <h3 className={styles.reviewHeader}>
           {productReviews.count}
           <span> reviews, sorted by </span>
           <select onChange={handleSortChange} value={sortOption}>
@@ -71,5 +65,38 @@ function RatingsReviews({
     </div>
   );
 }
+
+RatingsReviews.propTypes = {
+  setProductReviews: PropTypes.func.isRequired,
+  productReviews: PropTypes.shape({
+    product: PropTypes.string,
+    page: PropTypes.number,
+    count: PropTypes.number,
+    results: PropTypes.arrayOf(PropTypes.shape({
+      body: PropTypes.string,
+      date: PropTypes.string,
+      helpfulness: PropTypes.number,
+      photos: PropTypes.arrayOf(PropTypes.string),
+      rating: PropTypes.number,
+      recommend: PropTypes.bool,
+      response: PropTypes.string,
+      review_id: PropTypes.number,
+      reviewer_name: PropTypes.string,
+      summary: PropTypes.string,
+    })),
+  }).isRequired,
+  currentProduct: PropTypes.shape({
+    campus: PropTypes.string,
+    category: PropTypes.string,
+    created_at: PropTypes.string,
+    default_price: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    slogan: PropTypes.string,
+    updated_at: PropTypes.string,
+  }).isRequired,
+  averageRating: PropTypes.number.isRequired,
+};
 
 export default RatingsReviews;

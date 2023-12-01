@@ -4,12 +4,7 @@ import axios from 'axios';
 import styles from './NewReviewForm.module.scss';
 import ReviewStars from './ReviewStars';
 
-function NewReviewForm({ currentProduct, onClose }) {
-  NewReviewForm.propTypes = {
-    currentProduct: PropTypes.shape.isRequired,
-    onClose: PropTypes.func.isRequired,
-  };
-
+function NewReviewForm({ currentProduct, closeForm }) {
   const [rating, setRating] = useState(0);
   const [productCharacteristics, setProductCharacteristics] = useState({});
   const [reviewCharacteristics, setReviewCharacteristics] = useState({});
@@ -44,7 +39,7 @@ function NewReviewForm({ currentProduct, onClose }) {
         },
       });
       console.log('Review submitted successfully:', response.data);
-      onClose();
+      closeForm();
     } catch (error) {
       console.error('Error submitting review:', error);
     }
@@ -160,5 +155,20 @@ function NewReviewForm({ currentProduct, onClose }) {
     </form>
   );
 }
+
+NewReviewForm.propTypes = {
+  closeForm: PropTypes.func.isRequired,
+  currentProduct: PropTypes.shape({
+    campus: PropTypes.string,
+    category: PropTypes.string,
+    created_at: PropTypes.string,
+    default_price: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    slogan: PropTypes.string,
+    updated_at: PropTypes.string,
+  }).isRequired,
+};
 
 export default NewReviewForm;
