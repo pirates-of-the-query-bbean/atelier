@@ -1,44 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './Upvote.module.scss';
 
 // Because various components have different keys, pass in key
 // along with object to upvote a particular property.
-// EXAMPLE USAGE: <UpvoteLink item={questionObj/answerObj/reviewObj} property={helpfulnessKey}/>
+// EXAMPLE USAGE: <UpvoteLink
+//  itemType={'review', 'answer', 'question'}
+//  id={item_id}/>
 
-function UpvoteLink({ item, itemType, property }) {
-  const [upvoteCount, setUpvoteCount] = useState(item[property]);
-  let upvoteURL = '';
+function UpvoteLink({ item, itemType, id, property }) {
+  const [upvoteCount, setUpvoteCount] = useState(0);
 
-  if (itemType === 'review') {
-    upvoteURL = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${item.id}/helpful`;
-  } else if (itemType === 'answer') {
-    upvoteURL = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${item.id}/helpful`;
-  } else {
-    upvoteURL = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${item.id}/helpful`;
-  }
+  const upvote = (type, itemID) => {
+    let upvoteURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/';
+    let param = '';
 
-  const upvote = (obj, key) => {
+    if (type === 'review') {
+      upvoteURL += `reviews/${itemID}/helpful`;
+      param = 'review_id';
+    } else if (type === 'answer') {
+      upvoteURL += `qa/answers/${itemID}/helpful`;
+      param = 'answer_id';
+    } else if (type === 'question') {
+      upvoteURL += `qa/questions/${itemID}/helpful`;
+      param = 'question_id';
+    }
+
     axios({
       method: 'put',
       url: upvoteURL,
       headers: {
         Authorization: process.env.REACT_APP_API_KEY,
       },
-    });
-
-    const upvoteObj = obj;
-    setUpvoteCount(upvoteObj[key] += 1);
+      data: {
+        [param]: itemID,
+      },
+    })
+      .then((response) => {
+        setUpvoteCount(item[property] += 1);
+      })
+      .catch((err) => {
+        console.log('error upvoting: ', err);
+      });
   };
 
+  useEffect(() => {
+    if (item) {
+      setUpvoteCount(item[property]);
+    }
+  }, [item]);
+
   return (
-    <div className={styles.upvote__container}>
+    <div className={styles.upvote__container} data-testid="upvoteLink">
       <span>Helpful? </span>
       <button
         type="submit"
-        onSubmit={(e) => {
+        onClick={(e) => {
           e.preventDefault();
-          upvote(item, property);
+          upvote(itemType, id);
         }}
       >
         Yes
@@ -51,5 +71,10 @@ function UpvoteLink({ item, itemType, property }) {
     </div>
   );
 }
+
+// UpvoteLink.propTypes = {
+//   itemType: PropTypes.string.isRequired,
+//   id: PropTypes.number.isRequired,
+// };
 
 export default UpvoteLink;

@@ -1,35 +1,73 @@
-.review__item {
+.reviewItem {
   display: flex;
   flex-direction: column;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  max-width: 800px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid black;
+  background-color: var(lightgrey);
+}
+
+.starRatingContainer {
+  margin-bottom: 5px;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reviewDate {
+  display: flex;
+  gap: 10px;
   margin-bottom: 10px;
-  border-bottom: 2px solid var(--grey-color);
-  border-radius: 4px;
-  position: relative;
+}
 
-  .star__container {
-    // Define your star rating container styles or ensure it is defined in your FiveStars component
-  }
+.reviewSummary {
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  font-size: 1.2em;
+}
 
-  //displayflex justify space between
+.reviewBody {
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  font-size: 1.1em;
+}
 
-  .review__date {
-    display: flex;
-    align-items: center;
-    gap: 8px; // Adds space between items
-    position: absolute;
-    right: 16px; // Adjust as needed
-    top: 16px; // Adjust as needed
-  }
+.reviewRecommendation {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 0.9em;
+}
 
-  .upvoteLink {
-    border-left: none;
-  }
+.checkmark {
+  margin-right: 5px;
+  font-size: 1.1em;
+}
 
-  .review__body {
-    color: #333;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
+.reviewResponse {
+  background-color: var(rgba(255, 255, 255, 0.923));
+  border-left: 3px solid;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.upvoteLink {
+  margin-top: 5px;
+  font-size: 0.85em;
+}
+
+.reviewFooter {
+  display: flex;
+  align-items: normal;
 }
