@@ -23,13 +23,11 @@ function Overview({ product, averageRating, reviewCount }) {
   const [sizeNeeded, setSizeNeeded] = useState(false);
 
   const getStyles = () => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product.id}/styles`, {
-      headers: {
-        Authorization: process.env.REACT_APP_API_KEY,
-      },
+    axios.get(`products/${product.id}/styles`, {
     })
       .then((response) => {
         setProductStyles(response.data);
+        console.log('STYLES DATA IS', response.data);
         response.data.results.forEach((productStyle) => {
           if (productStyle['default?'] === true) {
             setCurrStyle(productStyle);
@@ -39,7 +37,7 @@ function Overview({ product, averageRating, reviewCount }) {
         setLoading(false);
       })
       .catch((err) => {
-        console.log('error fetching styles', err, '');
+        console.log('error fetching styles', err);
         setLoading('error');
       });
   };
@@ -82,7 +80,7 @@ function Overview({ product, averageRating, reviewCount }) {
   }
 
   if (isLoading === 'error') {
-    return <h3 data-testid="err-overview">ERROR fetching content!</h3>;
+    return <h3 data-testid="err-overview">ERROR fetching the content!</h3>;
   }
 
   return (
