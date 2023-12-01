@@ -49,15 +49,6 @@ describe('RatingBreakdown', () => {
     expect(screen.getByText(`${recommendPercentage}% of reviews recommend this product`)).toBeInTheDocument();
   });
 
-  // it('displays the correct rating percentages for each star', () => {
-  //   render(
-  //     <RatingBreakdown
-  //       productReviews={mockProductReviews}
-  //       averageRating={mockAverageRating}
-  //     />,
-  //   );
-  // });
-
   it('handles no reviews', () => {
     render(
       <RatingBreakdown

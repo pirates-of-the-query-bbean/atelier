@@ -18,7 +18,7 @@ li.selected {
 
 li.selected div {
   margin-top: 1px;
-  border-bottom: 4px solid var(--text-color);
+  border-bottom: 4px solid var(--offwhite);
 }
 
 
@@ -28,4 +28,11 @@ li.selected div {
   height: 3rem;
   background-color: rgb(161, 161, 161);
   border: 1px solid var(--text-color);
+  object-fit: cover;
+  pointer-events: auto;
+}
+
+.icon {
+
+  color: var(--offwhite);
 }

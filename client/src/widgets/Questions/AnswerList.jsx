@@ -1,92 +1,56 @@
-import React, {useState, useEffect} from 'react';
-import Answer from './Answer.jsx';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
+import Answer from './Answer';
 import styles from './Answer.module.scss';
-import axios from 'axios';
 
-function AnswerList({ question, helpful, report, sort, answersStartIndex, setAnswersStartIndex, showTwoMoreItems }) {
-  const [answerArr, setAnswerArr] = useState([]);
-
-  function getAnswers(question_id) {
-    // axios.get(`/qa/questions/${product_id}/answers`)
-    //   .then((data) => {
-    //     const questions = [];
-
-    //     for (let key in data.data) {
-    //       questions.push(answerObj[key]);
-    //     }
-    //     setQuestionArr(questions);
-    //   })
-    //   .catch((err) => {
-    //     console.log('error fetching questions');
-    //   });
-  }
-
-  function getAnswers2(answerObj) {
-    const answers = [];
-
-    for (let key in answerObj) {
-      answers.push(answerObj[key]);
-
-    }
-    sort(answers, setAnswerArr, 'helpfulness');
-
-  }
-
-  const testAnswer = {
-    73: {
-      "id": 73,
-      "body": "Last of the seams started splitting the first time I wore it!",
-      "date": "2019-11-28T00:00:00.000Z",
-      "answerer_name": "sillyguy",
-      "helpfulness": -6,
-      "photos": [],
-    },
-    78: {
-      "id": 78,
-      "body": "First 9 lives",
-      "date": "2019-11-12T00:00:00.000Z",
-      "answerer_name": "iluvdogz",
-      "helpfulness": 31,
-      "photos": [],
-    },
-    70: {
-      "id": 70,
-      "body": "Six of the seams started splitting the first time I wore it!",
-      "date": "2019-11-28T00:00:00.000Z",
-      "answerer_name": "sillyguy",
-      "helpfulness": 6,
-      "photos": [],
-    },
-    82: {
-      "id": 82,
-      "body": "Second of the seams started splitting the first time I wore it!",
-      "date": "2019-11-28T00:00:00.000Z",
-      "answerer_name": "Seller",
-      "helpfulness": 8,
-      "photos": [],
-    }
-  }
-
-
+function AnswerList({
+  question, showTwoMoreItems,
+  answerArr, answersStartIndex, setAnswersStartIndex, getAnswers,
+}) {
   useEffect(() => {
-    getAnswers2(testAnswer);
+    getAnswers(question.question_id);
   }, []);
-
 
   return (
     <section>
-      {answerArr.slice(0, answersStartIndex + 2).map((answer, index) => {
-        return (
-          <Answer key={index} answer={answer} helpful={helpful} report={report}/>
-          )}
-        )}
-      <a href='#'
-        className={styles.loadMoreAnswers}
-        onClick={(e) => {
-          showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
-        }}>See More Answers</a>
+      {answerArr.slice(0, answersStartIndex).map((answer) => (
+        <Answer
+          key={uuidv4()}
+          answer={answer}
+        />
+      ))}
+      {answersStartIndex < answerArr.length && (
+        <button
+          type="submit"
+          className={styles.loadMoreAnswers}
+          onClick={(e) => {
+            e.preventDefault();
+            showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
+          }}
+        >
+          See More Answers
+        </button>
+      )}
     </section>
-  )
+  );
 }
 
+AnswerList.propTypes = {
+  question: PropTypes.shape({
+
+  }).isRequired,
+  showTwoMoreItems: PropTypes.func.isRequired,
+  answerArr: PropTypes.arrayOf(PropTypes.shape({
+    answer_id: PropTypes.number.isRequired,
+    body: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    answerer_name: PropTypes.string.isRequired,
+    helpfulness: PropTypes.number.isRequired,
+    photos: PropTypes.arrayOf(PropTypes.string).isRequired,
+  })).isRequired,
+  answersStartIndex: PropTypes.number.isRequired,
+  setAnswersStartIndex: PropTypes.func.isRequired,
+  getAnswers: PropTypes.func.isRequired,
+}
 export default AnswerList;

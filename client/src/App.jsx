@@ -30,7 +30,8 @@ function App() {
     })
       .then((response) => {
         setProducts(response.data);
-        setCurrentProduct(response.data[3]);
+        // set current product to first product in array
+        setCurrentProduct(response.data[0]);
       })
       .catch((err) => {
         console.log('error fetching products', err);
@@ -69,6 +70,10 @@ function App() {
   };
 
   useEffect(() => {
+    getProducts();
+  }, []);
+
+  useEffect(() => {
     if (currentProduct && currentProduct.id) {
       getReviews();
     }
@@ -96,12 +101,11 @@ function App() {
       <RelatedProducts changeProductsFunc={changeProductsFunc} currentItem={currentProduct} />
      
       <Questions currentProduct={currentProduct} />
-      <ReportButton itemType="question" id="644740" />
       <RatingsReviews
-        setProductReviews={setProductReviews}
         productReviews={productReviews}
         currentProduct={currentProduct}
         averageRating={averageRating}
+        setProductReviews={setProductReviews}
       />
     </div>
   );

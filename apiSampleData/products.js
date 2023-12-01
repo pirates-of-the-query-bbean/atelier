@@ -1,4 +1,4 @@
-[
+module.exports = [
   {
     id: 40344,
     campus: 'hr-rfp',

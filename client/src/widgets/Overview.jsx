@@ -89,7 +89,9 @@ function Overview({ product, averageRating, reviewCount }) {
     <section data-testid="overview" className={styles.container}>
       <div className={styles.galleryAndAside}>
         <div className={styles.gallery}>
-          <Gallery currStyle={currStyle} />
+          <Gallery
+            currStyle={currStyle}
+          />
         </div>
         <aside>
           <ProductTitle
@@ -116,7 +118,6 @@ function Overview({ product, averageRating, reviewCount }) {
           />
         </aside>
       </div>
-
       <Description product={product} />
     </section>
   );
@@ -134,7 +135,6 @@ Overview.propTypes = {
   }).isRequired,
   averageRating: PropTypes.number,
   reviewCount: PropTypes.number,
-
 };
 
 export default Overview;

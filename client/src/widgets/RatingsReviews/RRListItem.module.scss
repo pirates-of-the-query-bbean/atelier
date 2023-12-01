@@ -24,12 +24,21 @@
   margin-bottom: 10px;
 }
 
+.reviewSummary {
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  font-size: 1.2em;
+}
+
 .reviewBody {
   color: #333;
   margin-top: 10px;
   margin-bottom: 10px;
   line-height: 1.5;
-  font-size: 0.95em;
+  font-size: 1.1em;
 }
 
 .reviewRecommendation {
@@ -56,4 +65,9 @@
 .upvoteLink {
   margin-top: 5px;
   font-size: 0.85em;
+}
+
+.reviewFooter {
+  display: flex;
+  align-items: normal;
 }
