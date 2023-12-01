@@ -9,16 +9,19 @@
   .reviewRating {
     display: block;
     padding-bottom: 10px;
+    gap: 10px;
   }
 
   .formHeader {
     font-size: 18px;
     font-weight: bold;
+    margin-top: 20px;
     margin-bottom: 15px;
   }
 
   .formField {
     margin-bottom: 20px;
+    margin-top: 20px;
 
     label {
       display: block;
@@ -103,4 +106,19 @@
       background-color: #555;
     }
   }
+}
+
+.characteristicRating .options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.characteristicRating label {
+  display: flex;
+  gap: 5px;
+}
+
+.checkboxLabel {
+  padding-bottom: 10px;
 }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './NewReviewForm.module.scss';
 import ReviewStars from './ReviewStars';
 
-const NewReviewForm = function ({ currentProduct, onClose }) {
+function NewReviewForm({ currentProduct, closeForm }) {
   const [rating, setRating] = useState(0);
   const [productCharacteristics, setProductCharacteristics] = useState({});
   const [reviewCharacteristics, setReviewCharacteristics] = useState({});
@@ -15,7 +16,7 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
   const [email, setEmail] = useState('');
 
   const handleCharacteristicChange = (charId, value) => {
-    setReviewCharacteristics(prev => ({ ...prev, [charId]: parseInt(value) }));
+    setReviewCharacteristics((prev) => ({ ...prev, [charId]: parseInt(value) }));
   };
 
   const handleSubmit = async (e) => {
@@ -30,7 +31,6 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
       email,
       characteristics: reviewCharacteristics,
     };
-    console.log('payload baby!', payload);
 
     try {
       const response = await axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews', payload, {
@@ -39,10 +39,9 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
         },
       });
       console.log('Review submitted successfully:', response.data);
-      onClose(); // Close the form upon successful submission
+      closeForm();
     } catch (error) {
       console.error('Error submitting review:', error);
-      // Handle error appropriately
     }
   };
 
@@ -72,10 +71,14 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
   return (
     <form onSubmit={handleSubmit} className={styles.newReviewForm}>
       <div className={styles.reviewRating}>
-        <h2>
-          Rate this product
-        </h2>
-        <ReviewStars setRating={setRating} />
+        <div>
+          <h2>
+            Rate this product
+          </h2>
+        </div>
+        <div>
+          <ReviewStars setRating={setRating} />
+        </div>
       </div>
 
       <div className={styles.formField}>
@@ -99,7 +102,7 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
 
       <div className={styles.formField}>
         <label className={styles.checkboxLabel}>
-          {'Recommend this product? '}
+          {'Recommend this product?  '}
           <input
             type="checkbox"
             checked={recommend}
@@ -151,6 +154,21 @@ const NewReviewForm = function ({ currentProduct, onClose }) {
       <button type="submit" className={styles.submitButton}>Submit Review</button>
     </form>
   );
+}
+
+NewReviewForm.propTypes = {
+  closeForm: PropTypes.func.isRequired,
+  currentProduct: PropTypes.shape({
+    campus: PropTypes.string,
+    category: PropTypes.string,
+    created_at: PropTypes.string,
+    default_price: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    slogan: PropTypes.string,
+    updated_at: PropTypes.string,
+  }).isRequired,
 };
 
 export default NewReviewForm;

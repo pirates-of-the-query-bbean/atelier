@@ -1,26 +1,33 @@
 .question__container {
   padding-bottom: 10px;
+
   .question__heading {
     font-weight: 600;
     text-transform: none;
+
     .question__body {
       font-size: 15px;
       margin-left: 5px;
     }
   }
+
   .question__header_input {
     float: right;
     font-size: 10px;
     font-weight: 400;
-    span:first-child {
-      padding-right: 7px;
-      border-right: 1px solid black;
-      a {
-        margin: 0 5px;
-      }
-    }
-    span:last-child {
-      padding-left: 10px;
-    }
   }
+
+  span:last-child {
+    padding-left: 5px;
+  }
+
+  span.addAnswer button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+  }
+}
+
+.question__placeholder {
+  padding-bottom: 20px;
 }

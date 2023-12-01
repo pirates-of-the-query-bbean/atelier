@@ -5,8 +5,8 @@ main {
 
 .relatedProducts {
     width: fit-content; 
-    margin: 0 auto;
     margin-bottom: 5rem;
+    position: relative;
 }
 
 .products__row {
@@ -14,7 +14,7 @@ main {
     display: flex;
     gap: 1rem;
     
-    width: 900px;
+    width: 100%;
     overflow: hidden; 
      
 }
@@ -30,27 +30,29 @@ main {
 }
 
 .products__arrows {
-    width: calc(100% - 4%);
-    display: flex; 
-    justify-content: space-between;
-    top: 50%; 
-    position: absolute; 
-    z-index: 10; 
-    transform: translateY(-50%); 
-    left: 2%; 
-    right: 2%; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 500; 
+    position: absolute;
+    display: flex;
+    top: 37%; 
+
 }   
 
-.products__icon {
+.products__iconleft {
+    position: absolute;
+    left: 10px;
     width: fit-content; 
+    transform: scale(3); 
+    color: white;
 }
 
-.products__icon svg{
-    transform: scale(1.5); 
-}
-
-.comparisonTable {
-    position: absolute; 
+.products__iconright {
+    position: absolute;
+    right: 10px;
+    width: fit-content; 
+    transform: scale(3); 
+    color: white;
 }
 
 .userOutfit__row {
@@ -58,7 +60,76 @@ main {
     display: flex;
     justify-content: left;
     gap: 1rem;
-    width: 900px;
+    width: 100%; 
     overflow: hidden; 
     margin-bottom: 5rem;
+}
+
+
+
+
+.comparisonTable {
+    position: absolute; 
+    top: 50%; 
+    left: 50%;
+    background-color: #fcf3f6;
+    min-height: 400px;
+    width: 450px;
+    transform: translate(-50%, -70%);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid black;
+    
+    
+
+}
+
+.comparisonTable__firstRow {
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+   
+    align-items: center;
+    background-color: #fcf3f6;
+    padding-top: 10px;
+    margin-bottom: 30px;
+    height: 100px;
+
+    & .comparisonTable__header {
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    & .comparisonTable__items {
+        width: 100%;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+
+    & span{
+        height: 50px;
+        width: 150px;
+    }
+}
+
+.comparisonTableRows {
+    display: flex;
+    justify-content: space-between; 
+    text-align: center;
+    
+
+
+
+    & span {
+        text-align: center;
+        width: 150px; 
+        height: 50px;
+        font-size: 14px;
+        
+    }
 }
