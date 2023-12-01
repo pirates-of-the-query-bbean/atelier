@@ -5,7 +5,8 @@ import FiveStars from '../../../sharedComponents/fiveStars/FiveStars';
 
 function ItemContainer({item, handleClick, Icon, dataTestId, changeProductsFunc}) {
   return (
-    <main data-testid={dataTestId} className={style1.itemContainer} onClick={() => changeProductsFunc(item)}>
+    // onClick={() => changeProductsFunc(item)}
+    <main data-testid={dataTestId} className={style1.itemContainer}>
         
       <div className={style1.itemContainer__image} onClick={changeProductsFunc}>
         {item.style && item.style.photos && item.style.photos.length > 0 && item.style.photos[0].thumbnail_url

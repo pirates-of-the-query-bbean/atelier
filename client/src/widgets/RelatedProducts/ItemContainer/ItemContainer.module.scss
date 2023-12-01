@@ -81,6 +81,7 @@ div {
     margin: 0; 
     padding: 0; 
     transition: .5s all ease; 
+    z-index: 1500; 
 }
 
 .itemContainer__icon:hover {
