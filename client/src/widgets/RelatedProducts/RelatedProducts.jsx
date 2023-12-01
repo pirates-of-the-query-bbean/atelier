@@ -9,26 +9,36 @@ import ItemContainer from './ItemContainer/ItemContainers';
 import styles from './RelatedProducts.module.scss';
 import OutfixCard from './OutfitCard/OutfixCard';
 
-function RelatedProducts({currentItem}) {
-  
+function RelatedProducts({currentItem, changeProductsFunc}) {
   const getAverageRating = (reviews) => {
     const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
     return reviews.length > 0 ? totalRating / reviews.length : null;
   };
-
   //  currentList state is the list given to us combined with its default styling and price
   const [currentList, setCurrentList] = useState([]);
   const [shownList, setShownList] = useState([]);
   const [leftList, setLeftList] = useState([]);
   const [rightList, setRightList] = useState([]);
+
+  //  this state is to keep track of when the comparison table is open
+  const [openTable, setOpenTable] = useState(false);
+  //  might be able to not use this..
+  //  this is to keep track of what the 'currentItem' will be compared against
+  const [clickedItem, setClickedItem] = useState({});
+  const [comparisonTableInfo, setComparisonTableInfo] = useState([]);
+  //  keep track of what the user has added to the outfit list
+  const [userOutfitlist, setUserOutfitList] = useState([]);
+  const [currentStyle, setCurrentStyle] = useState([]);
+  const [currentItemWithFeature, setCurrentItemWithFeature] = useState({});
+  const [comparisonData, setComparisonData] = useState({});
+
   useEffect(() => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40344`, {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${currentItem.id}`, {
       headers: {
         Authorization: process.env.REACT_APP_API_KEY,
       },
     })
       .then((res) => {
-        console.log(res.data, 'itemwithfeature');
         setCurrentItemWithFeature(res.data);
       })
       .catch((err) => {
@@ -44,32 +54,26 @@ function RelatedProducts({currentItem}) {
         },
       });
       const relatedItemsID = response.data;
-  
       const relatedItemsInfo = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, {
         headers: {
           Authorization: process.env.REACT_APP_API_KEY,
         },
       }).then((res) => res.data)));
-  
       const relatedItemsStyles = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, {
         headers: {
           Authorization: process.env.REACT_APP_API_KEY,
         },
       }).then((res) => res.data)));
-  
       const relatedItemsReviews = await Promise.all(relatedItemsID.map(id => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${id}`, {
         headers: {
           Authorization: process.env.REACT_APP_API_KEY,
         },
       }).then((res) => getAverageRating(res.data.results))));
-  
       const combinedList = relatedItemsInfo.map((item, index) => {
         const defaultStyle = relatedItemsStyles[index].results.find((r) => r['default?']) || relatedItemsStyles[index].results[0];
         const averageRating = relatedItemsReviews[index];
         return { ...item, style: defaultStyle, averageRating };
       });
-  
-      console.log('this is the currentlist', combinedList);
       setCurrentList(combinedList);
       setShownList(combinedList.slice(0, 4));
       setRightList(combinedList.slice(4));
@@ -84,14 +88,8 @@ function RelatedProducts({currentItem}) {
     }
   }, [currentItem]);
 
-
-
   const handleRightArrowClick = () => {
     if (rightList.length > 0) {
-      console.log("this is the current shownList", shownList);
-      console.log("this is the current leftList", leftList);
-      console.log("this is the current rightList", rightList);
-
       let rightListCopy = [...rightList];
       let shownListCopy = [...shownList];
       let leftListCopy = [...leftList];
@@ -106,19 +104,11 @@ function RelatedProducts({currentItem}) {
       setShownList(shownListCopy);
       setLeftList(leftListCopy);
       setRightList(rightListCopy);
-
-      console.log("this is the new shownList", shownList); 
-      console.log("this is the new leftList", leftList); 
-      console.log("this is the new rightList", rightList); 
     }
-  }
+  };
 
   const handleLeftArrowClick = () => {
     if (leftList.length > 0) {
-      console.log("this is the current shownList", shownList);
-      console.log("this is the current leftList", leftList);
-      console.log("this is the current rightList", rightList);
-
       let rightListCopy = [...rightList];
       let shownListCopy = [...shownList];
       let leftListCopy = [...leftList];
@@ -133,25 +123,8 @@ function RelatedProducts({currentItem}) {
       setShownList(shownListCopy);
       setLeftList(leftListCopy);
       setRightList(rightListCopy);
-
-      console.log("this is the new shownList", shownList); 
-      console.log("this is the new leftList", leftList); 
-      console.log("this is the new rightList", rightList); 
     }
-  }
-
-
-  //  this state is to keep track of when the comparison table is open
-  const [openTable, setOpenTable] = useState(false);
-  //  might be able to not use this..
-  //  this is to keep track of what the 'currentItem' will be compared against
-  const [clickedItem, setClickedItem] = useState({});
-  const [comparisonTableInfo, setComparisonTableInfo] = useState([]);
-  //  keep track of what the user has added to the outfit list
-  const [userOutfitlist, setUserOutfitList] = useState([]);
-  const [currentStyle, setCurrentStyle] = useState([]);
-  const [currentItemWithFeature, setCurrentItemWithFeature] = useState({}); 
-  const [comparisonData, setComparisonData] = useState({});
+  };
 
   //  combines the list of 'related items' with their default styles and prices
   useEffect(() => {
@@ -178,7 +151,6 @@ function RelatedProducts({currentItem}) {
             const defaultStyle = relatedItemsStyles[index].results.find((r) => r['default?']) || relatedItemsStyles[index].results[0];
             return { ...item, style: defaultStyle };
           });
-          console.log('this is the currentlist', combinedList);
           setCurrentList(combinedList);
           setShownList(combinedList.slice(0, 4));
           setRightList(combinedList.slice(4));
@@ -190,9 +162,6 @@ function RelatedProducts({currentItem}) {
     }
   }, [currentItem]);
 
-
-
-  
   useEffect(() => {
     if (currentItem && currentItem.id) {
       axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${currentItem.id}/styles`, {
@@ -214,47 +183,42 @@ function RelatedProducts({currentItem}) {
     }
   }, [currentItem]);
 
-  const handleTableClick = (item) => {
-    console.log('this is the current item', currentItem);
-    console.log('this is the object being received in the function', item); 
-    setClickedItem(item);
-    setOpenTable(!openTable);
-    compareItems();
-  };
+  
 
   const compareItems = () => {
-    if (!currentItemWithFeature || !clickedItem || !currentItemWithFeature.features || !clickedItem.features) {
-      console.log('this is the currentItemWithFeature', currentItemWithFeature); 
-      console.log('this is the clickedItem', clickedItem); 
-
-      console.log("Items or features are not present");
+    if (!currentItemWithFeature
+      || !clickedItem
+      || !currentItemWithFeature.features
+      || !clickedItem.features) {
       return; // Exit if items or their features are not present
     }
-  
     let combinedFeatures = {};
-    
     // Process currentItemWithFeature features
-    currentItemWithFeature.features.forEach(f => {
+    currentItemWithFeature.features.forEach((f) => {
       combinedFeatures[f.feature] = { currentItemWithFeatureValue: f.value };
     });
-  
     // Process clickedItem features
-    clickedItem.features.forEach(f => {
+    clickedItem.features.forEach((f) => {
       if (combinedFeatures[f.feature]) {
         combinedFeatures[f.feature].clickedItemValue = f.value;
       } else {
         combinedFeatures[f.feature] = { clickedItemValue: f.value };
       }
     });
-  
     // Fill missing values with '-'
     Object.keys(combinedFeatures).forEach(feature => {
       combinedFeatures[feature] = {
         currentItemWithFeatureValue: combinedFeatures[feature].currentItemWithFeatureValue || '-',
-        clickedItemValue: combinedFeatures[feature].clickedItemValue || '-'
+        clickedItemValue: combinedFeatures[feature].clickedItemValue || '-',
       };
     });
     setComparisonTableInfo(combinedFeatures);
+  };
+
+  const handleTableClick = (item) => {
+    setClickedItem(item);
+    setOpenTable(!openTable);
+    compareItems();
   };
 
   const handleAddOutfit = () => {
@@ -272,8 +236,6 @@ function RelatedProducts({currentItem}) {
     }
   };
 
-  
-
   return (
     <div className={styles.relatedProducts} data-testid="related-products">
       <div className={styles.relatedProducts__container}>
@@ -281,8 +243,8 @@ function RelatedProducts({currentItem}) {
         <div className={styles.products__row}>
           <div className={styles.products__arrows}>
             {/* onClick={() => handleArrowClick("left")}  */}
-              <div style={{ display: (leftList.length === 0) ? 'none' : 'initial'}} onClick={handleLeftArrowClick} className={styles.products__iconleft}><KeyboardArrowLeftIcon/></div>
-              <div style={{ display: (rightList.length === 0) ? 'none' : 'initial'}} onClick={handleRightArrowClick} className={styles.products__iconright}><KeyboardArrowRightIcon/></div>
+            <div style={{ display: (leftList.length === 0) ? 'none' : 'initial'}} onClick={handleLeftArrowClick} className={styles.products__iconleft}><KeyboardArrowLeftIcon/></div>
+            <div style={{ display: (rightList.length === 0) ? 'none' : 'initial'}} onClick={handleRightArrowClick} className={styles.products__iconright}><KeyboardArrowRightIcon/></div>
           </div>
           {shownList.map((product) => (
             <ItemContainer
@@ -291,27 +253,26 @@ function RelatedProducts({currentItem}) {
               key={product.id}
               item={product}
               Icon={StarOutlineIcon}
+              changeProductsFunc={changeProductsFunc}
             />
           ))}
         </div>
       </div>
-     
-      <div style={{ display: openTable ? "flex" : "none" }} className={styles.comparisonTable}>
+      <div style={{ display: openTable ? 'flex' : 'none' }} className={styles.comparisonTable}>
         <div className={styles.comparisonTable__firstRow}>
-           <div className={styles.comparisonTable__header}>
-              <span>Comparing</span>
-           </div> 
-
-           <div className={styles.comparisonTable__items}>
+          <div className={styles.comparisonTable__header}>
+            <span>Comparing</span>
+          </div>
+          <div className={styles.comparisonTable__items}>
             <span>{currentItem.name}</span>
             <span>{clickedItem.name}</span>
-           </div>
+          </div>
         </div>
         {Object.entries(comparisonTableInfo).map(([feature, values]) => (
           <div key={feature} className={styles.comparisonTableRows}>
-            <span>{values.currentItemWithFeatureValue || "-"}</span>
+            <span>{values.currentItemWithFeatureValue || '-'}</span>
             <span>{feature}</span>
-            <span>{values.clickedItemValue || "-"}</span>
+            <span>{values.clickedItemValue || '-'}</span>
           </div>
         ))}
       </div>
@@ -321,7 +282,6 @@ function RelatedProducts({currentItem}) {
           <AddOutfitCard handleClick={handleAddOutfit} />
           {(userOutfitlist.length > 0)
             ? userOutfitlist.map((product) => (
-              
               <OutfixCard
                 datatestid="newOutfitCard"
                 handleClick={handleRemoveOutfit}
@@ -329,7 +289,6 @@ function RelatedProducts({currentItem}) {
                 item={product}
                 Icon={CloseIcon}
                 currentStyle={currentStyle}
-                
               />
             )) : ''}
         </div>
