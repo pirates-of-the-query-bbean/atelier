@@ -6,6 +6,7 @@ import Questions from './widgets/Questions';
 import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
 import Overview from './widgets/Overview';
 import ReportButton from './sharedComponents/reportButton/ReportButton';
+import Navbar from './widgets/Navbar/Navbar';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -14,6 +15,12 @@ function App() {
   const [averageRating, setAverageRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
+
+  const changeProductsFunc = (newProduct) => {
+    console.log('change product to', newProduct);
+    setProducts(newProduct);
+    setCurrentProduct(newProduct);
+  };
 
   const getProducts = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
@@ -75,11 +82,10 @@ function App() {
     );
   }
 
-
-
   return (
     <div className={styles.container}>
-      <nav>ADD HEADER HERE</nav>
+      {/* <nav>ADD HEADER HERE</nav> */}
+      <Navbar />
       {Object.keys(currentProduct).length > 0 && (
       <Overview
         product={currentProduct}
@@ -87,7 +93,7 @@ function App() {
         reviewCount={productReviews.count}
       />
       )}
-      <RelatedProducts currentItem={currentProduct} />
+      <RelatedProducts changeProductsFunc={changeProductsFunc} currentItem={currentProduct} />
      
       <Questions currentProduct={currentProduct} />
       <ReportButton itemType="question" id="644740" />

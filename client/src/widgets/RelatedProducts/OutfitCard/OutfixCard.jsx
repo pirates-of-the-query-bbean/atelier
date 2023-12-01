@@ -6,10 +6,9 @@ import mainCard from '../assets/noimageavai.png';
 
 function OutfixCard({item, handleClick, Icon, dataTestId, currentStyle}) {
   return (
-    <main data-testid={dataTestId}  className={style1.itemContainer}>
+    <main data-testid={dataTestId} className={style1.itemContainer}>
       <div className={style1.itemContainer__image}>
-      {/* {console.log('this is the item in outfix card', item)} */}
-      <img src={currentStyle && currentStyle.photos && currentStyle.photos[0] ? currentStyle.photos[0].thumbnail_url : mainCard} alt={item.name} />
+        <img src={currentStyle && currentStyle.photos && currentStyle.photos[0] ? currentStyle.photos[0].thumbnail_url : mainCard} alt={item.name} />
         <div onClick={() => handleClick(item)} className={style1.itemContainer__icon} data-testid={`remove-${item.id}`} ><Icon/></div>
       </div>
       <div className={style1.itemContainer__text}>
@@ -19,9 +18,7 @@ function OutfixCard({item, handleClick, Icon, dataTestId, currentStyle}) {
           $
           {item.default_price}
         </span>
-
         <div className={style1.itemContainer__ratings}>
-
         </div>
       </div>
     </main>
