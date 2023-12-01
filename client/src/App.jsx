@@ -11,6 +11,7 @@ function App() {
   const [currentProduct, setCurrentProduct] = useState({});
   const [productReviews, setProductReviews] = useState({});
   const [averageRating, setAverageRating] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getProducts = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
