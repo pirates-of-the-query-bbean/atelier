@@ -1,12 +1,13 @@
 .sharedButton {
     width: 100%; 
     height: 60px;
-    font-size: 18px;
+    font-size: 0.85rem;
     text-transform: uppercase; 
     font-weight: 400; 
     cursor: pointer;
     border: 1px solid black;
     background-color: white;
+    text-decoration: none;
 }
 
 .sharedButton__container {
