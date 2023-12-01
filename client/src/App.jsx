@@ -85,6 +85,7 @@ function App() {
       />
       )}
       <RelatedProducts currentItem={currentProduct} />
+
       <Questions currentProduct={currentProduct} />
       <RatingsReviews
         productReviews={productReviews}
