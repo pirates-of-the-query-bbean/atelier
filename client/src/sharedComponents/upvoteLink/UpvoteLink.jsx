@@ -6,15 +6,20 @@ import styles from './Upvote.module.scss';
 // Because various components have different keys, pass in key
 // along with object to upvote a particular property.
 // EXAMPLE USAGE: <UpvoteLink
+//  item={item}
 //  itemType={'review', 'answer', 'question'}
 //  id={item_id}/>
+//  property="helpfulness"
 
-function UpvoteLink({ item, itemType, id, property }) {
+function UpvoteLink({
+  item, itemType, id, property,
+}) {
   const [upvoteCount, setUpvoteCount] = useState(0);
 
   const upvote = (type, itemID) => {
     let upvoteURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/';
     let param = '';
+    let upvoteItem = item;
 
     if (type === 'review') {
       upvoteURL += `reviews/${itemID}/helpful`;
@@ -37,8 +42,8 @@ function UpvoteLink({ item, itemType, id, property }) {
         [param]: itemID,
       },
     })
-      .then((response) => {
-        setUpvoteCount(item[property] += 1);
+      .then(() => {
+        setUpvoteCount(upvoteItem[property] += 1);
       })
       .catch((err) => {
         console.log('error upvoting: ', err);
@@ -72,9 +77,13 @@ function UpvoteLink({ item, itemType, id, property }) {
   );
 }
 
-// UpvoteLink.propTypes = {
-//   itemType: PropTypes.string.isRequired,
-//   id: PropTypes.number.isRequired,
-// };
+UpvoteLink.propTypes = {
+  item: PropTypes.shape({
+
+  }).isRequired,
+  itemType: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  property: PropTypes.string.isRequired,
+};
 
 export default UpvoteLink;

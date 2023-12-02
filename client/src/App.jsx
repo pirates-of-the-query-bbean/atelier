@@ -98,13 +98,8 @@ function App() {
         reviewCount={productReviews.count}
       />
       )}
-<<<<<<< HEAD
-      <RelatedProducts currentItem={currentProduct} />
-
-=======
       <RelatedProducts changeProductsFunc={changeProductsFunc} currentItem={currentProduct} />
-     
->>>>>>> main
+
       <Questions currentProduct={currentProduct} />
       <RatingsReviews
         productReviews={productReviews}
