@@ -14,7 +14,6 @@ function App() {
   const [productReviews, setProductReviews] = useState({});
   const [averageRating, setAverageRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [questions, setQuestions] = useState([]);
 
   const changeProductsFunc = (newProduct) => {
     console.log('change product to', newProduct);

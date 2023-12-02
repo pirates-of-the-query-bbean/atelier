@@ -15,8 +15,8 @@ function Questions({ currentProduct }) {
   const [questionsQuery, setQuestionsQuery] = useState('');
   const [initialQuestionArr, setInitialQuestionArr] = useState([]);
 
-  function showTwoMoreItems(indexToAdjust, stateToAdjust) {
-    indexToAdjust(stateToAdjust + 2);
+  function showMoreItems(indexToAdjust, stateToAdjust, amtToAdjust) {
+    indexToAdjust(stateToAdjust + amtToAdjust);
   }
 
   function searchQuestions(query) {
@@ -104,7 +104,7 @@ function Questions({ currentProduct }) {
         currentProduct={currentProduct}
         questionArr={questionArr}
         questionsStartIndex={questionsStartIndex}
-        showTwoMoreItems={showTwoMoreItems}
+        showMoreItems={showMoreItems}
       />
 
       <div className={styles.questions__buttons}>
@@ -114,7 +114,7 @@ function Questions({ currentProduct }) {
             text="More Answered Questions"
             buttonWidth={255}
             onClickFunction={() => {
-              showTwoMoreItems(setQuestionStartIndex, questionsStartIndex);
+              showMoreItems(setQuestionStartIndex, questionsStartIndex, 2);
             }}
           />
         )}

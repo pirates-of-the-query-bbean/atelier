@@ -5,9 +5,21 @@ import Answer from './Answer';
 import styles from './Answer.module.scss';
 
 function AnswerList({
-  question, showTwoMoreItems,
+  question, showMoreItems,
   answerArr, answersStartIndex, setAnswersStartIndex, getAnswers,
 }) {
+  const [dynamicButtonText, setDynamicButtonText] = useState('See More Answers');
+
+  function handleOnClick(buttonText) {
+    if (buttonText === 'See More Answers') {
+      showMoreItems(setAnswersStartIndex, answersStartIndex, answerArr.length);
+      setDynamicButtonText('Collapse Answers');
+    } else {
+      setAnswersStartIndex(2);
+      setDynamicButtonText('See More Answers');
+    }
+  }
+
   useEffect(() => {
     getAnswers(question.question_id);
   }, []);
@@ -20,16 +32,16 @@ function AnswerList({
           answer={answer}
         />
       ))}
-      {answersStartIndex < answerArr.length && (
+      {answerArr.length > 2 && (
         <button
           type="submit"
           className={styles.loadMoreAnswers}
           onClick={(e) => {
             e.preventDefault();
-            showTwoMoreItems(setAnswersStartIndex, answersStartIndex);
+            handleOnClick(dynamicButtonText);
           }}
         >
-          See More Answers
+          {dynamicButtonText}
         </button>
       )}
     </section>
@@ -40,7 +52,7 @@ AnswerList.propTypes = {
   question: PropTypes.shape({
 
   }).isRequired,
-  showTwoMoreItems: PropTypes.func.isRequired,
+  showMoreItems: PropTypes.func.isRequired,
   answerArr: PropTypes.arrayOf(PropTypes.shape({
     answer_id: PropTypes.number.isRequired,
     body: PropTypes.string.isRequired,
@@ -52,5 +64,6 @@ AnswerList.propTypes = {
   answersStartIndex: PropTypes.number.isRequired,
   setAnswersStartIndex: PropTypes.func.isRequired,
   getAnswers: PropTypes.func.isRequired,
-}
+};
+
 export default AnswerList;

@@ -7,7 +7,7 @@ function QuestionList({
   currentProduct,
   questionArr,
   questionsStartIndex,
-  showTwoMoreItems,
+  showMoreItems,
 }) {
   if (questionArr.length === 0) {
     return (
@@ -22,7 +22,7 @@ function QuestionList({
           currentProduct={currentProduct}
           key={question.question_id}
           question={question}
-          showTwoMoreItems={showTwoMoreItems}
+          showMoreItems={showMoreItems}
         />
       ))}
     </section>
@@ -50,7 +50,7 @@ QuestionList.propTypes = {
     photos: PropTypes.arrayOf(PropTypes.string).isRequired,
   })).isRequired,
   questionsStartIndex: PropTypes.number.isRequired,
-  showTwoMoreItems: PropTypes.func.isRequired,
+  showMoreItems: PropTypes.func.isRequired,
 };
 
 export default QuestionList;

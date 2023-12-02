@@ -7,7 +7,7 @@ import AddAnswerModal from './Modals/AddAnswerModal';
 import styles from './Question.module.scss';
 
 function Question({
-  currentProduct, question, showTwoMoreItems,
+  currentProduct, question, showMoreItems,
 }) {
   const { question_id, question_body } = question;
 
@@ -30,7 +30,7 @@ function Question({
   }
 
   function openAddAnswerModal() {
-    setAddAnswerModalOpen(true);
+    setAddAnswerModalOpen(!isAddAnswerModalOpen);
   }
 
   function closeAddAnswerModal() {
@@ -47,7 +47,7 @@ function Question({
       data: {
         body: data.body,
         name: data.name,
-        email: data.email
+        email: data.email,
       },
     })
       .then(() => {
@@ -57,36 +57,6 @@ function Question({
         console.log('Error posting answer', err);
       });
     closeAddAnswerModal();
-  }
-
-  function report(itemType, id) {
-    let reportURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa';
-    let param = '';
-
-    if (itemType === 'question') {
-      reportURL += `/questions/${id}/report`;
-      param = 'question_id';
-    } else {
-      reportURL += `/answers/${id}/report`;
-      param = 'answer_id';
-    }
-
-    axios({
-      method: 'put',
-      url: reportURL,
-      headers: {
-        Authorization: process.env.REACT_APP_API_KEY,
-      },
-      data: {
-        [param]: id,
-      },
-    })
-      .then(() => {
-        getAnswers(question_id);
-      })
-      .catch((err) => {
-        console.log('error reporting answer', err);
-      });
   }
 
   return (
@@ -117,7 +87,7 @@ function Question({
       <AnswerList
         answerArr={answerArr}
         question={question}
-        showTwoMoreItems={showTwoMoreItems}
+        showMoreItems={showMoreItems}
         getAnswers={getAnswers}
         answersStartIndex={answersStartIndex}
         setAnswersStartIndex={setAnswersStartIndex}
@@ -159,7 +129,7 @@ Question.propTypes = {
     created_at: PropTypes.string.isRequired,
     updated_at: PropTypes.string.isRequired,
   }).isRequired,
-  showTwoMoreItems: PropTypes.func.isRequired,
+  showMoreItems: PropTypes.func.isRequired,
 };
 
 export default Question;
