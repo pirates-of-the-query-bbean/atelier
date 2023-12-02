@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Question from './Question';
 import styles from './Question.module.scss';
@@ -6,6 +6,7 @@ import styles from './Question.module.scss';
 function QuestionList({
   currentProduct,
   questionArr,
+  setQuestionStartIndex,
   questionsStartIndex,
   showMoreItems,
 }) {
@@ -15,8 +16,25 @@ function QuestionList({
     );
   }
 
+  console.log(showMoreItems, setQuestionStartIndex);
+
+  const handleScrollCapture = (event) => {
+    const yTraveled = event.target.scrollTop;
+    const containerHeight = event.target.scrollHeight - event.target.clientHeight;
+    const hitLimit = yTraveled >= containerHeight * .80;
+
+    if (hitLimit) {
+      showMoreItems(setQuestionStartIndex, questionsStartIndex, 10);
+    } else {
+      console.log('Scroll event during capturing phase:', yTraveled, containerHeight);
+    }
+  };
+
+  useEffect(() => {
+
+  }, []);
   return (
-    <section>
+    <section className={styles.questionsArray} onScrollCapture={handleScrollCapture}>
       {questionArr.slice(0, questionsStartIndex + 1).map((question) => (
         <Question
           currentProduct={currentProduct}
@@ -51,6 +69,7 @@ QuestionList.propTypes = {
   })).isRequired,
   questionsStartIndex: PropTypes.number.isRequired,
   showMoreItems: PropTypes.func.isRequired,
+  setQuestionStartIndex: PropTypes.func.isRequired,
 };
 
 export default QuestionList;

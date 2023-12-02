@@ -49,7 +49,7 @@ function Questions({ currentProduct }) {
   }
 
   function getQuestions(id) {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/?product_id=${id}&count=100`, {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/?product_id=${id}&count=1000`, {
       headers: {
         Authorization: process.env.REACT_APP_API_KEY,
       },
@@ -104,17 +104,18 @@ function Questions({ currentProduct }) {
         currentProduct={currentProduct}
         questionArr={questionArr}
         questionsStartIndex={questionsStartIndex}
+        setQuestionStartIndex={setQuestionStartIndex}
         showMoreItems={showMoreItems}
       />
 
       <div className={styles.questions__buttons}>
-        {questionArr.length > questionsStartIndex && (
+        {questionsStartIndex < 10 && (
           <CustomButton
             style={styles.questions__customButton}
             text="More Answered Questions"
             buttonWidth={255}
             onClickFunction={() => {
-              showMoreItems(setQuestionStartIndex, questionsStartIndex, 2);
+              showMoreItems(setQuestionStartIndex, questionsStartIndex, 10);
             }}
           />
         )}

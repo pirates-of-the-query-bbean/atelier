@@ -16,3 +16,9 @@
     text-decoration: none;
   }
 }
+
+section.questionsArray {
+  max-height: 50vh;
+  overflow-y: hidden;
+  margin-bottom: 20px;
+}

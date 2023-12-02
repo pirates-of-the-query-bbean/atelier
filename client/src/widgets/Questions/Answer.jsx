@@ -17,7 +17,7 @@ function Answer({ answer }) {
       <div className={styles.answer__meta}>
         <p>
           {answerer_name === 'Seller' ? (
-            <span>by <b>Seller,</b>
+            <span>by <b>Seller, </b>
               <ParsedDate date={date} />
             </span>
           ) : (
