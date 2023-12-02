@@ -9,17 +9,17 @@ function ReportButton({
   const [buttonText, setButtonText] = useState('Report');
 
   const report = () => {
-    let reportURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa';
+    let reportURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/';
     let param = '';
 
     if (itemType === 'question') {
-      reportURL += `/questions/${id}/report`;
+      reportURL += `qa/questions/${id}/report`;
       param = 'question_id';
     } else if (itemType === 'answer') {
-      reportURL += `/answers/${id}/report`;
+      reportURL += `qa/answers/${id}/report`;
       param = 'answer_id';
     } else if (itemType === 'review') {
-      reportURL += `/reviews/${id}/report`;
+      reportURL += `reviews/${id}/report`;
       param = 'review_id';
     }
 

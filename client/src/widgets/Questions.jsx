@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 import CustomButton from '../sharedComponents/customButton/CustomButton';
-import Search from './questions/Search';
-import QuestionList from './questions/QuestionList';
+import Search from './Questions/Search';
+import QuestionList from './Questions/QuestionList';
 import styles from './Questions.module.scss';
-import AddQuestionModal from './questions/Modals/AddQuestionModal';
+import AddQuestionModal from './Questions/Modals/AddQuestionModal';
 
 function Questions({ currentProduct }) {
   const [questionArr, setQuestionArr] = useState([]);

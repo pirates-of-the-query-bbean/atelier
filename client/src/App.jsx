@@ -5,6 +5,8 @@ import RatingsReviews from './widgets/RatingsReviews/RatingsReviews';
 import Questions from './widgets/Questions';
 import RelatedProducts from './widgets/RelatedProducts/RelatedProducts';
 import Overview from './widgets/Overview';
+import ReportButton from './sharedComponents/reportButton/ReportButton';
+import Navbar from './widgets/Navbar/Navbar';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -12,6 +14,13 @@ function App() {
   const [productReviews, setProductReviews] = useState({});
   const [averageRating, setAverageRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [questions, setQuestions] = useState([]);
+
+  const changeProductsFunc = (newProduct) => {
+    console.log('change product to', newProduct);
+    setProducts(newProduct);
+    setCurrentProduct(newProduct);
+  };
 
   const getProducts = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', {
@@ -22,12 +31,24 @@ function App() {
       .then((response) => {
         setProducts(response.data);
         // set current product to first product in array
-        setCurrentProduct(response.data[3]);
+        setCurrentProduct(response.data[0]);
       })
       .catch((err) => {
         console.log('error fetching products', err);
       });
   };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  function getAverageRating(reviews) {
+    let reviewTotal = 0;
+    for (let i = 0; i < reviews.length; i += 1) {
+      reviewTotal += reviews[i].rating;
+    }
+    setAverageRating(reviewTotal / reviews.length);
+  }
 
   const getReviews = () => {
     setIsLoading(true);
@@ -66,17 +87,10 @@ function App() {
     );
   }
 
-  const getAverageRating = function (reviews) {
-    let reviewTotal = 0;
-    for (let i = 0; i < reviews.length; i += 1) {
-      reviewTotal += reviews[i].rating;
-    }
-    setAverageRating(reviewTotal / reviews.length);
-  };
-
   return (
     <div className={styles.container}>
-      <nav>ADD HEADER HERE</nav>
+      {/* <nav>ADD HEADER HERE</nav> */}
+      <Navbar />
       {Object.keys(currentProduct).length > 0 && (
       <Overview
         product={currentProduct}
@@ -84,8 +98,13 @@ function App() {
         reviewCount={productReviews.count}
       />
       )}
+<<<<<<< HEAD
       <RelatedProducts currentItem={currentProduct} />
 
+=======
+      <RelatedProducts changeProductsFunc={changeProductsFunc} currentItem={currentProduct} />
+     
+>>>>>>> main
       <Questions currentProduct={currentProduct} />
       <RatingsReviews
         productReviews={productReviews}

@@ -1,14 +1,18 @@
-.rating__components {
+.ratingComponents {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 
-  .review__cards {
+  .reviewCards {
     flex-grow: 1;
     padding-left: 100px;
   }
 
-  .review__breakdown {
+  .reviewBreakdown {
     flex-grow: 0;
   }
+}
+
+.reviewHeader {
+  margin-top: 10px;
 }
