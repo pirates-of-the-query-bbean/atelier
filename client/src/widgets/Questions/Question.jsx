@@ -56,7 +56,7 @@ function Question({
       .catch((err) => {
         console.log('Error posting answer', err);
       });
-    closeAddAnswerModal();
+      openAddAnswerModal();
   }
 
   return (

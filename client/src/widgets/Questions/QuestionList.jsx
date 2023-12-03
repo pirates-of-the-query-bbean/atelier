@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Question from './Question';
 import styles from './Question.module.scss';
@@ -16,23 +16,19 @@ function QuestionList({
     );
   }
 
-  console.log(showMoreItems, setQuestionStartIndex);
-
   const handleScrollCapture = (event) => {
     const yTraveled = event.target.scrollTop;
     const containerHeight = event.target.scrollHeight - event.target.clientHeight;
-    const hitLimit = yTraveled >= containerHeight * .80;
+    const hitLimit = yTraveled >= containerHeight * 0.80;
 
     if (hitLimit) {
-      showMoreItems(setQuestionStartIndex, questionsStartIndex, 10);
-    } else {
-      console.log('Scroll event during capturing phase:', yTraveled, containerHeight);
+      showMoreItems(setQuestionStartIndex, questionsStartIndex, 2);
+      if ((questionsStartIndex >= 243) && (yTraveled > hitLimit)) {
+        console.log('We need to request more data');
+      }
     }
   };
 
-  useEffect(() => {
-
-  }, []);
   return (
     <section className={styles.questionsArray} onScrollCapture={handleScrollCapture}>
       {questionArr.slice(0, questionsStartIndex + 1).map((question) => (
