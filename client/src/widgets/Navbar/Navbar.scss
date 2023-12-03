@@ -1,0 +1,29 @@
+.actualNavbar {
+    height: 70px; 
+    background-color: var(--brand-color); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff; 
+    padding: 0 30px; 
+    font-size: 14px; 
+}
+
+.actualNavbar__options {
+    display: flex;
+    gap: 16px;
+
+    & span:hover {
+        color: var(--brand-very-light);
+        transition: 1s all ease;
+    }
+}
+
+.actualNavbar__logo {
+    display: flex;
+    gap: 15px;
+}
+
+.actualNavbar__icon {
+    transform: scale(1.3);
+}

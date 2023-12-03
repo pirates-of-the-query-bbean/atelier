@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './ProductStyle.module.scss';
-import FiveStars from '../../sharedComponents/fiveStars/FiveStars';
 import Style from './Style';
 
 function ProductStyle({
-  product, productStyles, currStyle, setCurrStyle,
+  productStyles, currStyle, setCurrStyle,
 }) {
   if (currStyle === null || currStyle === undefined) {
     currStyle = { name: 'Select a style' };

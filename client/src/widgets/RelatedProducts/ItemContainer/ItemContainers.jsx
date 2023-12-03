@@ -3,11 +3,11 @@ import style1 from './ItemContainer.module.scss';
 import mainCard from '../assets/noimageavai.png';
 import FiveStars from '../../../sharedComponents/fiveStars/FiveStars';
 
-function ItemContainer({item, handleClick, Icon, dataTestId}) {
+function ItemContainer({item, handleClick, Icon, dataTestId, changeProductsFunc}) {
   return (
-    <main data-testid={dataTestId}  className={style1.itemContainer}>
+    <main data-testid={dataTestId} className={style1.itemContainer} onClick={() => changeProductsFunc(item)}>
         
-      <div className={style1.itemContainer__image}>
+      <div className={style1.itemContainer__image} onClick={changeProductsFunc}>
         {item.style && item.style.photos && item.style.photos.length > 0 && item.style.photos[0].thumbnail_url
           ? <img src={item.style.photos[0].thumbnail_url} alt={item.name} />
           : <img src={mainCard} alt={item.name} />}
