@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import RRListItem from './RRListItem';
 import NewReviewForm from './NewReviewForm';
@@ -8,40 +8,58 @@ import styles from './RRList.module.scss';
 function RRList({ productReviews, currentProduct }) {
   const [reviewRenderCount, setReviewRenderCount] = useState(2);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const reviewListRef = useRef(null);
+
+  const loadMoreReviews = () => {
+    const newCount = Math.min(reviewRenderCount + 2, productReviews.results.length);
+    setReviewRenderCount(newCount);
+  };
+
+  const handleScroll = () => {
+    const container = reviewListRef.current;
+    if (container) {
+      const threshold = 100;
+      const isNearBottom = container.scrollHeight - container.scrollTop
+      <= container.clientHeight + threshold;
+      if (isNearBottom) {
+        loadMoreReviews();
+      }
+    }
+  };
 
   if (!productReviews || !productReviews.results) {
     return <div>No reviews available.</div>;
   }
 
-  const handleMoreReviewsClick = () => {
-    const newCount = Math.min(reviewRenderCount + 2, productReviews.results.length);
-    setReviewRenderCount(newCount);
-  };
+  useEffect(() => {
+    const container = reviewListRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [reviewRenderCount, productReviews.results.length]);
 
   const toggleReviewForm = () => {
     setShowReviewForm(!showReviewForm);
   };
 
   return (
-    <div className={styles.reviewList}>
-      <div>
+    <div>
+      <div className={styles.reviewContainer} ref={reviewListRef}>
         {productReviews.results.slice(0, reviewRenderCount).map((review, index) => (
-          <RRListItem
-            key={index}
-            review={review}
-          />
+          <RRListItem key={index} review={review} />
         ))}
       </div>
       <div className={styles.reviewButtons}>
-        {reviewRenderCount < productReviews.results.length && (
-          <div><CustomButton text="More Reviews" onClickFunction={handleMoreReviewsClick} /></div>
-        )}
-        <div>
-          <CustomButton
-            text={showReviewForm ? 'Cancel' : 'Add a Review +'}
-            onClickFunction={toggleReviewForm}
-          />
-        </div>
+        <CustomButton
+          text={showReviewForm ? 'Cancel' : 'Add a Review +'}
+          onClickFunction={toggleReviewForm}
+        />
       </div>
       {showReviewForm && (
         <NewReviewForm

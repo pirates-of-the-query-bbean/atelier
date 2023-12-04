@@ -3,10 +3,17 @@
   margin-bottom: 10px;
 }
 
+.reviewContainer {
+  height: 400px;
+  max-width: 700px;
+  overflow-y: auto;
+  padding: 20px;
+}
+
 .reviewButtons {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  max-width: 33%;
 
   >div:not(:last-child) {
     margin-right: 10px;

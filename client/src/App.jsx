@@ -30,7 +30,6 @@ function App() {
     })
       .then((response) => {
         setProducts(response.data);
-        // set current product to first product in array
         setCurrentProduct(response.data[0]);
       })
       .catch((err) => {
@@ -47,12 +46,14 @@ function App() {
     for (let i = 0; i < reviews.length; i += 1) {
       reviewTotal += reviews[i].rating;
     }
-    setAverageRating(reviewTotal / reviews.length);
+    let average = reviewTotal / reviews.length;
+    average = Math.round(average * 4) / 4;
+    setAverageRating(parseFloat(average.toFixed(2)));
   }
 
   const getReviews = () => {
     setIsLoading(true);
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${currentProduct.id}`, {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${currentProduct.id}&count=1000`, {
       headers: {
         Authorization: process.env.REACT_APP_API_KEY,
       },

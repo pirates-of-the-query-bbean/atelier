@@ -38,7 +38,7 @@ function RatingBreakdown({ productReviews, averageRating }) {
   return (
     <div className={styles.ratingBreakdown} data-testid="ratingBreakdown">
       <div className={styles.averageRating}>
-        {averageRating}
+        {Math.floor(averageRating)}
         <FiveStars rating={averageRating} />
       </div>
       <div className={styles.recommendation}>

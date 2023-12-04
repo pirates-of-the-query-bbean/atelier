@@ -15,7 +15,7 @@ function RatingsReviews({
   const [sortOption, setSortOption] = useState('relevance');
 
   function fetchSortedReviews(productId, sort) {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${productId}&sort=${sort}`, {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${productId}&sort=${sort}&count=1000`, {
       headers: {
         'Authorization': process.env.REACT_APP_API_KEY
       },
@@ -49,13 +49,20 @@ function RatingsReviews({
       </div>
       <div className={styles.reviewCards}>
         <h3 className={styles.reviewHeader}>
-          {productReviews.count}
-          <span> reviews, sorted by </span>
-          <select onChange={handleSortChange} value={sortOption}>
-            <option value="relevance">Relevance</option>
-            <option value="newest">Newest</option>
-            <option value="helpful">Helpful</option>
-          </select>
+          {/* Check if productReviews and productReviews.results are defined */}
+          {productReviews && productReviews.results ? (
+            <>
+              {productReviews.results.length}
+              <span> reviews, sorted by </span>
+              <select onChange={handleSortChange} value={sortOption}>
+                <option value="relevance">Relevance</option>
+                <option value="newest">Newest</option>
+                <option value="helpful">Helpful</option>
+              </select>
+            </>
+          ) : (
+            <span>Loading reviews...</span> // Placeholder text while loading
+          )}
         </h3>
         <RRList
           productReviews={productReviews}
